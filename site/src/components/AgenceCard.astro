@@ -1,0 +1,194 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from './Icon.astro';
+import type { Agence } from '../data/agences';
+import { agencePhoto } from '../data/photos';
+interface Props {
+  agence: Agence;
+  delay?: number;
+  full?: boolean; // version détaillée (page contact)
+}
+const { agence: a, delay = 0, full = false } = Astro.props;
+const img = agencePhoto(a.photo);
+const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.mapsQuery)}`;
+---
+
+<article class:list={['acard', 'reveal', { 'acard--full': full }]} style={`--d:${delay}ms`}>
+  <a class="acard__media" href={`/agences/${a.slug}/`} aria-label={`Voir l’agence de ${a.city}`}>
+    {
+      img && (
+        <Picture
+          src={img}
+          alt={`${a.name} — ${a.address.city}`}
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 700px) 92vw, 46vw"
+          formats={['webp']}
+          loading="lazy"
+          decoding="async"
+          class="acard__img"
+        />
+      )
+    }
+    <span class="badge badge--lime acard__badge">{a.showroom}</span>
+  </a>
+  <div class="acard__body">
+    <p class="tag">{a.zoneLabel}</p>
+    <h3 class="acard__title"><a href={`/agences/${a.slug}/`}>Menuiserie à {a.city}</a></h3>
+    <address class="acard__addr">
+      <Icon id="pin" />
+      <span>{a.address.street}<br />{a.address.zip} {a.address.city}</span>
+    </address>
+    <a class="acard__tel" href={`tel:${a.tel}`}><Icon id="phone" /> {a.phone}</a>
+    <ul class="acard__hours">
+      {
+        a.hours.map((h) => (
+          <li>
+            <span>{h.days}</span>
+            <span>{h.time}</span>
+          </li>
+        ))
+      }
+    </ul>
+    {a.responsable && <p class="acard__resp"><Icon id="team" /> {a.responsable.name} · responsable d’agence</p>}
+    <div class="acard__actions">
+      <a class="btn btn--dark btn--sm" href={`/agences/${a.slug}/`}>L’agence <Icon id="arrow" /></a>
+      <a class="link-arrow" href={maps} target="_blank" rel="noopener">Itinéraire <Icon id="arrow-up-right" /></a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .acard {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background: var(--white);
+    color: var(--ink);
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-s);
+  }
+  .acard--full {
+    grid-template-columns: 1fr 1.1fr;
+    grid-template-rows: none;
+  }
+  .acard__media {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--stone-100);
+  }
+  .acard--full .acard__media {
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+  .acard :global(.acard__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease-out);
+  }
+  @media (hover: hover) {
+    .acard__media:hover :global(.acard__img) {
+      transform: scale(1.04);
+    }
+  }
+  .acard__badge {
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+  }
+  .acard__body {
+    padding: 1.35rem 1.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .acard__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 2rem;
+    line-height: 1;
+  }
+  .acard__title a {
+    text-decoration: none;
+    color: var(--green-900);
+  }
+  .acard__title a:hover {
+    color: var(--green-500);
+  }
+  .acard__addr {
+    font-style: normal;
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    color: var(--ink-2);
+    line-height: 1.4;
+  }
+  .acard__addr :global(svg),
+  .acard__tel :global(svg),
+  .acard__resp :global(svg) {
+    color: var(--green-500);
+    margin-top: 0.2em;
+  }
+  .acard__tel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: var(--green-900);
+  }
+  .acard__hours {
+    list-style: none;
+    padding: 0.75rem 0 0;
+    margin: 0;
+    border-top: 1px solid var(--stone-200);
+    display: grid;
+    gap: 0.3rem;
+    font-size: 0.93rem;
+    color: var(--ink);
+  }
+  .acard__hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .acard__hours li span:first-child {
+    color: var(--ink-2);
+  }
+  .acard__hours li span:last-child {
+    font-weight: 600;
+    text-align: right;
+    color: var(--green-900);
+  }
+  .acard__resp {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+  }
+  .acard__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    flex-wrap: wrap;
+  }
+  @media (max-width: 700px) {
+    .acard--full {
+      grid-template-columns: 1fr;
+    }
+    .acard--full .acard__media {
+      aspect-ratio: 16 / 10;
+      min-height: 0;
+    }
+  }
+</style>

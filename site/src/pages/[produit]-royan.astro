@@ -1,0 +1,204 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Icon from '../components/Icon.astro';
+import Rays from '../components/Rays.astro';
+import RealisationCard from '../components/RealisationCard.astro';
+import AgenceCard from '../components/AgenceCard.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { croisees, type Croisee } from '../data/croisees';
+import { agences } from '../data/agences';
+import { prestationBySlug } from '../data/prestations';
+import { realisationBySlug } from '../data/realisations';
+import { site } from '../data/site';
+import { realPhoto } from '../data/photos';
+
+export function getStaticPaths() {
+  return croisees.map((c) => ({ params: { produit: c.slug.replace(/-royan$/, '') }, props: { c } }));
+}
+const { c } = Astro.props as { c: Croisee };
+const agence = agences.royan;
+const parent = prestationBySlug(c.prestation)!;
+const hero = realPhoto(c.hero.real, c.hero.i ?? 1);
+const reals = c.realisations.map(realisationBySlug).filter(Boolean);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `${c.produit} à ${c.ville}`,
+    serviceType: c.produit,
+    description: c.metaDescription,
+    provider: { '@id': `${site.url}/agences/royan/#localbusiness` },
+    areaServed: [{ '@type': 'City', name: 'Royan' }, ...agence.communes.slice(0, 12).map((n) => ({ '@type': 'City', name: n }))],
+    url: `${site.url}/${c.slug}/`,
+  },
+];
+---
+
+<Base title={c.metaTitle} description={c.metaDescription} jsonLd={jsonLd}>
+  <PageHero
+    title={c.h1}
+    eyebrow={`${parent.title} · Pays royannais`}
+    lead={c.lead}
+    crumbs={[{ label: 'Prestations', href: '/prestations/' }, { label: parent.title, href: `/prestations/${parent.slug}/` }, { label: `${c.produit} à Royan` }]}
+    image={hero}
+    imageAlt={`${c.produit} posée par LUZ en pays royannais`}
+  >
+    <div class="hero-ctas">
+      <a class="btn btn--primary btn--lg" href="/devis/">Demander un devis <Icon id="arrow" /></a>
+      <a class="btn btn--ghost btn--lg" href={`tel:${agence.tel}`}><Icon id="phone" /> {agence.phone}</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container cgrid">
+      <div class="ctext">
+        {
+          c.sections.map((s) => (
+            <div class="cblock reveal">
+              <h2>{s.title}</h2>
+              {s.text.map((t) => (
+                <p>{t}</p>
+              ))}
+            </div>
+          ))
+        }
+        <p class="cparent reveal">
+          <Icon id="arrow" /> Pour le détail des gammes, matériaux et options :
+          <a href={`/prestations/${parent.slug}/`}>{parent.h1}</a>.
+        </p>
+      </div>
+      <aside class="caside">
+        <ul class="points reveal" style="--d:100ms">
+          {
+            c.points.map((p) => (
+              <li>
+                <Rays />
+                <div>
+                  <strong>{p.title}</strong>
+                  <span>{p.text}</span>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+        <AgenceCard agence={agence} delay={150} />
+      </aside>
+    </div>
+  </section>
+
+  {
+    reals.length > 0 && (
+      <section class="section section--stone pattern-rays">
+        <div class="container">
+          <SectionHead eyebrow="Réalisations" title={`${c.produit} en pays royannais : nos chantiers`} row>
+            <a class="link-arrow" href={`/realisations/?prestation=${parent.slug}&zone=royan`}>
+              Voir plus <Icon id="arrow" />
+            </a>
+          </SectionHead>
+          <div class="grid grid--3">
+            {reals.slice(0, 6).map((r, i) => (
+              <RealisationCard real={r!} delay={(i % 3) * 70} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section">
+    <div class="container container--narrow">
+      <SectionHead eyebrow="Questions fréquentes" title={`${c.produit} à Royan : vos questions`} center />
+      <Faq items={c.faq} />
+    </div>
+  </section>
+
+  <CtaBand agence="royan" title={`Votre ${c.produit.toLowerCase()} à Royan&nbsp;: parlons-en.`} />
+</Base>
+
+<style>
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .cgrid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .cblock {
+    margin-bottom: 2rem;
+  }
+  .cblock h2 {
+    font-size: clamp(1.7rem, 3vw, 2.4rem);
+  }
+  .cblock p {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .cparent {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    background: var(--stone-50);
+    border-left: 4px solid var(--lime);
+  }
+  .cparent :global(svg) {
+    color: var(--green-500);
+    margin-top: 0.3em;
+    flex: none;
+  }
+  .caside {
+    display: grid;
+    gap: 1.5rem;
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+  }
+  .points {
+    list-style: none;
+    padding: 1.5rem;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+    border-radius: var(--radius);
+    background: var(--green-900);
+    color: var(--white);
+  }
+  .points li {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+  }
+  .points :global(svg) {
+    width: 26px;
+    flex: none;
+    color: var(--lime);
+    margin-top: 0.3rem;
+  }
+  .points strong {
+    display: block;
+    font-family: var(--font-ui);
+    font-weight: 600;
+  }
+  .points span {
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.75);
+  }
+  @media (max-width: 900px) {
+    .cgrid {
+      grid-template-columns: 1fr;
+    }
+    .caside {
+      position: static;
+    }
+  }
+</style>

@@ -1,0 +1,82 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+export type Crumb = { label: string; href?: string };
+interface Props {
+  items: Crumb[]; // sans l'accueil
+  light?: boolean;
+  class?: string;
+}
+const { items, light = false, class: cls, ...rest } = Astro.props;
+const all: Crumb[] = [{ label: 'Accueil', href: '/' }, ...items];
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: all.map((c, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    name: c.label,
+    item: c.href ? new URL(c.href, site.url).href : undefined,
+  })),
+};
+---
+
+<nav {...rest} class:list={['crumbs', { 'crumbs--light': light }, cls]} aria-label="Fil d’Ariane">
+  <ol>
+    {
+      all.map((c, i) => (
+        <li>
+          {i > 0 && <Icon id="chevron-right" class="crumbs__sep" />}
+          {c.href && i < all.length - 1 ? <a href={c.href}>{c.label}</a> : <span aria-current="page">{c.label}</span>}
+        </li>
+      ))
+    }
+  </ol>
+</nav>
+<script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+<style>
+  .crumbs ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.15rem;
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  .crumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.15rem;
+  }
+  .crumbs a {
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+  .crumbs a:hover {
+    color: var(--green-700);
+  }
+  .crumbs span {
+    color: var(--green-900);
+    font-weight: 600;
+  }
+  .crumbs__sep {
+    color: var(--ink-3);
+    font-size: 0.85em;
+  }
+  .crumbs--light a {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .crumbs--light a:hover,
+  .crumbs--light span {
+    color: var(--white);
+  }
+  .crumbs--light .crumbs__sep {
+    color: rgba(255, 255, 255, 0.5);
+  }
+</style>

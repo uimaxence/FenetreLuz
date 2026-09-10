@@ -1,0 +1,327 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Icon from '../components/Icon.astro';
+import Rays from '../components/Rays.astro';
+import Faq from '../components/Faq.astro';
+import LocalCta from '../components/LocalCta.astro';
+import CtaBand from '../components/CtaBand.astro';
+import type { ImageMetadata } from 'astro';
+import { aides, financement } from '../data/aides';
+import { realPhoto } from '../data/photos';
+const hero = realPhoto('fenetres-pvc-volets-alu-saint-genis-de-saintonge');
+// Logo ARKEA : src/assets/logos/partenaires/arkea.svg|png
+const partLogos = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/partenaires/*.{svg,png}', { eager: true });
+const arkea = Object.entries(partLogos).find(([p]) => /\/arkea\.(svg|png)$/i.test(p))?.[1].default;
+const faq = [
+  { q: 'Dois-je faire ma demande d’aide avant ou après le devis ?', a: 'Avant de signer. MaPrimeRénov’ et les CEE exigent que la demande soit déposée avant la signature du devis (et donc avant les travaux). Nous vous remettons un devis conforme pour constituer le dossier, puis vous signez une fois l’accord obtenu.' },
+  { q: 'Pourquoi la certification RGE est-elle indispensable ?', a: 'MaPrimeRénov’, les primes CEE et l’éco-PTZ ne sont accordés que si les travaux sont réalisés par une entreprise Reconnue Garante de l’Environnement. LUZ est certifiée RGE (Qualibat) pour la pose de menuiseries extérieures.' },
+  { q: 'Les aides s’appliquent-elles aux vérandas, pergolas et portails ?', a: 'Non : ces produits n’entrent pas dans la rénovation énergétique. Ils bénéficient en revanche de la TVA à 10 % en rénovation (logement de plus de 2 ans) et de nos solutions de financement.' },
+  { q: 'Puis-je cumuler plusieurs aides ?', a: 'Oui : MaPrimeRénov’ + prime CEE + TVA réduite + éco-PTZ sont cumulables, dans la limite d’un plafond global fixé par l’État. Nous vous indiquons le cumul possible pour votre situation.' },
+];
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<Base
+  title="Aides à la rénovation de fenêtres 2026 & financement — MaPrimeRénov’, CEE, TVA 5,5 %, éco-PTZ | LUZ"
+  description="MaPrimeRénov’, primes CEE, TVA réduite à 5,5 %, éco-prêt à taux zéro et financement ARKEA : Fenêtres & Vérandas LUZ, entreprise RGE en Charente-Maritime, vous aide à financer vos fenêtres, portes et volets. Sous conditions d’éligibilité."
+  jsonLd={jsonLd}
+>
+  <PageHero
+    title="Aides & financement"
+    eyebrow="Entreprise certifiée RGE"
+    lead="Changer ses fenêtres coûte moins cher qu’on ne le croit lorsqu’on mobilise les bonnes aides. Nous vous indiquons celles auxquelles vous avez droit, sous conditions d’éligibilité, et nous montons le dossier avec vous."
+    crumbs={[{ label: 'Aides & financement' }]}
+    image={hero}
+    imageAlt="Maison charentaise rénovée avec fenêtres PVC et volets aluminium"
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Les dispositifs" title="Quatre aides pour vos menuiseries" lead="Fenêtres, portes-fenêtres, portes d’entrée et volets isolants posés par une entreprise RGE ouvrent droit à ces aides, cumulables entre elles." />
+      <div class="grid grid--2">
+        {
+          aides.map((a, i) => (
+            <article class="aide reveal" style={`--d:${(i % 2) * 80}ms`}>
+              <div class="aide__head">
+                <span class="aide__ic">
+                  <Icon id="euro" />
+                </span>
+                <div>
+                  <h3>{a.name}</h3>
+                  <p class="aide__short">{a.short}</p>
+                </div>
+              </div>
+              <p class="aide__desc">{a.description}</p>
+              <p class="aide__row">
+                <span>Pour</span>
+                <span>{a.pour.join(', ')}</span>
+              </p>
+              <p class="aide__row">
+                <span>Montant</span>
+                <span>{a.montant}</span>
+              </p>
+              <p class="aide__row">
+                <span>Cumul</span>
+                <span>{a.cumul}</span>
+              </p>
+              <details class="aide__cond">
+                <summary>
+                  Conditions d’éligibilité <Icon id="chevron" />
+                </summary>
+                <ul class="list-rays">
+                  {a.conditions.map((c) => (
+                    <li>{c}</li>
+                  ))}
+                </ul>
+              </details>
+            </article>
+          ))
+        }
+      </div>
+      <p class="disclaimer">
+        <Icon id="shield" /> Dispositifs révisés chaque année par l’État : montants et conditions indiqués à titre informatif, sous réserve d’éligibilité et des barèmes en vigueur au moment de la demande. Votre conseiller LUZ vérifie votre situation.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--green on-dark fin">
+    <Rays class="rays-giant rays-giant--bl" style="opacity:.08" />
+    <div class="container fin__grid">
+      <div>
+        <SectionHead eyebrow={`Financement ${financement.partenaire}`} title={financement.titre} lead={financement.texte} />
+        <ul class="list-rays">
+          <li>Étude gratuite en agence, réponse rapide</li>
+          <li>Mensualités adaptées à votre budget</li>
+          <li>Pour vérandas, pergolas, portails, ensembles de menuiseries</li>
+        </ul>
+        <a class="btn btn--primary mt-2" href="/devis/">Demander une simulation <Icon id="arrow" /></a>
+      </div>
+      <div class="fin__aside">
+        {arkea && <span class="fin__logo"><img src={arkea.src} width={arkea.width} height={arkea.height} alt="ARKEA, partenaire financement" loading="lazy" decoding="async" /></span>}
+        <p class="fin__mentions">{financement.mentions}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Comment ça marche" title="Nous montons le dossier avec vous" />
+      <ol class="how">
+        <li class="reveal"><strong>Visite et devis conforme</strong><span>Notre métreur relève les cotes ; le devis mentionne les performances (Uw, Sw) et notre numéro RGE, exigés par les organismes.</span></li>
+        <li class="reveal" style="--d:80ms"><strong>Dépôt des demandes</strong><span>Vous déposez la demande MaPrimeRénov’ (ou nous vous guidons pas à pas) et la demande de prime CEE, avant de signer le devis.</span></li>
+        <li class="reveal" style="--d:160ms"><strong>Accord puis signature</strong><span>Une fois l’accord de principe reçu, vous signez le devis et nous lançons la fabrication.</span></li>
+        <li class="reveal" style="--d:240ms"><strong>Pose et versement</strong><span>Après la pose, nous fournissons la facture et l’attestation ; les aides sont versées sur votre compte.</span></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--stone">
+    <div class="container container--narrow">
+      <SectionHead eyebrow="Questions fréquentes" title="Aides et financement : vos questions" center />
+      <Faq items={faq} schema={false} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Près de chez vous" title="Votre projet de fenêtres à Jonzac ou à Royan" />
+      <LocalCta produit="projet de fenêtres" />
+    </div>
+  </section>
+
+  <CtaBand title="Estimez vos aides avec un conseiller." text="Devis gratuit et calcul des aides mobilisables lors de la visite." />
+</Base>
+
+<style>
+  .aide {
+    padding: 1.6rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    display: grid;
+    gap: 0.8rem;
+    align-content: start;
+  }
+  .aide__head {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .aide__ic {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius);
+    background: var(--lime-100);
+    color: var(--green-800);
+    font-size: 1.4rem;
+  }
+  .aide h3 {
+    margin: 0 0 0.2rem;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 1.7rem;
+  }
+  .aide__short {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .aide__desc {
+    margin: 0;
+    line-height: 1.6;
+    color: var(--ink-2);
+  }
+  .aide__row {
+    margin: 0;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--stone-200);
+    font-size: 0.95rem;
+  }
+  .aide__row span:first-child {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--green-500);
+    padding-top: 0.15rem;
+  }
+  .aide__cond summary {
+    list-style: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--green-800);
+    font-size: 0.95rem;
+  }
+  .aide__cond summary::-webkit-details-marker {
+    display: none;
+  }
+  .aide__cond[open] summary :global(svg) {
+    transform: rotate(180deg);
+  }
+  .aide__cond ul {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+  }
+  .disclaimer {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin: 2rem 0 0;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    background: var(--stone-50);
+    font-size: 0.92rem;
+    color: var(--ink-2);
+  }
+  .disclaimer :global(svg) {
+    flex: none;
+    color: var(--green-500);
+    margin-top: 0.2rem;
+    font-size: 1.2rem;
+  }
+  .fin {
+    overflow: hidden;
+  }
+  .fin__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3rem;
+    align-items: end;
+  }
+  .fin__aside {
+    display: grid;
+    gap: 1rem;
+  }
+  .fin__logo {
+    justify-self: start;
+    display: inline-flex;
+    padding: 0.6rem 0.9rem;
+    border-radius: var(--radius-s);
+    background: var(--white);
+  }
+  .fin__logo img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+  }
+  .fin__mentions {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.65);
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius);
+    margin: 0;
+  }
+  .how {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    counter-reset: how;
+  }
+  .how li {
+    counter-increment: how;
+    padding: 1.4rem;
+    border-radius: var(--radius);
+    background: var(--stone-50);
+    border: 1px solid var(--stone-200);
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+  .how li::before {
+    content: counter(how, decimal-leading-zero);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.2rem;
+    color: var(--lime);
+    -webkit-text-stroke: 1px var(--lime-600);
+    line-height: 1;
+  }
+  .how strong {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--green-900);
+  }
+  .how span {
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  @media (max-width: 900px) {
+    .fin__grid,
+    .how {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 560px) {
+    .fin__grid,
+    .how {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

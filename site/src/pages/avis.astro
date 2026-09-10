@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Icon from '../components/Icon.astro';
+import ReviewsBlock from '../components/ReviewsBlock.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { fichesGoogle } from '../data/avis';
+---
+
+<Base
+  title="Avis clients Fenêtres & Vérandas LUZ — Jonzac & Royan"
+  description="Les avis Google de nos clients pour les agences de Jonzac et de Royan : fenêtres, vérandas, pergolas, portails et volets posés en Charente-Maritime. Avis réels, sans filtre."
+>
+  <PageHero
+    title="Avis clients"
+    eyebrow="Avis Google des deux agences"
+    lead="Nous affichons uniquement les avis déposés sur les fiches Google de nos agences. Ils sont publics, vérifiables et nous y répondons systématiquement."
+    crumbs={[{ label: 'Avis clients' }]}
+    compact
+  />
+
+  <section class="section">
+    <div class="container">
+      <ReviewsBlock limit={30} />
+    </div>
+  </section>
+
+  <section class="section section--stone pattern-rays">
+    <div class="container">
+      <SectionHead eyebrow="Vous êtes client LUZ ?" title="Donnez votre avis, il compte" lead="Quelques lignes sur votre chantier aident les prochains clients à choisir et nos équipes à progresser." center />
+      <div class="grid grid--2 give">
+        {
+          [fichesGoogle.jonzac, fichesGoogle.royan].map((f, i) => (
+            <div class="give__card reveal" style={`--d:${i * 80}ms`}>
+              <strong>{f.label}</strong>
+              {f.reviewUrl ? (
+                <a class="btn btn--green" href={f.reviewUrl} target="_blank" rel="noopener">
+                  Laisser un avis Google <Icon id="arrow-up-right" />
+                </a>
+              ) : (
+                <span class="give__todo">Lien « laisser un avis » à renseigner (QR code en agence)</span>
+              )}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .give {
+    max-width: 800px;
+    margin-inline: auto;
+  }
+  .give__card {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+  }
+  .give__card strong {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 1.6rem;
+    color: var(--green-900);
+  }
+  .give__todo {
+    font-size: 0.9rem;
+    color: var(--ink-3);
+    font-style: italic;
+  }
+</style>

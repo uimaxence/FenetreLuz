@@ -1,0 +1,67 @@
+---
+/**
+ * « Votre projet à Jonzac / Royan » — maillage prestation → agences (seo-luz.md §5).
+ */
+import Icon from './Icon.astro';
+import { agencesList } from '../data/agences';
+interface Props {
+  produit?: string; // ex. "véranda"
+}
+const { produit = 'projet' } = Astro.props;
+---
+
+<div class="lcta grid grid--2">
+  {
+    agencesList.map((a, i) => (
+      <div class="lcta__card reveal" style={`--d:${i * 80}ms`}>
+        <span class="tag">{a.zoneLabel}</span>
+        <h3>Votre {produit} à {a.city}</h3>
+        <p>
+          Étude, métré et pose depuis notre agence de {a.address.city}. {a.responsable ? `${a.responsable.name} vous reçoit sur rendez-vous.` : `${a.showroom} pour comparer les gammes.`}
+        </p>
+        <div class="lcta__actions">
+          <a class="link-arrow" href={`/agences/${a.slug}/`}>Agence de {a.city} <Icon id="arrow" /></a>
+          <a class="lcta__tel" href={`tel:${a.tel}`}><Icon id="phone" /> {a.phone}</a>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .lcta__card {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    border-top: 4px solid var(--lime);
+  }
+  .lcta__card h3 {
+    margin: 0.35rem 0 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.7rem;
+    line-height: 1;
+  }
+  .lcta__card p {
+    color: var(--ink-2);
+    margin-bottom: 1rem;
+  }
+  .lcta__actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .lcta__tel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--green-900);
+  }
+</style>

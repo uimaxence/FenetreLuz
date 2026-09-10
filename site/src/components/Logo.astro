@@ -1,0 +1,64 @@
+---
+/**
+ * Logo LUZ : rayons + mot-symbole « LUZ » vectorisé (serif haute contraste) + baseline.
+ * Le mot-symbole est un tracé SVG : aucune police à charger, rendu net à toutes les tailles.
+ */
+import Rays from './Rays.astro';
+interface Props {
+  variant?: 'dark' | 'light';
+  baseline?: boolean;
+  class?: string;
+  animated?: boolean;
+}
+const { variant = 'dark', baseline = true, class: cls, animated = false, ...rest } = Astro.props;
+---
+
+<span {...rest} class:list={['logo', `logo--${variant}`, cls]}>
+  <Rays class="logo__rays" animated={animated} />
+  <svg class="logo__word" viewBox="0 -1540 4161 1580" aria-hidden="true" focusable="false">
+    <path
+      fill="currentColor"
+      d="M52 0V-39H232V-1461H52V-1500H674V-1461H495V-39H737Q850 -39 925.0 -67.5Q1000 -96 1045.5 -149.5Q1091 -203 1113.0 -279.0Q1135 -355 1142 -450H1181V0Z M2772 -1500V-1461H2583V-460Q2583 -213 2468.0 -92.0Q2353 29 2111 29Q1839 29 1713.5 -86.0Q1588 -201 1588 -460V-1461H1408V-1500H2050V-1461H1850V-480Q1850 -381 1863.0 -297.0Q1876 -213 1910.5 -152.0Q1945 -91 2009.0 -56.5Q2073 -22 2174 -22Q2289 -22 2372.0 -66.0Q2455 -110 2500.0 -206.5Q2545 -303 2545 -460V-1461H2363V-1500Z M2988 0V-39L3766 -1461H3445Q3309 -1461 3232.0 -1426.0Q3155 -1391 3119.5 -1320.0Q3084 -1249 3072 -1142H3033V-1500H4060V-1461L3282 -39H3662Q3799 -39 3875.5 -76.0Q3952 -113 3987.5 -192.0Q4023 -271 4035 -398H4075V0Z"
+    ></path>
+  </svg>
+  {baseline && <span class="logo__base">Fenêtres <span class="logo__amp">&amp;</span> Vérandas</span>}
+</span>
+
+<style>
+  .logo {
+    --logo-w: 64px;
+    display: inline-grid;
+    justify-items: center;
+    width: var(--logo-w);
+    line-height: 1;
+    text-decoration: none;
+  }
+  .logo--dark {
+    color: var(--green-900);
+  }
+  .logo--light {
+    color: var(--white);
+  }
+  .logo__rays {
+    width: calc(var(--logo-w) * 0.62);
+    height: auto;
+    margin-bottom: calc(var(--logo-w) * 0.06);
+  }
+  .logo__word {
+    width: 100%;
+    height: auto;
+  }
+  .logo__base {
+    margin-top: calc(var(--logo-w) * 0.1);
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: calc(var(--logo-w) * 0.135);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .logo__amp {
+    font-weight: 500;
+  }
+</style>

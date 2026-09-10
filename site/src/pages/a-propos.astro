@@ -1,0 +1,354 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Icon from '../components/Icon.astro';
+import Rays from '../components/Rays.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import Steps from '../components/Steps.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { equipe, poles } from '../data/equipe';
+import { site } from '../data/site';
+import { agencePhoto, equipePhoto } from '../data/photos';
+const hero = agencePhoto('jonzac');
+const groupe = equipePhoto('groupe-bureau');
+const meo = equipePhoto('certificat-meo');
+const janneau = equipePhoto('benoit-eco-responsable-janneau');
+const byPole = (Object.keys(poles) as (keyof typeof poles)[]).map((k) => ({ key: k, label: poles[k], membres: equipe.filter((m) => m.pole === k) }));
+---
+
+<Base
+  title="À propos de Fenêtres & Vérandas LUZ — Menuisier-installateur à Jonzac et Royan depuis plus de 20 ans"
+  description="Fenêtres & Vérandas LUZ (anciennement Fenêtres & Vérandas Parthenay) : une entreprise familiale de menuiserie en Charente-Maritime, deux agences, une équipe de 12 personnes, des poseurs salariés et des certifications MéO, Janneau, HORIZAL, Soliso et RGE."
+>
+  <PageHero
+    title="Laissez-vous séduire par la lumière"
+    eyebrow="Notre histoire"
+    lead="LUZ, c’est la lumière. Celle qui entre par une fenêtre bien posée, une véranda bien orientée, une pergola ouverte au bon moment. Depuis plus de vingt ans, notre équipe la fait entrer dans les maisons de Charente-Maritime."
+    crumbs={[{ label: 'À propos' }]}
+    image={hero}
+    imageAlt="Façade de l’agence LUZ de Jonzac au coucher du soleil"
+  />
+
+  <section class="section">
+    <div class="container story">
+      <div class="story__text reveal">
+        <SectionHead eyebrow="Plus de 20 ans en Charente-Maritime" title="De Fenêtres Parthenay à Fenêtres & Vérandas LUZ" />
+        <p>Installée à Saint-Germain-de-Lusignan, aux portes de Jonzac, l’entreprise a grandi avec la Haute-Saintonge : d’abord les fenêtres et les portes, puis les vérandas, les pergolas, les portails, les volets et les stores, au fil des demandes de nos clients et des partenariats noués avec des fabricants français.</p>
+        <p>En 2023, Fenêtres & Vérandas Parthenay devient <strong>Fenêtres & Vérandas LUZ</strong>. Un nom court, qui dit ce que nous faisons entrer chez vous : la lumière. L’équipe, l’adresse et les engagements n’ont pas changé.</p>
+        <p>Une seconde agence a ouvert à Breuillet, en pays royannais, pour servir le littoral avec la même exigence : conseil en showroom, métré par un professionnel, pose par nos propres salariés et service après-vente joignable.</p>
+        <ul class="story__facts">
+          <li><strong>2</strong><span>agences & showrooms</span></li>
+          <li><strong>{equipe.length}</strong><span>personnes, dont 5 poseurs salariés</span></li>
+          <li><strong>{site.showroomSize}</strong><span>de showroom à Jonzac</span></li>
+        </ul>
+      </div>
+      <figure class="story__media reveal reveal--scale">
+        {groupe && <Picture src={groupe} alt="L’équipe commerciale et administrative de Fenêtres & Vérandas LUZ" widths={[640, 1000, 1400]} sizes="(max-width: 900px) 92vw, 48vw" formats={['webp']} loading="lazy" decoding="async" class="story__img" />}
+        <figcaption>L’équipe du bureau et du showroom de Jonzac.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section section--stone pattern-rays">
+    <div class="container">
+      <SectionHead eyebrow="Nos engagements" title="Ce que nous vous garantissons" center />
+      <div class="grid grid--4">
+        {
+          [
+            { i: 'team', t: 'Nos propres poseurs', d: 'Aucune sous-traitance : les poseurs qui interviennent chez vous sont salariés LUZ, formés par nos fabricants.' },
+            { i: 'ruler', t: 'Un métré professionnel', d: 'Chaque devis est établi sur des cotes relevées par notre métreur. Pas de mauvaise surprise à la pose.' },
+            { i: 'hammer', t: 'Fabrication française', d: 'MéO, Janneau, Concept Alu, HORIZAL, Soliso, EHRET : des fabricants français dont nous sommes installateur agréé.' },
+            { i: 'shield', t: 'Assuré et certifié', d: 'Assurance décennale Generali, certification RGE Qualibat, garanties fabricant sur chaque produit.' },
+          ].map((e, i) => (
+            <div class="eng reveal" style={`--d:${i * 70}ms`}>
+              <span class="eng__ic">
+                <Icon id={e.i} />
+              </span>
+              <h3>{e.t}</h3>
+              <p>{e.d}</p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-3">
+        <TrustStrip />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="L’équipe" title="Douze personnes à votre service" lead="Du premier rendez-vous à la dernière visite de contrôle, vous parlez toujours à quelqu’un de chez nous." />
+      {
+        byPole.map((g) => (
+          <div class="pole">
+            <h3 class="pole__title">{g.label}</h3>
+            <ul class="team">
+              {g.membres.map((m, i) => {
+                const ph = m.photo ? equipePhoto(m.photo) : undefined;
+                return (
+                  <li class="member reveal" style={`--d:${i * 60}ms`}>
+                    <div class="member__media">
+                      {ph ? (
+                        <Picture src={ph} alt={`${m.prenom}, ${m.role.toLowerCase()} chez LUZ`} widths={[300, 500, 800]} sizes="(max-width: 600px) 45vw, 200px" formats={['webp']} loading="lazy" decoding="async" class="member__img" />
+                      ) : (
+                        <span class="member__soon">
+                          <Rays class="member__rays" />
+                          <span>Photo à venir</span>
+                        </span>
+                      )}
+                    </div>
+                    <strong>{m.prenom}</strong>
+                    <span>{m.role}</span>
+                    {m.agence && <small>Agence de {m.agence === 'jonzac' ? 'Jonzac' : 'Royan'}</small>}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section--green on-dark certs">
+    <Rays class="rays-giant rays-giant--br" style="opacity:.08" />
+    <div class="container certs__grid">
+      <div>
+        <SectionHead eyebrow="Réseaux fabricants" title="Formés et certifiés par nos fabricants" lead="Menuisier d’Excellence MéO, Menuisier Créateur Janneau, Portalier HORIZAL, Expert Storiste Soliso, concessionnaire Concept Alu : chaque agrément implique une formation, un audit et des règles de pose." />
+        <a class="btn btn--ghost" href="/marques-partenaires/">Nos marques partenaires <Icon id="arrow" /></a>
+      </div>
+      <div class="certs__photos">
+        {meo && <Picture src={meo} alt="Signature du certificat Menuisier d’Excellence MéO dans le showroom LUZ" widths={[480, 800]} sizes="(max-width: 900px) 92vw, 30vw" formats={['webp']} loading="lazy" decoding="async" class="certs__img" />}
+        {janneau && <Picture src={janneau} alt="Benoît, gérant, avec le certificat d’engagement éco-responsable Janneau" widths={[480, 800]} sizes="(max-width: 900px) 92vw, 30vw" formats={['webp']} loading="lazy" decoding="async" class="certs__img" />}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Notre méthode" title="Un projet accompagné, du devis à la pose" center />
+      <Steps />
+    </div>
+  </section>
+
+  <section class="section section--stone">
+    <div class="container local">
+      <div class="reveal">
+        <p class="eyebrow"><Rays /> Ancrage local</p>
+        <h2>Une entreprise d’ici, engagée ici</h2>
+        <p class="lead">Rugby, culture, solidarité : nous soutenons des associations de Jonzac et de sa région.</p>
+        <a class="link-arrow" href="/partenariats-engagements/">Nos partenariats & engagements <Icon id="arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Venez nous rencontrer." text="Deux showrooms, à Jonzac et à Breuillet, pour voir les produits et parler de votre projet." primaryHref="/contact/" primaryLabel="Nos agences" />
+</Base>
+
+<style>
+  .story {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: stretch;
+  }
+  .story__text p {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .story__facts {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0 0;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .story__facts li {
+    display: grid;
+  }
+  .story__facts strong {
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--green-900);
+  }
+  .story__facts span {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+  }
+  .story__media {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+  }
+  .story :global(.story__img) {
+    flex: 1;
+    width: 100%;
+    min-height: 0;
+    border-radius: var(--radius-l);
+    object-fit: cover;
+  }
+  @media (max-width: 900px) {
+    .story :global(.story__img) {
+      aspect-ratio: 4 / 3;
+    }
+  }
+  .story__media figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--ink-3);
+  }
+  .eng {
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+  }
+  .eng__ic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius);
+    background: var(--green-900);
+    color: var(--lime);
+    font-size: 1.4rem;
+    margin-bottom: 0.9rem;
+  }
+  .eng h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+  .eng p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.96rem;
+    line-height: 1.5;
+  }
+  .pole {
+    margin-top: 2rem;
+  }
+  .pole__title {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--green-500);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--stone-200);
+  }
+  .team {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1.25rem;
+  }
+  .member {
+    display: grid;
+    gap: 0.15rem;
+    justify-items: start;
+  }
+  .member__media {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--stone-100);
+    margin-bottom: 0.5rem;
+    display: grid;
+    place-items: center;
+  }
+  .member :global(.member__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    filter: grayscale(1);
+    transition:
+      filter 400ms ease,
+      transform 700ms var(--ease-out);
+  }
+  @media (hover: hover) {
+    .member:hover :global(.member__img) {
+      filter: grayscale(0);
+      transform: scale(1.03);
+    }
+  }
+  .member__soon {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(160deg, var(--green-800), var(--green-950));
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-ui);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .member__rays {
+    width: 46px;
+    color: var(--lime);
+    opacity: 0.8;
+  }
+  .member strong {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--green-900);
+  }
+  .member span {
+    font-size: 0.9rem;
+    color: var(--ink-2);
+  }
+  .member small {
+    font-size: 0.78rem;
+    color: var(--ink-3);
+  }
+  .certs {
+    overflow: hidden;
+  }
+  .certs__grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  .certs__photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .certs :global(.certs__img) {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+  .certs :global(.certs__img:nth-child(2)) {
+    margin-top: 2rem;
+  }
+  .local {
+    text-align: center;
+  }
+  .local .eyebrow {
+    justify-content: center;
+  }
+  @media (max-width: 900px) {
+    .story,
+    .certs__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,29 @@
+---
+import Rays from './Rays.astro';
+interface Props {
+  eyebrow?: string;
+  title: string;
+  lead?: string;
+  center?: boolean;
+  row?: boolean;
+  as?: 'h1' | 'h2' | 'h3';
+  class?: string;
+}
+const { eyebrow, title, lead, center = false, row = false, as = 'h2', class: cls, ...rest } = Astro.props;
+const Tag = as;
+---
+
+<div {...rest} class:list={['section-head', 'reveal', { 'section-head--center': center, 'section-head--row': row }, cls]}>
+  <div>
+    {
+      eyebrow && (
+        <p class="eyebrow">
+          <Rays /> {eyebrow}
+        </p>
+      )
+    }
+    <Tag set:html={title} />
+    {lead && <p class="lead">{lead}</p>}
+  </div>
+  {row && <div class="section-head__aside"><slot /></div>}
+</div>

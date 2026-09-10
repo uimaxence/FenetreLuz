@@ -1,0 +1,98 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import PrestationCard from '../../components/PrestationCard.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Icon from '../../components/Icon.astro';
+import TrustStrip from '../../components/TrustStrip.astro';
+import LocalCta from '../../components/LocalCta.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { prestationsMenu } from '../../data/prestations';
+import { site } from '../../data/site';
+import { realPhoto } from '../../data/photos';
+const hero = realPhoto('baies-vitrees-alu-janneau-archiac');
+---
+
+<Base
+  title="Nos prestations de menuiserie en Charente-Maritime — Fenêtres, vérandas, portails, volets, stores | LUZ"
+  description="Fenêtres PVC, alu, bois, portes d’entrée, vérandas et extensions, pergolas, carports, volets, portails, stores, motorisation, braseros : toutes les prestations de Fenêtres & Vérandas LUZ, posées par nos équipes à Jonzac, Royan et en Charente-Maritime."
+>
+  <PageHero
+    title="Nos prestations"
+    eyebrow="Menuiserie, fermetures, extérieur"
+    lead="Un seul interlocuteur pour tout ce qui s’ouvre, se ferme et protège votre maison. Chaque prestation s’appuie sur un fabricant français dont nous sommes installateur agréé, et sur nos propres équipes de pose."
+    crumbs={[{ label: 'Prestations' }]}
+    image={hero}
+    imageAlt="Baies vitrées aluminium sur une longère en pierre à Archiac"
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--3">
+        {prestationsMenu.map((p, i) => <PrestationCard prestation={p} delay={(i % 3) * 70} />)}
+        <a class="dep reveal" href="/depannage/">
+          <span class="dep__icon"><Icon id="depannage" /></span>
+          <h3>Dépannage & entretien</h3>
+          <p>Diagnostic et réparation de volets, stores, portails, portes de garage et motorisations. Forfait {site.depannage.forfait}.</p>
+          <span class="link-arrow">En savoir plus <Icon id="arrow" /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone pattern-rays">
+    <div class="container">
+      <SectionHead eyebrow="Réseaux fabricants" title="Installateur agréé de fabricants français" lead="Être certifié nous engage : formation par le fabricant, respect de ses règles de pose, garanties constructeur." center />
+      <TrustStrip />
+      <p class="text-center mt-2"><a class="link-arrow" href="/marques-partenaires/">Découvrir nos marques partenaires <Icon id="arrow" /></a></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Près de chez vous" title="Votre projet à Jonzac ou à Royan" />
+      <LocalCta />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .dep {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--green-900);
+    color: var(--white);
+    text-decoration: none;
+  }
+  .dep h3 {
+    color: var(--white);
+    margin: 0.25rem 0 0;
+  }
+  .dep p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.97rem;
+  }
+  .dep__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius);
+    background: var(--lime);
+    color: var(--green-950);
+    font-size: 1.4rem;
+  }
+  .dep .link-arrow {
+    color: var(--lime);
+  }
+  .dep:hover {
+    color: var(--white);
+  }
+</style>

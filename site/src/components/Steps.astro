@@ -1,0 +1,125 @@
+---
+/**
+ * Méthode LUZ en 4 étapes (séquence réelle : l'ordre porte du sens).
+ */
+import Icon from './Icon.astro';
+const steps = [
+  {
+    icon: 'home',
+    title: 'Rendez-vous chez vous ou en showroom',
+    text: 'Un conseiller LUZ écoute votre projet, regarde l’existant et vous oriente vers les bons matériaux et les bonnes gammes. Comparez les produits en showroom à Jonzac ou Breuillet.',
+  },
+  {
+    icon: 'ruler',
+    title: 'Métré et devis détaillé',
+    text: 'Notre métreur relève les cotes exactes. Vous recevez un devis clair, poste par poste, avec les aides mobilisables et, si besoin, une simulation de financement.',
+  },
+  {
+    icon: 'hammer',
+    title: 'Fabrication française sur mesure',
+    text: 'Vos menuiseries sont fabriquées par MéO, Janneau, Concept Alu, HORIZAL ou Soliso aux cotes relevées. Nous planifions la pose avec vous dès la commande.',
+  },
+  {
+    icon: 'check',
+    title: 'Pose par nos équipes et suivi',
+    text: 'Nos poseurs salariés installent, règlent et nettoient. Réception ensemble, garanties fabricant et décennale, service dépannage disponible ensuite.',
+  },
+];
+---
+
+<ol class="steps">
+  {
+    steps.map((s, i) => (
+      <li class="step reveal" style={`--d:${i * 90}ms`}>
+        <span class="step__num">{String(i + 1).padStart(2, '0')}</span>
+        <span class="step__icon">
+          <Icon id={s.icon} />
+        </span>
+        <h3 class="step__title">{s.title}</h3>
+        <p class="step__text">{s.text}</p>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .steps {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
+    counter-reset: step;
+  }
+  .step {
+    position: relative;
+    padding: 1.5rem 1.4rem 1.6rem;
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius);
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+  }
+  .step::after {
+    content: '';
+    position: absolute;
+    top: 2.2rem;
+    right: -1.25rem;
+    width: 1.25rem;
+    height: 2px;
+    background: var(--stone-200);
+  }
+  .step:last-child::after {
+    display: none;
+  }
+  .step__num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: var(--lime);
+    -webkit-text-stroke: 1px var(--lime-600);
+  }
+  .step__icon {
+    position: absolute;
+    right: 1.2rem;
+    top: 1.3rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--green-50);
+    color: var(--green-700);
+    font-size: 1.25rem;
+  }
+  .step__title {
+    margin: 0.2rem 0 0;
+    font-size: 1.15rem;
+  }
+  .step__text {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.96rem;
+    line-height: 1.5;
+  }
+  @media (max-width: 1000px) {
+    .steps {
+      grid-template-columns: 1fr 1fr;
+    }
+    .step:nth-child(2)::after {
+      display: none;
+    }
+  }
+  @media (max-width: 560px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+    .step::after {
+      display: none;
+    }
+  }
+</style>

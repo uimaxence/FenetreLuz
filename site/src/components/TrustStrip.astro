@@ -1,0 +1,125 @@
+---
+/**
+ * Bandeau de confiance : certifications + réseaux fabricants, gabarit homogène.
+ * Dès qu'un logo officiel est déposé dans src/assets/logos/certifications/<id>.svg|png,
+ * il remplace l'icône générique (voir LOGOS-A-RECUPERER.md).
+ */
+import type { ImageMetadata } from 'astro';
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+interface Props {
+  dark?: boolean;
+  ids?: string[];
+  class?: string;
+}
+const { dark = false, ids, class: cls, ...rest } = Astro.props;
+const list = ids ? site.certifications.filter((c) => ids.includes(c.id)) : site.certifications;
+
+const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/certifications/*.{svg,png}', { eager: true });
+const logoFor = (id: string) =>
+  Object.entries(logos).find(([p]) => p.split('/').pop()!.replace(/\.(svg|png)$/i, '') === id)?.[1].default;
+---
+
+<ul {...rest} class:list={['trust', { 'trust--dark': dark }, cls]} aria-label="Certifications et réseaux fabricants">
+  {
+    list.map((c, i) => {
+      const logo = logoFor(c.id);
+      return (
+        <li class="trust__item reveal" style={`--d:${i * 40}ms`}>
+          {logo ? (
+            <span class="trust__logo">
+              <img src={logo.src} width={logo.width} height={logo.height} alt={`${c.label} — ${c.sub}`} loading="lazy" decoding="async" />
+            </span>
+          ) : (
+            <span class="trust__ic">
+              <Icon id={c.id === 'generali' ? 'shield' : c.id === 'rge' || c.id === 'qualibat' ? 'leaf' : 'check'} />
+            </span>
+          )}
+          <span>
+            <strong>{c.label}</strong>
+            <small>{c.sub}</small>
+          </span>
+        </li>
+      );
+    })
+  }
+</ul>
+
+<style>
+  .trust {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.75rem;
+  }
+  .trust__item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem 0.9rem;
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius);
+    background: var(--white);
+    min-height: 66px;
+  }
+  .trust__ic {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--green-50);
+    color: var(--green-700);
+    font-size: 1.1rem;
+  }
+  .trust__logo {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 68px;
+    height: 50px;
+    padding: 0.2rem;
+    border-radius: var(--radius-s);
+    background: var(--white);
+  }
+  .trust__logo img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  .trust strong {
+    display: block;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.88rem;
+    line-height: 1.15;
+    color: var(--green-900);
+  }
+  .trust small {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--ink-3);
+    margin-top: 0.15rem;
+  }
+  .trust--dark .trust__item {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.14);
+  }
+  .trust--dark .trust__ic {
+    background: rgba(212, 220, 63, 0.16);
+    color: var(--lime);
+  }
+  .trust--dark strong {
+    color: var(--white);
+  }
+  .trust--dark small {
+    color: rgba(255, 255, 255, 0.6);
+  }
+</style>

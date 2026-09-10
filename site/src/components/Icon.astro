@@ -1,0 +1,89 @@
+---
+/**
+ * Icônes trait fin (24px, stroke 1.75) — style homogène pour prestations et UI.
+ */
+interface Props {
+  id: string;
+  class?: string;
+  size?: number;
+  title?: string;
+}
+const { id, class: cls, size, title, ...rest } = Astro.props;
+
+const icons: Record<string, string> = {
+  // Prestations
+  fenetre: '<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M3 12h18"/>',
+  porte: '<path d="M5 21V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v17"/><path d="M3 21h18"/><circle cx="15" cy="12.5" r="1"/>',
+  veranda: '<path d="M3 11 12 4l9 7"/><path d="M5 10v11h14V10"/><path d="M5 21h14"/><path d="M9 21v-7h6v7"/><path d="M12 14v7"/>',
+  pergola: '<path d="M3 7h18"/><path d="M5 7v14M19 7v14"/><path d="M6 10.5 9 8M10 10.5 13 8M14 10.5 17 8"/><path d="M5 21h14"/>',
+  carport: '<path d="M3 8h18"/><path d="M5 8v13M19 8v13"/><path d="M7 17h10l-1.5-4h-7Z"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="19" r="1"/>',
+  volet: '<rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 8h18M3 12h18M3 16h18"/>',
+  portail: '<path d="M3 21V9M21 21V9"/><path d="M3 21h18"/><path d="M6 9c0-3 2.7-5 6-5s6 2 6 5"/><path d="M7 9v10M10 6v13M14 6v13M17 9v10"/>',
+  store: '<path d="M3 4h18"/><path d="M4 4v6M20 4v6"/><path d="M4 10c0 1.5 1 2.5 2 2.5S8 11.5 8 10c0 1.5 1 2.5 2 2.5s2-1 2-2.5c0 1.5 1 2.5 2 2.5s2-1 2-2.5c0 1.5 1 2.5 2 2.5s2-1 2-2.5"/><path d="M6 12.5V20"/>',
+  moteur: '<circle cx="12" cy="12" r="8"/><path d="M13 7.5 9.5 12.5h4L10.5 17"/>',
+  brasero: '<path d="M4 15h16l-1.5 4h-13Z"/><path d="M7 19v2M17 19v2"/><path d="M12 3c-1 2.5-3.5 3.5-3.5 6.2a3.5 3.5 0 0 0 7 0c0-1.5-.6-2.5-1.3-3.4-.3 1-.8 1.4-1.2 1.6C13.2 6 12.8 4.5 12 3Z"/>',
+  terrasse: '<path d="M2 20 8 8h8l6 12"/><path d="M5 14h14M3.5 17h17"/>',
+  depannage: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  // UI
+  arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+  'arrow-up-right': '<path d="M7 17 17 7M8 7h9v9"/>',
+  chevron: '<path d="m6 9 6 6 6-6"/>',
+  'chevron-right': '<path d="m9 6 6 6-6 6"/>',
+  phone: '<path d="M5 3h4l2 5-2.5 1.5a11 11 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 5a2 2 0 0 1 2-2Z"/>',
+  mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  pin: '<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  check: '<path d="m5 12 4.5 4.5L19 7"/>',
+  star: '<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9Z"/>',
+  menu: '<path d="M3 6h18M3 12h18M3 18h18"/>',
+  close: '<path d="M6 6l12 12M18 6 6 18"/>',
+  quote: '<path d="M7 17c-2 0-3-1.5-3-3.5S5.5 9 8 8l.5 1.5C7 10 6.5 11 6.5 12h1.5a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2Zm9 0c-2 0-3-1.5-3-3.5s1.5-4.5 4-5.5l.5 1.5c-1.5.5-2 1.5-2 2.5h1.5a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2Z"/>',
+  facebook: '<path d="M14 8h3V4h-3a4 4 0 0 0-4 4v2H7v4h3v7h4v-7h3l1-4h-4V8Z"/>',
+  instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>',
+  ruler: '<path d="m3 17 14-14 4 4L7 21Z"/><path d="m7 13 2 2M10 10l2 2M13 7l2 2"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6Z"/><path d="m9 12 2 2 4-4"/>',
+  euro: '<path d="M17 6.5A6 6 0 0 0 7 9M17 17.5A6 6 0 0 1 7 15M4 10h9M4 14h9"/>',
+  sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/>',
+  team: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.5 3-6 6.5-6s6.5 2.5 6.5 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.5c3 0 5.5 2.2 5.5 5.5"/>',
+  truck: '<path d="M2 6h12v11H2Z"/><path d="M14 10h4l3 3v4h-7Z"/><circle cx="6" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/>',
+  hammer: '<path d="m14 5 5 5-2 2-5-5Z"/><path d="m12 7-9 9 2.5 2.5L15 9"/><path d="M15 4l3-1 2 2-1 3"/>',
+  file: '<path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8Z"/><path d="M14 3v5h5M8 13h8M8 17h8"/>',
+  home: '<path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
+  map: '<path d="m3 6 6-2 6 2 6-2v14l-6 2-6-2-6 2Z"/><path d="M9 4v14M15 6v14"/>',
+  external: '<path d="M14 4h6v6M20 4l-9 9"/><path d="M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/>',
+  leaf: '<path d="M4 20C6 12 11 6 20 4c-1 9-6 14-14 16"/><path d="M4 20c4-5 8-8 12-10"/>',
+  handshake: '<path d="m3 9 4-3 5 2 5-2 4 3-2 7-4 3-3-2-3 2-4-3Z"/><path d="m12 8-3 3 2 2 3-2"/>',
+  spark: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+};
+
+const path = icons[id] ?? icons.spark;
+const px = size ? `${size}px` : undefined;
+---
+
+<svg
+  {...rest}
+  class:list={['icon', cls]}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="1.75"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  width={px}
+  height={px}
+  aria-hidden={title ? undefined : 'true'}
+  role={title ? 'img' : undefined}
+  focusable="false"
+  set:html={(title ? `<title>${title}</title>` : '') + path}
+/>
+
+<style>
+  .icon {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex: none;
+    vertical-align: -0.15em;
+  }
+</style>

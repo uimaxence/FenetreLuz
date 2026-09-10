@@ -1,0 +1,784 @@
+---
+import { Picture } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Rays from '../components/Rays.astro';
+import Icon from '../components/Icon.astro';
+import SectionHead from '../components/SectionHead.astro';
+import PrestationCard from '../components/PrestationCard.astro';
+import RealisationCard from '../components/RealisationCard.astro';
+import Steps from '../components/Steps.astro';
+import AgenceCard from '../components/AgenceCard.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import ReviewsBlock from '../components/ReviewsBlock.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { prestationsMenu } from '../data/prestations';
+import { realisationsFeatured } from '../data/realisations';
+import { agencesList } from '../data/agences';
+import { villes } from '../data/villes';
+import { aides } from '../data/aides';
+import { site } from '../data/site';
+import { realPhoto, equipePhoto } from '../data/photos';
+
+// Hero : fondu enchaîné de 3 chantiers ensoleillés (pergola littoral, maison charentaise, pergola jardin)
+const heroSlides = [
+  {
+    img: realPhoto('pergola-bioclimatique-ile-oleron'),
+    alt: 'Pergola bioclimatique aluminium anthracite adossée à une maison aux volets bleus sur l’île d’Oléron, réalisation LUZ',
+    cap: 'Pergola bioclimatique Concept Alu — Île d’Oléron',
+    pos: '50% 45%',
+  },
+  {
+    img: realPhoto('fenetres-pvc-volets-alu-saint-genis-de-saintonge'),
+    alt: 'Maison charentaise en pierre avec fenêtres PVC blanches et volets battants aluminium bleus posés par LUZ',
+    cap: 'Fenêtres Janneau & volets alu — Saint-Genis-de-Saintonge',
+    pos: '50% 40%',
+  },
+  {
+    img: realPhoto('double-pergola-bioclimatique-pays-jonzacais'),
+    alt: 'Double pergola bioclimatique en L sur la terrasse d’une maison de plain-pied, jardin paysagé, réalisation LUZ',
+    cap: 'Double pergola bioclimatique — Pays jonzacais',
+    pos: '50% 50%',
+  },
+].filter((s) => s.img);
+const pose = equipePhoto('pose-securite-2');
+const articles = (await getCollection('conseils', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+const featured = realisationsFeatured.slice(0, 6);
+
+const title = 'Menuiserie à Jonzac & Royan — Fenêtres, Vérandas, Portails | LUZ';
+const description =
+  'Fenêtres & Vérandas LUZ, menuisier-installateur certifié RGE en Charente-Maritime : fenêtres PVC, alu, bois, portes d’entrée, vérandas, pergolas, portails, volets et stores. Deux agences à Jonzac et Royan, pose par nos équipes, devis gratuit.';
+---
+
+<Base title={title} description={description}>
+  <!-- ============ HERO ============ -->
+  <section class="hero on-dark">
+    <div class="hero__grid">
+      <div class="hero__text">
+        <Rays class="hero__rays" animated />
+        <div class="hero__inner">
+          <p class="eyebrow"><Rays /> Menuiserie · Jonzac & Royan · Charente-Maritime</p>
+          <h1>
+            Fenêtres, vérandas, portails&nbsp;: <span class="accent">laissez entrer la&nbsp;lumière.</span>
+          </h1>
+          <p class="lead">
+            Menuisier-installateur multi-marques depuis plus de 20 ans. Nous concevons, fabriquons avec des fabricants
+            français et posons nous-mêmes vos fenêtres, portes, vérandas, pergolas, portails, volets et stores.
+          </p>
+          <div class="hero__ctas">
+            <a class="btn btn--primary btn--lg" href="/devis/">Demander un devis <Icon id="arrow" /></a>
+            <a class="btn btn--ghost btn--lg" href="/realisations/">Voir nos réalisations</a>
+          </div>
+          <ul class="hero__trust" aria-label="Certifications">
+            <li>Certifié RGE</li>
+            <li>Menuisier d’Excellence MéO</li>
+            <li>Menuisier Créateur Janneau</li>
+            <li>Portalier HORIZAL</li>
+            <li>Expert Storiste Soliso</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hero__media" aria-label="Réalisations LUZ">
+        {
+          heroSlides.map((s, i) => (
+            <figure class="hero__slide" style={`--i:${i};--pos:${s.pos}`}>
+              <Picture
+                src={s.img!}
+                alt={s.alt}
+                widths={[640, 960, 1400, 2000]}
+                sizes="(max-width: 900px) 100vw, 55vw"
+                formats={['webp']}
+                loading="eager"
+                fetchpriority={i === 0 ? 'high' : 'low'}
+                decoding="async"
+                class="hero__img"
+              />
+              <figcaption class="hero__cap">
+                <Icon id="pin" /> {s.cap}
+              </figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="container stats-wrap">
+    <ul class="stats">
+      <li class="stat reveal" style="--d:0ms">
+        <span class="stat__num"><span data-count="20" data-suffix="+">20+</span></span>
+        <span class="stat__label">ans de menuiserie en Charente-Maritime</span>
+      </li>
+      <li class="stat reveal" style="--d:80ms">
+        <span class="stat__num"><span data-count="2">2</span></span>
+        <span class="stat__label">agences & showrooms, Jonzac et Royan</span>
+      </li>
+      <li class="stat reveal" style="--d:160ms">
+        <span class="stat__num"><span data-count="100" data-suffix=" %">100 %</span></span>
+        <span class="stat__label">des poses réalisées par nos propres équipes</span>
+      </li>
+      <li class="stat reveal" style="--d:240ms">
+        <span class="stat__num">RGE</span>
+        <span class="stat__label">Qualibat : vos aides à la rénovation sécurisées</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- ============ PRESTATIONS ============ -->
+  <section class="section" id="prestations">
+    <div class="container">
+      <SectionHead
+        eyebrow="Nos prestations"
+        title="Tout ce qui s’ouvre, se ferme et protège votre maison"
+        lead="Organisées par produit, parce que c’est ainsi que vous cherchez. Derrière chaque gamme, un fabricant français dont nous sommes installateur agréé."
+        row
+      >
+        <a class="link-arrow" href="/prestations/">Toutes les prestations <Icon id="arrow" /></a>
+      </SectionHead>
+      <div class="grid grid--3">
+        {prestationsMenu.map((p, i) => <PrestationCard prestation={p} delay={(i % 3) * 70} />)}
+        <a class="pcard-dep reveal" href="/depannage/" style="--d:140ms">
+          <span class="pcard-dep__icon"><Icon id="depannage" /></span>
+          <h3>Dépannage & entretien</h3>
+          <p>Volet bloqué, store en panne, motorisation muette ? Intervention à domicile, diagnostic {site.depannage.forfait}, même sur des équipements que nous n’avons pas posés.</p>
+          <span class="link-arrow">Service dépannage <Icon id="arrow" /></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ POURQUOI LUZ ============ -->
+  <section class="section section--stone pattern-rays why">
+    <div class="container why__grid">
+      <div class="why__media reveal reveal--scale">
+        {
+          pose && (
+            <Picture
+              src={pose}
+              alt="Poseur LUZ installant une fenêtre en hauteur, harnais de sécurité"
+              widths={[480, 800, 1100]}
+              sizes="(max-width: 900px) 92vw, 42vw"
+              formats={['webp']}
+              loading="lazy"
+              decoding="async"
+              class="why__img"
+            />
+          )
+        }
+        <div class="why__float">
+          <Rays class="why__float-rays" />
+          <strong>Nos propres équipes de pose</strong>
+          <span>Pas de sous-traitance : les poseurs qui installent chez vous sont salariés LUZ, formés par nos fabricants.</span>
+        </div>
+      </div>
+      <div class="why__text">
+        <SectionHead
+          eyebrow="Pourquoi LUZ"
+          title="Une bonne menuiserie, c’est d’abord une menuiserie bien posée"
+          lead="Le meilleur produit mal posé ne vaut rien. C’est pourquoi nous maîtrisons toute la chaîne : conseil, métré, fabrication sur mesure, pose et service après-vente."
+        />
+        <ul class="why__list">
+          <li class="reveal" style="--d:0ms">
+            <span class="why__ic"><Icon id="ruler" /></span>
+            <div><strong>Métré par un professionnel</strong><p>Notre métreur relève chaque ouverture ; le devis est établi sur des cotes réelles, sans surprise.</p></div>
+          </li>
+          <li class="reveal" style="--d:70ms">
+            <span class="why__ic"><Icon id="hammer" /></span>
+            <div><strong>Fabricants français, installateur agréé</strong><p>MéO, Janneau, Concept Alu, HORIZAL, Soliso : nous sommes formés et certifiés par chacun d’eux.</p></div>
+          </li>
+          <li class="reveal" style="--d:140ms">
+            <span class="why__ic"><Icon id="shield" /></span>
+            <div><strong>Garanties et assurance décennale</strong><p>Garanties fabricant sur les produits, pose couverte par notre assurance décennale Generali.</p></div>
+          </li>
+          <li class="reveal" style="--d:210ms">
+            <span class="why__ic"><Icon id="depannage" /></span>
+            <div><strong>Un service après-vente qui répond</strong><p>Réglages, dépannage, entretien : deux agences proches de chez vous, joignables par téléphone.</p></div>
+          </li>
+        </ul>
+        <TrustStrip ids={['rge', 'qualibat', 'meo', 'janneau', 'horizal', 'soliso']} class="why__trust" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ RÉALISATIONS ============ -->
+  <section class="section">
+    <div class="container">
+      <SectionHead
+        eyebrow="Réalisations"
+        title="Nos chantiers en Charente-Maritime"
+        lead="Des vraies maisons, des vrais chantiers : maisons charentaises en pierre, villas du littoral, pavillons à rénover."
+        row
+      >
+        <a class="link-arrow" href="/realisations/">Toutes les réalisations <Icon id="arrow" /></a>
+      </SectionHead>
+      <div class="grid grid--3">
+        {featured.map((r, i) => <RealisationCard real={r} delay={(i % 3) * 70} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MÉTHODE ============ -->
+  <section class="section section--stone pattern-rays">
+    <div class="container">
+      <SectionHead eyebrow="Comment ça se passe" title="Un projet accompagné, du devis à la pose" center />
+      <Steps />
+    </div>
+  </section>
+
+  <!-- ============ AGENCES ============ -->
+  <section class="section section--green on-dark agences">
+    <Rays class="rays-giant rays-giant--tr agences__rays" />
+    <div class="container">
+      <SectionHead
+        eyebrow="Deux agences, un seul interlocuteur"
+        title="Près de chez vous, à Jonzac et à Royan"
+        lead="Deux showrooms pour voir et toucher les produits, des conseillers qui se déplacent chez vous, et des équipes de pose qui couvrent toute la Charente-Maritime et l’ouest de la Charente."
+      />
+      <div class="grid grid--2">
+        {agencesList.map((a, i) => <AgenceCard agence={a} delay={i * 100} />)}
+      </div>
+      <div class="zones reveal">
+        <span class="zones__label">Nous intervenons aussi à</span>
+        <ul class="zones__list">
+          {villes.map((v) => <li><a href={`/menuiserie-${v.slug}/`}>{v.name}</a></li>)}
+          <li><a href="/agences/jonzac/">Montendre, Archiac, Mirambeau, Pons…</a></li>
+          <li><a href="/agences/royan/">Saint-Georges-de-Didonne, Saint-Palais, La Tremblade, Marennes…</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AIDES + DÉPANNAGE ============ -->
+  <section class="section">
+    <div class="container grid grid--2 duo">
+      <div class="duo__card duo__card--aides reveal">
+        <p class="eyebrow"><Rays /> Aides & financement</p>
+        <h2 class="duo__title">Jusqu’à plusieurs milliers d’euros d’aides pour vos fenêtres</h2>
+        <p>Entreprise certifiée RGE, nous vous aidons à mobiliser les dispositifs auxquels vous avez droit, sous conditions d’éligibilité.</p>
+        <ul class="list-rays">
+          {aides.map((a) => <li><strong>{a.name}</strong> — {a.short}</li>)}
+          <li><strong>Financement ARKEA</strong> — payez votre projet en plusieurs fois</li>
+        </ul>
+        <a class="btn btn--dark" href="/aides-financement/">Voir les aides <Icon id="arrow" /></a>
+      </div>
+      <div class="duo__card duo__card--dep reveal" style="--d:100ms">
+        <p class="eyebrow"><Rays /> Dépannage & entretien</p>
+        <h2 class="duo__title">Une panne ? On se déplace.</h2>
+        <p>Volet roulant bloqué, store qui ne rentre plus, portail ou porte de garage en panne, casse après une tempête : notre service dépannage intervient à Jonzac, Royan et alentours.</p>
+        <p class="duo__price"><span>Forfait déplacement + diagnostic</span><strong>{site.depannage.forfait}</strong></p>
+        <div class="cluster">
+          <a class="btn btn--green" href="/depannage/">Demander une intervention <Icon id="arrow" /></a>
+          <a class="link-arrow" href="tel:+33546704838"><Icon id="phone" /> 05 46 70 48 38</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AVIS ============ -->
+  <section class="section section--stone">
+    <div class="container">
+      <SectionHead eyebrow="Avis clients" title="Ce que disent nos clients" lead="Les avis Google de nos deux agences, sans filtre." row>
+        <a class="link-arrow" href="/avis/">Tous les avis <Icon id="arrow" /></a>
+      </SectionHead>
+      <ReviewsBlock limit={3} />
+    </div>
+  </section>
+
+  <!-- ============ CONSEILS ============ -->
+  {
+    articles.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <SectionHead eyebrow="Conseils & guides" title="Bien préparer votre projet" lead="Prix, aides, choix des matériaux : nos réponses claires aux questions que vous vous posez avant de nous appeler." row>
+            <a class="link-arrow" href="/conseils/">
+              Tous les conseils <Icon id="arrow" />
+            </a>
+          </SectionHead>
+          <div class="grid grid--3">{articles.map((a, i) => <ArticleCard article={a} delay={i * 70} />)}</div>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaBand />
+</Base>
+
+<style>
+  /* ---- Hero ---- */
+  .hero {
+    background: var(--green-900);
+    position: relative;
+  }
+  .hero__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    min-height: clamp(560px, 78vh, 820px);
+  }
+  .hero__text {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: clamp(3rem, 6vw, 5.5rem) clamp(1.5rem, 5vw, 5rem) clamp(5rem, 9vw, 7rem) var(--gutter);
+  }
+  .hero__inner {
+    position: relative;
+    width: min(100%, 640px);
+    margin-left: auto;
+  }
+  .hero__rays {
+    position: absolute;
+    left: -14%;
+    bottom: -9%;
+    width: clamp(420px, 55vw, 860px);
+    color: var(--lime);
+    opacity: 0.13;
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-size: clamp(2.8rem, 5.4vw, 5.2rem);
+    margin-bottom: 1.25rem;
+  }
+  .hero .lead {
+    max-width: 56ch;
+    color: rgba(255, 255, 255, 0.82);
+  }
+  .hero__ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .hero__trust {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.25rem;
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .hero__trust li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+  .hero__trust li::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--lime);
+  }
+  .hero__media {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    background: var(--green-950);
+  }
+  /* Fondu enchaîné : 3 diapositives, 6 s chacune (5 s visibles + 1 s de fondu), cycle de 18 s. */
+  .hero__slide {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    animation: hero-fade 18s linear infinite;
+    animation-delay: calc(var(--i) * 6s);
+  }
+  .hero__slide:first-child {
+    opacity: 1;
+  }
+  .hero :global(.hero__img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--pos, 50% 50%);
+    animation: hero-kb 18s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 6s);
+  }
+  @keyframes hero-fade {
+    0%,
+    27.8% {
+      opacity: 1;
+    }
+    33.3%,
+    94.4% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes hero-kb {
+    0% {
+      transform: scale(1);
+    }
+    33.3% {
+      transform: scale(1.07);
+    }
+    94.4% {
+      transform: scale(1.07);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__slide,
+    .hero :global(.hero__img) {
+      animation: none;
+    }
+  }
+  .hero__media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(21, 68, 24, 0.35), transparent 30%);
+    pointer-events: none;
+  }
+  .hero__cap {
+    position: absolute;
+    z-index: 1;
+    right: 1.25rem;
+    bottom: 5.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: rgba(11, 46, 16, 0.7);
+    backdrop-filter: blur(6px);
+    color: var(--white);
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+  @media (max-width: 900px) {
+    .hero__grid {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .hero__text {
+      padding-bottom: 3rem;
+    }
+    .hero__inner {
+      margin-left: 0;
+    }
+    .hero__media {
+      aspect-ratio: 4 / 3;
+    }
+    .hero__cap {
+      bottom: 1rem;
+    }
+  }
+
+  /* ---- Stats ---- */
+  .stats-wrap {
+    position: relative;
+    z-index: 2;
+  }
+  .stats {
+    list-style: none;
+    padding: 0;
+    margin: -4.25rem 0 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .stat {
+    padding: 1.5rem 1.5rem 1.4rem;
+    display: grid;
+    gap: 0.3rem;
+    border-right: 1px solid var(--stone-200);
+  }
+  .stat:last-child {
+    border-right: 0;
+  }
+  .stat__num {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--green-900);
+  }
+  .stat__label {
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    line-height: 1.35;
+  }
+  @media (max-width: 900px) {
+    .stats {
+      grid-template-columns: 1fr 1fr;
+      margin-top: 0;
+      border-radius: 0;
+      box-shadow: none;
+      border-left: 0;
+      border-right: 0;
+      width: calc(100% + 2 * var(--gutter));
+      margin-inline: calc(-1 * var(--gutter));
+    }
+    .stat:nth-child(2n) {
+      border-right: 0;
+    }
+    .stat:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--stone-200);
+    }
+  }
+
+  /* ---- Dépannage card in grid ---- */
+  .pcard-dep {
+    display: grid;
+    align-content: start;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--green-900);
+    color: var(--white);
+    text-decoration: none;
+    transition: transform 300ms var(--ease-out);
+  }
+  .pcard-dep:hover {
+    transform: translateY(-4px);
+    color: var(--white);
+  }
+  .pcard-dep h3 {
+    color: var(--white);
+    margin: 0.25rem 0 0;
+    font-size: 1.3rem;
+  }
+  .pcard-dep p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.97rem;
+    line-height: 1.5;
+  }
+  .pcard-dep__icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius);
+    background: var(--lime);
+    color: var(--green-950);
+    font-size: 1.4rem;
+  }
+  .pcard-dep .link-arrow {
+    color: var(--lime);
+    margin-top: 0.4rem;
+  }
+
+  /* ---- Pourquoi ---- */
+  .why__grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: stretch;
+  }
+  .why__media {
+    position: relative;
+    border-radius: var(--radius-l);
+    overflow: visible;
+  }
+  /* L'image remplit exactement la hauteur de la colonne texte : haut et bas alignés. */
+  .why :global(.why__img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-l);
+  }
+  .why__float {
+    position: absolute;
+    right: -1.5rem;
+    bottom: 2rem;
+    width: min(300px, 80%);
+    padding: 1.25rem 1.35rem;
+    border-radius: var(--radius);
+    background: var(--green-900);
+    color: var(--white);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .why__float-rays {
+    position: absolute;
+    right: -20%;
+    bottom: -25%;
+    width: 60%;
+    color: var(--lime);
+    opacity: 0.18;
+  }
+  .why__float strong {
+    display: block;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 1.05rem;
+    margin-bottom: 0.3rem;
+    position: relative;
+  }
+  .why__float span {
+    position: relative;
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.45;
+  }
+  .why__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    display: grid;
+    gap: 1.1rem;
+  }
+  .why__list li {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .why__ic {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    color: var(--green-700);
+    font-size: 1.3rem;
+  }
+  .why__list strong {
+    display: block;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--green-900);
+    margin-bottom: 0.15rem;
+  }
+  .why__list p {
+    margin: 0;
+    color: var(--ink-2);
+    font-size: 0.97rem;
+    line-height: 1.5;
+  }
+  @media (max-width: 900px) {
+    .why__grid {
+      grid-template-columns: 1fr;
+    }
+    .why__media {
+      aspect-ratio: 4 / 3;
+    }
+    .why__float {
+      right: 1rem;
+      bottom: 1rem;
+    }
+  }
+
+  /* ---- Agences ---- */
+  .agences {
+    overflow: hidden;
+  }
+  .agences__rays {
+    opacity: 0.08;
+  }
+  .zones {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.25rem;
+  }
+  .zones__label {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--lime);
+  }
+  .zones__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .zones__list a {
+    display: inline-block;
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition:
+      background-color 160ms ease,
+      border-color 160ms ease,
+      color 160ms ease;
+  }
+  .zones__list a:hover {
+    background: var(--lime);
+    border-color: var(--lime);
+    color: var(--green-950);
+  }
+
+  /* ---- Duo aides / dépannage ---- */
+  .duo__card {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: var(--radius-l);
+    display: grid;
+    gap: 0.9rem;
+    align-content: start;
+  }
+  .duo__card p {
+    margin: 0;
+  }
+  .duo__card--aides {
+    background: var(--lime-100);
+  }
+  .duo__card--dep {
+    background: var(--stone-50);
+    border: 1px solid var(--stone-200);
+  }
+  .duo__title {
+    font-size: clamp(1.8rem, 2.8vw, 2.4rem);
+    margin: 0;
+  }
+  .duo__card .btn {
+    justify-self: start;
+    margin-top: 0.5rem;
+  }
+  .duo__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+  }
+  .duo__price strong {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    color: var(--green-900);
+    line-height: 1;
+  }
+</style>

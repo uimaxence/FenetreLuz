@@ -1,0 +1,104 @@
+---
+/**
+ * FAQ accessible (<details>) + données structurées FAQPage.
+ */
+import Icon from './Icon.astro';
+import type { Faq } from '../data/prestations';
+interface Props {
+  items: Faq[];
+  schema?: boolean;
+  class?: string;
+}
+const { items, schema = true, class: cls, ...rest } = Astro.props;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<div {...rest} class:list={['faq', cls]}>
+  {
+    items.map((f, i) => (
+      <details class="faq__item reveal" style={`--d:${i * 50}ms`} name="faq">
+        <summary class="faq__q">
+          <span>{f.q}</span>
+          <Icon id="chevron" class="faq__chev" />
+        </summary>
+        <div class="faq__a">
+          <p>{f.a}</p>
+        </div>
+      </details>
+    ))
+  }
+</div>
+{schema && <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+<style>
+  .faq {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .faq__item {
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: border-color 200ms ease;
+  }
+  .faq__item[open] {
+    border-color: var(--green-100);
+  }
+  .faq__q {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.05rem 1.25rem;
+    cursor: pointer;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--green-900);
+  }
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+  .faq__q:hover {
+    background: var(--stone-50);
+  }
+  .faq__chev {
+    flex: none;
+    color: var(--green-500);
+    transition: transform 250ms var(--ease-out);
+  }
+  .faq__item[open] .faq__chev {
+    transform: rotate(180deg);
+  }
+  .faq__a {
+    padding: 0 1.25rem 1.2rem;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .faq__a p {
+    margin: 0;
+  }
+  @keyframes faq-in {
+    from {
+      opacity: 0;
+      transform: translateY(-4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .faq__item[open] .faq__a {
+    animation: faq-in 220ms var(--ease-out);
+  }
+</style>

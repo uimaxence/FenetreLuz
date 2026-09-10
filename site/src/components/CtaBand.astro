@@ -1,0 +1,119 @@
+---
+/**
+ * Bandeau d'appel à l'action (vert profond + rayons) — fin de page.
+ */
+import Rays from './Rays.astro';
+import Icon from './Icon.astro';
+import { agencesList } from '../data/agences';
+interface Props {
+  title?: string;
+  text?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  agence?: 'jonzac' | 'royan';
+}
+const {
+  title = 'Un projet ? Parlons-en.',
+  text = 'Devis gratuit après visite à domicile. Un conseiller LUZ vous rappelle sous 48 h ouvrées.',
+  primaryHref = '/devis/',
+  primaryLabel = 'Demander un devis',
+  agence,
+} = Astro.props;
+const phones = agence ? agencesList.filter((a) => a.slug === agence) : agencesList;
+---
+
+<section class="cta on-dark pattern-rays pattern-rays--light">
+  <Rays class="cta__rays" />
+  <div class="container cta__in reveal">
+    <div>
+      <h2 class="cta__title" set:html={title} />
+      <p class="cta__text">{text}</p>
+    </div>
+    <div class="cta__actions">
+      <a class="btn btn--primary btn--lg" href={primaryHref}>{primaryLabel} <Icon id="arrow" /></a>
+      <div class="cta__phones">
+        {
+          phones.map((a) => (
+            <a href={`tel:${a.tel}`} class="cta__phone">
+              <Icon id="phone" />
+              <span>
+                <small>{a.short}</small>
+                {a.phone}
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    background: var(--green-900);
+    overflow: hidden;
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+  .cta__rays {
+    position: absolute;
+    left: -8%;
+    bottom: -18%;
+    width: clamp(360px, 42vw, 720px);
+    color: var(--lime);
+    opacity: 0.16;
+    pointer-events: none;
+  }
+  .cta__in {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem 3rem;
+    flex-wrap: wrap;
+  }
+  .cta__title {
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    margin-bottom: 0.4rem;
+  }
+  .cta__text {
+    margin: 0;
+    max-width: 48ch;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+  }
+  .cta__actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem 2rem;
+    flex-wrap: wrap;
+  }
+  .cta__phones {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .cta__phone {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    color: var(--white);
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 1.1rem;
+    line-height: 1.1;
+  }
+  .cta__phone :global(svg) {
+    font-size: 1.4rem;
+    color: var(--lime);
+  }
+  .cta__phone small {
+    display: block;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 0.15rem;
+  }
+  .cta__phone:hover {
+    color: var(--lime);
+  }
+</style>

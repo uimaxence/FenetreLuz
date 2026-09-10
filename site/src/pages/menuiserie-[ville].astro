@@ -1,0 +1,173 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Icon from '../components/Icon.astro';
+import PrestationCard from '../components/PrestationCard.astro';
+import RealisationCard from '../components/RealisationCard.astro';
+import AgenceCard from '../components/AgenceCard.astro';
+import Faq from '../components/Faq.astro';
+import TrustStrip from '../components/TrustStrip.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { villes, type Ville } from '../data/villes';
+import { agences } from '../data/agences';
+import { prestationBySlug } from '../data/prestations';
+import { realisationBySlug } from '../data/realisations';
+import { site } from '../data/site';
+import { realPhoto } from '../data/photos';
+
+export function getStaticPaths() {
+  return villes.map((v) => ({ params: { ville: v.slug }, props: { v } }));
+}
+const { v } = Astro.props as { v: Ville };
+const agence = agences[v.agence];
+const hero = 'real' in v.hero ? realPhoto(v.hero.real, v.hero.i ?? 1) : undefined;
+const prestas = v.prestationsFocus.map(prestationBySlug).filter(Boolean);
+const reals = v.realisations.map(realisationBySlug).filter(Boolean);
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: `Menuiserie à ${v.name}`,
+    serviceType: 'Menuiserie, fenêtres, vérandas, portails',
+    description: v.metaDescription,
+    provider: { '@id': `${site.url}/agences/${agence.slug}/#localbusiness` },
+    areaServed: [{ '@type': 'City', name: v.name }, ...v.communes.map((c) => ({ '@type': 'City', name: c }))],
+    url: `${site.url}/menuiserie-${v.slug}/`,
+  },
+];
+---
+
+<Base title={v.metaTitle} description={v.metaDescription} jsonLd={jsonLd}>
+  <PageHero
+    title={v.h1}
+    eyebrow={`Nous intervenons à ${v.name}`}
+    lead={v.lead}
+    crumbs={[{ label: 'Zones d’intervention', href: '/contact/' }, { label: `Menuiserie à ${v.name}` }]}
+    image={hero}
+    imageAlt={`Réalisation LUZ près de ${v.name}`}
+  >
+    <div class="hero-ctas">
+      <a class="btn btn--primary btn--lg" href="/devis/">Demander un devis <Icon id="arrow" /></a>
+      <a class="btn btn--ghost btn--lg" href={`tel:${agence.tel}`}><Icon id="phone" /> {agence.phone}</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container vgrid">
+      <div class="vtext reveal">
+        <SectionHead eyebrow="Menuisier-installateur" title={`LUZ à ${v.name}`} />
+        {v.paragraphs.map((p) => <p class="vtext__p">{p}</p>)}
+        <p class="vdist"><Icon id="truck" /> {v.distance}. Déplacement gratuit pour le métré et le devis.</p>
+      </div>
+      <aside class="vaside reveal" style="--d:100ms">
+        <AgenceCard agence={agence} />
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--stone pattern-rays">
+    <div class="container">
+      <SectionHead eyebrow="Prestations" title={`Nos prestations à ${v.name}`} row>
+        <a class="link-arrow" href="/prestations/">Toutes les prestations <Icon id="arrow" /></a>
+      </SectionHead>
+      <div class="grid grid--3">
+        {prestas.map((p, i) => <PrestationCard prestation={p!} delay={(i % 3) * 70} compact />)}
+      </div>
+    </div>
+  </section>
+
+  {
+    reals.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <SectionHead eyebrow="Réalisations" title={`Nos chantiers autour de ${v.name}`} row>
+            <a class="link-arrow" href="/realisations/">
+              Toutes les réalisations <Icon id="arrow" />
+            </a>
+          </SectionHead>
+          <div class="grid grid--4">
+            {reals.map((r, i) => (
+              <RealisationCard real={r!} delay={(i % 4) * 60} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section section--green on-dark">
+    <div class="container">
+      <SectionHead eyebrow="Secteur" title={`Communes desservies autour de ${v.name}`} />
+      <ul class="communes reveal">
+        {v.communes.map((c) => <li>{c}</li>)}
+      </ul>
+      <div class="mt-3">
+        <TrustStrip dark ids={['rge', 'meo', 'janneau', 'concept-alu', 'horizal', 'soliso']} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone">
+    <div class="container container--narrow">
+      <SectionHead eyebrow="Questions fréquentes" title={`Vos questions sur nos interventions à ${v.name}`} center />
+      <Faq items={v.faq} />
+    </div>
+  </section>
+
+  <CtaBand agence={v.agence} title={`Un projet à ${v.name}&nbsp;? Parlons-en.`} />
+</Base>
+
+<style>
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .vgrid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .vtext__p {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .vdist {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius);
+    background: var(--lime-100);
+    font-weight: 600;
+    color: var(--green-900);
+  }
+  .vdist :global(svg) {
+    font-size: 1.3rem;
+    flex: none;
+  }
+  .communes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .communes li {
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: 0.92rem;
+  }
+  @media (max-width: 900px) {
+    .vgrid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

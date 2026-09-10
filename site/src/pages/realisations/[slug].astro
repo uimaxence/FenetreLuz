@@ -1,0 +1,335 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Icon from '../../components/Icon.astro';
+import Rays from '../../components/Rays.astro';
+import RealisationCard from '../../components/RealisationCard.astro';
+import LocalCta from '../../components/LocalCta.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { realisations, type Realisation } from '../../data/realisations';
+import { prestationBySlug } from '../../data/prestations';
+import { agences } from '../../data/agences';
+import { villes } from '../../data/villes';
+import { site } from '../../data/site';
+import { realPhotos } from '../../data/photos';
+
+export function getStaticPaths() {
+  return realisations.map((r) => ({ params: { slug: r.slug }, props: { r } }));
+}
+const { r } = Astro.props as { r: Realisation };
+const photos = realPhotos(r.slug);
+const presta = prestationBySlug(r.prestation)!;
+
+// Page locale liée (le chantier relie l'axe prestation et l'axe ville)
+let localHref = `/agences/${r.zone === 'dev' ? 'jonzac' : r.zone}/`;
+let localLabel = `Menuiserie à ${r.zone === 'dev' ? 'Jonzac' : agences[r.zone].city}`;
+const v = villes.find((x) => r.ville.toLowerCase().includes(x.name.toLowerCase().replace('île d’', '')) || (x.slug === 'cognac' && /jarnac|cognac/i.test(r.ville)) || (x.slug === 'saintes' && /saintes|pons/i.test(r.ville)));
+if (v) {
+  localHref = `/menuiserie-${v.slug}/`;
+  localLabel = `Menuiserie à ${v.name}`;
+}
+const related = realisations.filter((x) => x.slug !== r.slug && x.prestation === r.prestation).slice(0, 3);
+const title = `${r.prestationLabel} à ${r.ville} — Réalisation LUZ`;
+const description = `${r.title} (${r.marque}) à ${r.ville}. ${r.description.slice(0, 150)}…`;
+const first = photos[0];
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ImageGallery',
+    name: r.title,
+    description: r.description,
+    url: `${site.url}/realisations/${r.slug}/`,
+    about: { '@type': 'Service', name: presta.title, provider: { '@id': `${site.url}/#organization` } },
+    contentLocation: { '@type': 'Place', name: r.ville },
+  },
+];
+---
+
+<Base title={title} description={description} jsonLd={jsonLd}>
+  <section class="rhead">
+    <div class="container">
+      <Breadcrumb items={[{ label: 'Réalisations', href: '/realisations/' }, { label: r.title }]} />
+      <div class="rhead__row">
+        <div>
+          <p class="eyebrow"><Rays /> {r.prestationLabel} · {r.marque}</p>
+          <h1 class="rhead__title">{r.title}</h1>
+          <p class="rhead__ville"><Icon id="pin" /> {r.ville}</p>
+        </div>
+        <a class="btn btn--primary" href="/devis/">Un projet similaire ? <Icon id="arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tight">
+    <div class="container rgrid">
+      <div class="gallery" data-gallery>
+        <div class:list={['gallery__main', { 'gallery__main--portrait': first && first.height > first.width }]} data-gallery-main>
+          {
+            first && (
+              <Picture
+                src={first}
+                alt={`${r.title} — ${r.ville}`}
+                widths={[640, 1000, 1400, 1800]}
+                sizes="(max-width: 900px) 100vw, 62vw"
+                formats={['webp']}
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="gallery__img"
+              />
+            )
+          }
+        </div>
+        {
+          photos.length > 1 && (
+            <div class="gallery__thumbs">
+              {photos.map((p, i) => (
+                <button type="button" class:list={['gallery__thumb', { 'is-active': i === 0 }]} data-gallery-thumb aria-label={`Photo ${i + 1} sur ${photos.length}`}>
+                  <Picture src={p} alt={`${r.title} — photo ${i + 1}`} widths={[240, 1200]} sizes="120px" formats={['webp']} loading="lazy" decoding="async" class="gallery__thumb-img" />
+                </button>
+              ))}
+            </div>
+          )
+        }
+        {r.lowRes && <p class="small muted">Photos prises sur chantier par nos équipes.</p>}
+      </div>
+
+      <aside class="rinfo">
+        <div class="rinfo__card reveal">
+          <h2 class="rinfo__title">Le chantier</h2>
+          <p class="rinfo__desc">{r.description}</p>
+          <dl class="rinfo__dl">
+            <div><dt>Prestation</dt><dd><a href={`/prestations/${presta.slug}/`}>{presta.title}</a></dd></div>
+            <div><dt>Commune</dt><dd><a href={localHref}>{r.ville}</a></dd></div>
+            <div><dt>Fabricant</dt><dd>{r.marque}</dd></div>
+            {r.details.map((d) => <div><dt>{d.label}</dt><dd>{d.value}</dd></div>)}
+          </dl>
+          <div class="rinfo__links">
+            <a class="link-arrow" href={`/prestations/${presta.slug}/`}>{presta.title} <Icon id="arrow" /></a>
+            <a class="link-arrow" href={localHref}>{localLabel} <Icon id="arrow" /></a>
+          </div>
+        </div>
+        <div class="rinfo__cta reveal" style="--d:100ms">
+          <Rays class="rinfo__rays" />
+          <strong>Envie du même résultat chez vous ?</strong>
+          <span>Visite et devis gratuits, pose par nos équipes.</span>
+          <a class="btn btn--primary btn--sm" href="/devis/">Demander un devis <Icon id="arrow" /></a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  {
+    related.length > 0 && (
+      <section class="section section--stone pattern-rays">
+        <div class="container">
+          <SectionHead eyebrow="Dans le même esprit" title={`D’autres chantiers ${presta.nav.toLowerCase()}`} row>
+            <a class="link-arrow" href={`/realisations/?prestation=${presta.slug}`}>
+              Tous les chantiers {presta.nav.toLowerCase()} <Icon id="arrow" />
+            </a>
+          </SectionHead>
+          <div class="grid grid--3">
+            {related.map((x, i) => (
+              <RealisationCard real={x} delay={i * 70} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Près de chez vous" title="Votre projet à Jonzac ou à Royan" />
+      <LocalCta produit={presta.nav.toLowerCase()} />
+    </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .rhead {
+    background: var(--stone-50);
+    border-bottom: 1px solid var(--stone-200);
+    padding-block: 1.5rem 2rem;
+  }
+  .rhead__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.25rem;
+  }
+  .rhead__title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin-bottom: 0.4rem;
+    max-width: 24ch;
+  }
+  .rhead__ville {
+    margin: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+  .rhead__ville :global(svg) {
+    color: var(--green-500);
+  }
+  .rgrid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+  }
+  .gallery__main {
+    border-radius: var(--radius-l);
+    overflow: hidden;
+    background: var(--stone-100);
+    aspect-ratio: 4 / 3;
+    transition: opacity 140ms ease;
+  }
+  .gallery__main--portrait {
+    aspect-ratio: 4 / 3;
+  }
+  .gallery__main.is-switching {
+    opacity: 0.35;
+  }
+  .gallery :global(.gallery__img),
+  .gallery__main :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .gallery__thumbs {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+  }
+  .gallery__thumb {
+    flex: none;
+    width: 120px;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-s);
+    overflow: hidden;
+    border: 2px solid transparent;
+    background: var(--stone-100);
+    transition:
+      border-color 160ms ease,
+      transform 160ms var(--ease-out);
+  }
+  .gallery__thumb:hover {
+    transform: translateY(-2px);
+  }
+  .gallery__thumb.is-active {
+    border-color: var(--green-500);
+  }
+  .gallery :global(.gallery__thumb-img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .rinfo {
+    display: grid;
+    gap: 1.25rem;
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+  }
+  .rinfo__card {
+    padding: 1.6rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    box-shadow: var(--shadow-s);
+  }
+  .rinfo__title {
+    font-size: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+  .rinfo__desc {
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .rinfo__dl {
+    margin: 1.25rem 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+  .rinfo__dl div {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--stone-200);
+    font-size: 0.95rem;
+  }
+  .rinfo__dl dt {
+    color: var(--ink-3);
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding-top: 0.15rem;
+  }
+  .rinfo__dl dd {
+    margin: 0;
+    font-weight: 600;
+    color: var(--green-900);
+  }
+  .rinfo__links {
+    display: grid;
+    gap: 0.5rem;
+  }
+  .rinfo__cta {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--green-900);
+    color: var(--white);
+  }
+  .rinfo__rays {
+    position: absolute;
+    right: -15%;
+    bottom: -25%;
+    width: 55%;
+    color: var(--lime);
+    opacity: 0.18;
+  }
+  .rinfo__cta strong {
+    position: relative;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  .rinfo__cta span {
+    position: relative;
+    color: rgba(255, 255, 255, 0.78);
+    font-size: 0.95rem;
+  }
+  .rinfo__cta .btn {
+    position: relative;
+    justify-self: start;
+    margin-top: 0.5rem;
+  }
+  @media (max-width: 900px) {
+    .rgrid {
+      grid-template-columns: 1fr;
+    }
+    .rinfo {
+      position: static;
+    }
+  }
+</style>

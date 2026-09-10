@@ -1,0 +1,106 @@
+---
+import '../styles/global.css';
+import '@fontsource/barlow-condensed/700.css';
+import '@fontsource/barlow/500.css';
+import '@fontsource/barlow/600.css';
+import '@fontsource-variable/source-sans-3';
+import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+import { agencesList } from '../data/agences';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string; // URL absolue ou chemin /public
+  ogType?: 'website' | 'article';
+  jsonLd?: Record<string, unknown>[];
+  noindex?: boolean;
+  bodyClass?: string;
+}
+
+const { title, description, ogImage, ogType = 'website', jsonLd = [], noindex = false, bodyClass } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? site.url).href;
+const og = new URL(ogImage ?? '/og-default.jpg', Astro.site ?? site.url).href;
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${site.url}/#organization`,
+  name: site.name,
+  legalName: site.legalName,
+  vatID: site.legal.tva,
+  taxID: site.legal.siren.replace(/\s/g, ''),
+  foundingDate: '2011-07-18',
+  url: site.url,
+  logo: `${site.url}/logo-luz.png`,
+  email: site.email,
+  telephone: '+33546704838',
+  sameAs: [site.social.facebook, site.social.instagram],
+  areaServed: ['Charente-Maritime', 'Charente'],
+  contactPoint: agencesList.map((a) => ({
+    '@type': 'ContactPoint',
+    telephone: a.tel,
+    contactType: 'customer service',
+    areaServed: 'FR',
+    availableLanguage: 'French',
+    name: a.name,
+  })),
+};
+
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: site.url,
+  name: site.name,
+  publisher: { '@id': `${site.url}/#organization` },
+  inLanguage: 'fr-FR',
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex ? <meta name="robots" content="noindex,follow" /> : <meta name="robots" content="index,follow,max-image-preview:large" />}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={og} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={og} />
+    <meta name="theme-color" content="#154418" />
+    <meta name="geo.region" content="FR-17" />
+    <meta name="geo.placename" content="Jonzac, Royan" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+    <ClientRouter />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organization)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(website)} />
+    {jsonLd.map((j) => <script is:inline type="application/ld+json" set:html={JSON.stringify(j)} />)}
+  </head>
+  <body class={bodyClass}>
+    <Header />
+    <main id="main" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script src="../scripts/main.ts"></script>
+  </body>
+</html>

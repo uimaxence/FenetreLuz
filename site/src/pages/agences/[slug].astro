@@ -1,0 +1,386 @@
+---
+import { Picture } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import Icon from '../../components/Icon.astro';
+import PrestationCard from '../../components/PrestationCard.astro';
+import RealisationCard from '../../components/RealisationCard.astro';
+import ReviewsBlock from '../../components/ReviewsBlock.astro';
+import DevisForm from '../../components/DevisForm.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { agences, type Agence } from '../../data/agences';
+import { prestationsMenu } from '../../data/prestations';
+import { realisationsByZone } from '../../data/realisations';
+import { villes } from '../../data/villes';
+import { site } from '../../data/site';
+import { agencePhoto, equipePhoto } from '../../data/photos';
+
+export function getStaticPaths() {
+  return Object.values(agences).map((a) => ({ params: { slug: a.slug }, props: { a } }));
+}
+const { a } = Astro.props as { a: Agence };
+const hero = agencePhoto(a.photo);
+const showroom = a.slug === 'jonzac' ? equipePhoto('showroom-steve-elodie') : undefined;
+const reals = realisationsByZone(a.slug).sort((x, y) => Number(!!y.featured) - Number(!!x.featured)).slice(0, 6);
+const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.mapsQuery)}`;
+const villesProches = villes.filter((v) => v.agence === a.slug);
+const title = `Menuiserie à ${a.city} — Fenêtres, Vérandas, Portails | LUZ ${a.city}`;
+const description = `Fenêtres & Vérandas LUZ, agence de ${a.city} (${a.address.city}) : fenêtres PVC, alu, bois, portes, vérandas, pergolas, portails, volets, stores. ${a.showroom ?? ''}, devis gratuit, pose par nos équipes. ${a.phone}.`;
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HomeAndConstructionBusiness',
+    '@id': `${site.url}/agences/${a.slug}/#localbusiness`,
+    name: `${site.name} — ${a.name}`,
+    image: `${site.url}/og-default.jpg`,
+    url: `${site.url}/agences/${a.slug}/`,
+    telephone: a.tel,
+    email: a.email,
+    priceRange: '€€',
+    parentOrganization: { '@id': `${site.url}/#organization` },
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: a.address.street,
+      postalCode: a.address.zip,
+      addressLocality: a.address.city,
+      addressRegion: 'Nouvelle-Aquitaine',
+      addressCountry: 'FR',
+    },
+    hasMap: maps,
+    openingHoursSpecification: a.openingHoursSpecification.map((o) => ({
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: o.days,
+      opens: o.opens,
+      closes: o.closes,
+    })),
+    areaServed: a.communes.map((c) => ({ '@type': 'City', name: c })),
+    sameAs: [site.social.facebook, site.social.instagram],
+  },
+];
+---
+
+<Base title={title} description={description} jsonLd={jsonLd}>
+  <PageHero
+    title={`Menuiserie à ${a.city}`}
+    eyebrow={`${a.name} · ${a.zoneLabel}`}
+    lead={a.intro}
+    crumbs={[{ label: 'Agences', href: '/contact/' }, { label: a.name }]}
+    image={hero}
+    imageAlt={`${a.name} — ${a.address.city}`}
+  >
+    <div class="hero-ctas">
+      <a class="btn btn--primary btn--lg" href="/devis/">Demander un devis <Icon id="arrow" /></a>
+      <a class="btn btn--ghost btn--lg" href={`tel:${a.tel}`}><Icon id="phone" /> {a.phone}</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container nap-grid">
+      <div class="nap reveal">
+        <p class="tag">Coordonnées</p>
+        <h2 class="nap__title">{a.name}</h2>
+        <address class="nap__addr">
+          <Icon id="pin" />
+          <span>{a.address.street}<br />{a.address.zip} {a.address.city}</span>
+        </address>
+        <a class="nap__tel" href={`tel:${a.tel}`}><Icon id="phone" /> {a.phone}</a>
+        <a class="nap__mail" href={`mailto:${a.email}`}><Icon id="mail" /> {a.email}</a>
+        <ul class="nap__hours">
+          {a.hours.map((h) => <li><span>{h.days}</span><span>{h.time}</span></li>)}
+        </ul>
+        <div class="cluster">
+          <a class="btn btn--dark btn--sm" href={maps} target="_blank" rel="noopener">Itinéraire <Icon id="arrow-up-right" /></a>
+          <a class="link-arrow" href="/contact/">Contact <Icon id="arrow" /></a>
+        </div>
+        {a.showroom && <p class="nap__show"><Icon id="home" /> {a.showroom}</p>}
+      </div>
+      <div class="desc reveal" style="--d:100ms">
+        <SectionHead eyebrow="L’agence" title={`LUZ à ${a.city} : ${a.slug === 'jonzac' ? 'notre agence historique' : 'notre agence du littoral'}`} />
+        {a.description.map((d) => <p class="desc__p">{d}</p>)}
+        {
+          a.responsable && (
+            <div class="resp">
+              <span class="resp__ic">
+                <Icon id="team" />
+              </span>
+              <div>
+                <strong>{a.responsable.name}</strong>
+                <span>{a.responsable.role}</span>
+                <p>{a.responsable.bio}</p>
+              </div>
+            </div>
+          )
+        }
+        {
+          showroom && (
+            <figure class="show">
+              <Picture src={showroom} alt="Le showroom LUZ de Jonzac : menuiseries exposées et espace conseil" widths={[640, 1000, 1400]} sizes="(max-width: 900px) 92vw, 60vw" formats={['webp']} loading="lazy" decoding="async" class="show__img" />
+              <figcaption>Le showroom de {a.address.city} : {a.showroom?.toLowerCase()} de menuiseries en situation réelle.</figcaption>
+            </figure>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone pattern-rays">
+    <div class="container">
+      <SectionHead eyebrow="Prestations" title={`Ce que nous posons à ${a.city} et alentours`} row>
+        <a class="link-arrow" href="/prestations/">Toutes les prestations <Icon id="arrow" /></a>
+      </SectionHead>
+      <div class="grid grid--3">
+        {prestationsMenu.slice(0, 6).map((p, i) => <PrestationCard prestation={p} delay={(i % 3) * 70} compact />)}
+      </div>
+    </div>
+  </section>
+
+  {
+    reals.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <SectionHead eyebrow="Réalisations" title={`Nos chantiers en ${a.zoneLabel.split(',')[0]}`} row>
+            <a class="link-arrow" href={`/realisations/?zone=${a.slug}`}>
+              Toutes les réalisations du secteur <Icon id="arrow" />
+            </a>
+          </SectionHead>
+          <div class="grid grid--3">
+            {reals.map((r, i) => (
+              <RealisationCard real={r} delay={(i % 3) * 70} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section section--green on-dark">
+    <div class="container">
+      <SectionHead eyebrow="Zone d’intervention" title={`Les communes desservies par l’agence de ${a.city}`} lead="Déplacement gratuit pour le métré et le devis dans toutes ces communes, et au-delà sur demande." />
+      <ul class="communes reveal">
+        {a.communes.map((c) => <li>{c}</li>)}
+      </ul>
+      {
+        villesProches.length > 0 && (
+          <p class="communes__more">
+            Nous intervenons aussi à
+            {villesProches.map((v, i) => (
+              <>
+                {i > 0 && ', '}
+                <a href={`/menuiserie-${v.slug}/`}>{v.name}</a>
+              </>
+            ))}
+            .
+          </p>
+        )
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Avis clients" title={`Les avis Google de l’agence de ${a.city}`} row>
+        <a class="link-arrow" href="/avis/">Tous les avis <Icon id="arrow" /></a>
+      </SectionHead>
+      <ReviewsBlock limit={3} />
+    </div>
+  </section>
+
+  <section class="section section--stone">
+    <div class="container container--narrow">
+      <SectionHead eyebrow="Devis gratuit" title={`Votre projet à ${a.city}`} lead="Décrivez votre projet, un conseiller de l’agence vous rappelle pour fixer un rendez-vous." center />
+      <div class="form-card">
+        <DevisForm defaultSecteur={a.slug} compact />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand agence={a.slug} title={`Un projet à ${a.city}&nbsp;? Appelez l’agence.`} />
+</Base>
+
+<style>
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .nap-grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+  }
+  .nap {
+    position: sticky;
+    top: calc(var(--header-h) + 1.5rem);
+    padding: 1.75rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    border-top: 4px solid var(--lime);
+    box-shadow: var(--shadow-s);
+    display: grid;
+    gap: 0.75rem;
+  }
+  .nap__title {
+    font-size: 2.2rem;
+    margin: 0;
+  }
+  .nap__addr {
+    font-style: normal;
+    display: flex;
+    gap: 0.6rem;
+    line-height: 1.4;
+    color: var(--ink-2);
+  }
+  .nap__addr :global(svg),
+  .nap__tel :global(svg),
+  .nap__mail :global(svg),
+  .nap__show :global(svg) {
+    color: var(--green-500);
+    flex: none;
+    margin-top: 0.2em;
+  }
+  .nap__tel {
+    display: inline-flex;
+    gap: 0.6rem;
+    align-items: center;
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: var(--green-900);
+  }
+  .nap__mail {
+    display: inline-flex;
+    gap: 0.6rem;
+    align-items: center;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .nap__hours {
+    list-style: none;
+    padding: 0.75rem 0;
+    margin: 0;
+    border-top: 1px solid var(--stone-200);
+    border-bottom: 1px solid var(--stone-200);
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.95rem;
+  }
+  .nap__hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .nap__hours li span:last-child {
+    font-weight: 600;
+    text-align: right;
+  }
+  .nap__show {
+    margin: 0;
+    display: flex;
+    gap: 0.6rem;
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .desc__p {
+    font-size: 1.1rem;
+    line-height: 1.65;
+    color: var(--ink-2);
+  }
+  .resp {
+    display: flex;
+    gap: 1rem;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--stone-50);
+    border: 1px solid var(--stone-200);
+  }
+  .resp__ic {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--green-900);
+    color: var(--lime);
+    font-size: 1.4rem;
+  }
+  .resp strong {
+    display: block;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--green-900);
+    font-size: 1.1rem;
+  }
+  .resp > div > span {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--green-500);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+  }
+  .resp p {
+    margin: 0;
+    color: var(--ink-2);
+  }
+  .show {
+    margin: 2rem 0 0;
+  }
+  .show :global(.show__img) {
+    width: 100%;
+    border-radius: var(--radius);
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+  }
+  .show figcaption {
+    margin-top: 0.6rem;
+    font-size: 0.88rem;
+    color: var(--ink-3);
+  }
+  .communes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .communes li {
+    padding: 0.45rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    font-size: 0.92rem;
+  }
+  .communes__more {
+    margin: 1.5rem 0 0;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .communes__more a {
+    color: var(--lime);
+    font-weight: 600;
+  }
+  .form-card {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: var(--radius-l);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    box-shadow: var(--shadow-s);
+  }
+  @media (max-width: 900px) {
+    .nap-grid {
+      grid-template-columns: 1fr;
+    }
+    .nap {
+      position: static;
+    }
+  }
+</style>

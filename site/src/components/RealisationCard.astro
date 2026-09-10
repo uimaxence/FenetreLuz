@@ -1,0 +1,158 @@
+---
+import { Picture } from 'astro:assets';
+import Icon from './Icon.astro';
+import type { Realisation } from '../data/realisations';
+import { realPhotos } from '../data/photos';
+
+interface Props {
+  real: Realisation;
+  delay?: number;
+  filterable?: boolean;
+  ratio?: '4 / 3' | '3 / 4' | '1 / 1';
+}
+const { real: r, delay = 0, filterable = false, ratio = '4 / 3' } = Astro.props;
+const photos = realPhotos(r.slug).slice(0, 4); // diaporama automatique quand il y a plusieurs photos
+---
+
+<a
+  class="rcard reveal"
+  href={`/realisations/${r.slug}/`}
+  style={`--d:${delay}ms;--ratio:${ratio}`}
+  data-real={filterable ? '' : undefined}
+  data-prestation={filterable ? r.prestation : undefined}
+  data-zone={filterable ? r.zone : undefined}
+>
+  <div class="rcard__media" data-slider={photos.length > 1 ? '' : undefined}>
+    {
+      photos.map((p, i) => (
+        <Picture
+          src={p}
+          alt={i === 0 ? `${r.title} — ${r.ville}` : `${r.title} — photo ${i + 1}`}
+          widths={[420, 640, 900]}
+          sizes="(max-width: 640px) 92vw, (max-width: 1100px) 46vw, 30vw"
+          formats={['webp']}
+          loading="lazy"
+          decoding="async"
+          class="rcard__img"
+          pictureAttributes={{ class: `rcard__slide${i === 0 ? ' is-active' : ''}` }}
+        />
+      ))
+    }
+    {
+      photos.length > 1 && (
+        <span class="rcard__dots" aria-hidden="true">
+          {photos.map((_, i) => (
+            <i class:list={{ 'is-active': i === 0 }} />
+          ))}
+        </span>
+      )
+    }
+  </div>
+  <div class="rcard__body">
+    <span class="rcard__meta">
+      <span class="tag">{r.prestationLabel}</span>
+      <span class="rcard__ville"><Icon id="pin" /> {r.ville}</span>
+    </span>
+    <h3 class="rcard__title">{r.title}</h3>
+    <span class="rcard__marque">{r.marque}</span>
+  </div>
+</a>
+
+<style>
+  .rcard {
+    display: block;
+    text-decoration: none;
+    color: var(--ink);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    transition:
+      transform 300ms var(--ease-out),
+      box-shadow 300ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .rcard:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      color: var(--ink);
+    }
+    .rcard:hover :global(.rcard__img) {
+      transform: scale(1.05);
+    }
+  }
+  .rcard__media {
+    position: relative;
+    aspect-ratio: var(--ratio, 4 / 3);
+    overflow: hidden;
+    background: var(--stone-100);
+  }
+  .rcard :global(.rcard__slide) {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 900ms ease;
+  }
+  .rcard :global(.rcard__slide.is-active) {
+    opacity: 1;
+  }
+  .rcard :global(.rcard__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease-out);
+  }
+  .rcard__dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.7rem;
+    display: flex;
+    justify-content: center;
+    gap: 0.35rem;
+    pointer-events: none;
+  }
+  .rcard__dots i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+    transition:
+      background-color 300ms ease,
+      transform 300ms var(--ease-out);
+  }
+  .rcard__dots i.is-active {
+    background: var(--lime);
+    transform: scale(1.25);
+  }
+  .rcard__body {
+    padding: 1rem 1.1rem 1.15rem;
+    display: grid;
+    gap: 0.35rem;
+  }
+  .rcard__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .rcard__ville {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.85rem;
+    color: var(--ink-2);
+  }
+  .rcard__title {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.25;
+    color: var(--green-900);
+  }
+  .rcard__marque {
+    font-size: 0.85rem;
+    color: var(--ink-3);
+  }
+</style>

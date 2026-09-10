@@ -1,0 +1,277 @@
+---
+/**
+ * Formulaire de demande de devis / contact.
+ * - Sans JS : POST classique vers /api/devis/ puis redirection /devis/merci/.
+ * - Avec JS : envoi fetch + message inline (voir scripts/main.ts).
+ */
+import Icon from './Icon.astro';
+interface Props {
+  defaultProjet?: string;
+  defaultSecteur?: 'jonzac' | 'royan' | 'autre';
+  compact?: boolean;
+  title?: string;
+}
+const { defaultProjet, defaultSecteur, compact = false, title } = Astro.props;
+const projets = [
+  { v: 'fenetres-portes', l: 'Fenêtres & portes' },
+  { v: 'veranda-extension', l: 'Véranda / extension' },
+  { v: 'pergola-carport', l: 'Pergola / carport' },
+  { v: 'portail-cloture', l: 'Portail / clôture' },
+  { v: 'volets-garage', l: 'Volets / porte de garage' },
+  { v: 'stores', l: 'Stores' },
+  { v: 'motorisation-alarme', l: 'Motorisation / alarme' },
+  { v: 'depannage', l: 'Dépannage' },
+  { v: 'autre', l: 'Autre' },
+];
+const secteurs = [
+  { v: 'jonzac', l: 'Jonzac / Haute-Saintonge' },
+  { v: 'royan', l: 'Royan / littoral / Oléron' },
+  { v: 'autre', l: 'Saintes, Cognac, autre' },
+];
+---
+
+<form class:list={['dform', { 'dform--compact': compact }]} action="/api/devis/" method="post" data-devis novalidate>
+  {title && <h2 class="dform__title">{title}</h2>}
+  <div data-fields>
+    <fieldset class="dform__group">
+      <legend>Votre projet</legend>
+      <div class="chips">
+        {
+          projets.map((p) => (
+            <label class="chip">
+              <input type="radio" name="projet" value={p.v} checked={defaultProjet === p.v} required />
+              <span>{p.l}</span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <fieldset class="dform__group">
+      <legend>Votre secteur</legend>
+      <div class="chips">
+        {
+          secteurs.map((s) => (
+            <label class="chip">
+              <input type="radio" name="secteur" value={s.v} checked={defaultSecteur === s.v} required />
+              <span>{s.l}</span>
+            </label>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <div class="dform__grid">
+      <div class="field">
+        <label for="f-nom">Nom et prénom</label>
+        <input id="f-nom" name="nom" type="text" autocomplete="name" required />
+      </div>
+      <div class="field">
+        <label for="f-tel">Téléphone</label>
+        <input id="f-tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel" required />
+      </div>
+      <div class="field">
+        <label for="f-email">E-mail</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" required />
+      </div>
+      <div class="field">
+        <label for="f-ville">Commune du chantier</label>
+        <input id="f-ville" name="ville" type="text" autocomplete="address-level2" placeholder="Ex. Royan, Jonzac, Saintes…" required />
+      </div>
+      <div class="field field--full">
+        <label for="f-message">Décrivez votre projet <small>(dimensions, nombre de fenêtres, délai souhaité…)</small></label>
+        <textarea id="f-message" name="message" rows={compact ? 3 : 5}></textarea>
+      </div>
+    </div>
+
+    <label class="consent">
+      <input type="checkbox" name="consent" value="oui" required />
+      <span>
+        J’accepte que mes informations soient utilisées pour traiter ma demande, conformément à la
+        <a href="/politique-confidentialite/">politique de confidentialité</a>.
+      </span>
+    </label>
+
+    <!-- Piège à robots (laissé vide par les humains) -->
+    <div class="hp" aria-hidden="true">
+      <label for="f-site">Site web</label>
+      <input id="f-site" name="site_web" type="text" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="dform__submit">
+      <button class="btn btn--primary btn--lg" type="submit">Envoyer ma demande <Icon id="arrow" /></button>
+      <p class="dform__hint">Devis gratuit et sans engagement. Réponse sous 48 h ouvrées.</p>
+    </div>
+  </div>
+  <p class="dform__status" data-status hidden role="status" aria-live="polite"></p>
+</form>
+
+<style>
+  .dform {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .dform__title {
+    font-size: clamp(1.6rem, 2.5vw, 2rem);
+    margin: 0;
+  }
+  .dform__group {
+    border: 0;
+    padding: 0;
+    margin: 0 0 1.25rem;
+  }
+  legend,
+  .field label {
+    display: block;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.02em;
+    color: var(--green-900);
+    margin-bottom: 0.55rem;
+  }
+  .field label small {
+    font-weight: 500;
+    color: var(--ink-3);
+    letter-spacing: 0;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chip {
+    position: relative;
+    cursor: pointer;
+  }
+  .chip input {
+    position: absolute;
+    opacity: 0;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+  }
+  .chip span {
+    display: inline-block;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--stone-200);
+    background: var(--white);
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 0.92rem;
+    color: var(--ink);
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease,
+      transform 160ms var(--ease-out);
+  }
+  .chip:hover span {
+    border-color: var(--green-500);
+  }
+  .chip input:checked + span {
+    background: var(--green-900);
+    border-color: var(--green-900);
+    color: var(--white);
+  }
+  .chip input:focus-visible + span {
+    outline: 3px solid var(--orange);
+    outline-offset: 2px;
+  }
+  .chip:active span {
+    transform: scale(0.97);
+  }
+  .dform__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.25rem;
+  }
+  .field--full {
+    grid-column: 1 / -1;
+  }
+  input[type='text'],
+  input[type='tel'],
+  input[type='email'],
+  textarea {
+    width: 100%;
+    padding: 0.8rem 0.95rem;
+    border: 1.5px solid var(--stone-200);
+    border-radius: var(--radius-s);
+    background: var(--white);
+    font-size: 1rem;
+    transition:
+      border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+  input:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--green-500);
+    box-shadow: 0 0 0 4px rgba(0, 150, 57, 0.14);
+  }
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  .consent {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    margin-top: 1.25rem;
+  }
+  .consent input {
+    margin-top: 0.3rem;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--green-500);
+    flex: none;
+  }
+  .hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+  .dform__submit {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+  }
+  .dform__hint {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--ink-3);
+  }
+  .dform.is-sending .btn {
+    opacity: 0.7;
+  }
+  .dform__status {
+    margin: 0;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    background: var(--stone-50);
+    border-left: 4px solid var(--green-500);
+    line-height: 1.5;
+  }
+  .dform__status[data-state='ok'] {
+    background: var(--lime-100);
+    border-color: var(--green-500);
+  }
+  .dform__status[data-state='error'] {
+    background: #fdece7;
+    border-color: var(--orange);
+  }
+  @media (max-width: 640px) {
+    .dform__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
