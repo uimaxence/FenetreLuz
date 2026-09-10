@@ -1,0 +1,138 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import RealisationCard from '../../components/RealisationCard.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { realisations, zoneLabels } from '../../data/realisations';
+import { prestationsPubliees } from '../../data/prestations';
+import { realPhoto } from '../../data/photos';
+
+const hero = realPhoto('double-pergola-bioclimatique-pays-jonzacais');
+const sorted = [...realisations].sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
+const usedPrestations = prestationsPubliees.filter((p) => realisations.some((r) => r.prestation === p.slug));
+---
+
+<Base
+  title="Nos réalisations en Charente-Maritime — Fenêtres, vérandas, pergolas, portails | LUZ"
+  description={`${realisations.length} chantiers réalisés par Fenêtres & Vérandas LUZ à Jonzac, Royan, Saintes, Cognac et sur le littoral : fenêtres, portes d’entrée, vérandas, pergolas, portails, volets, stores. Filtrez par prestation et par secteur.`}
+>
+  <PageHero
+    title="Nos réalisations"
+    eyebrow={`${realisations.length} chantiers en Charente-Maritime et Charente`}
+    lead="Des maisons charentaises en pierre aux villas du littoral : chaque chantier est posé par nos propres équipes. Filtrez par prestation ou par secteur pour trouver un projet proche du vôtre."
+    crumbs={[{ label: 'Réalisations' }]}
+    image={hero}
+    imageAlt="Double pergola bioclimatique en L sur une terrasse, réalisation LUZ"
+    compact
+  />
+
+  <section class="section section--tight">
+    <div class="container">
+      <div class="filters" data-filters>
+        <div class="filters__row">
+          <span class="filters__label">Prestation</span>
+          <div class="filters__btns">
+            <button type="button" class="fbtn is-active" data-filter="prestation" data-value="all" aria-pressed="true">Toutes</button>
+            {usedPrestations.map((p) => <button type="button" class="fbtn" data-filter="prestation" data-value={p.slug} aria-pressed="false">{p.nav}</button>)}
+          </div>
+        </div>
+        <div class="filters__row">
+          <span class="filters__label">Secteur</span>
+          <div class="filters__btns">
+            <button type="button" class="fbtn is-active" data-filter="zone" data-value="all" aria-pressed="true">Tous</button>
+            {Object.entries(zoneLabels).map(([k, l]) => <button type="button" class="fbtn" data-filter="zone" data-value={k} aria-pressed="false">{l}</button>)}
+          </div>
+        </div>
+        <p class="filters__count"><strong data-filters-count>{realisations.length}</strong> réalisation(s)</p>
+      </div>
+
+      <div class="grid grid--3 rgrid">
+        {sorted.map((r, i) => <RealisationCard real={r} delay={(i % 3) * 60} filterable />)}
+      </div>
+      <p class="empty" data-filters-empty hidden>
+        <Icon id="spark" /> Aucun chantier ne correspond à ces critères pour le moment. Réinitialisez les filtres ou contactez-nous : nous avons probablement posé un projet similaire.
+      </p>
+    </div>
+  </section>
+
+  <CtaBand title="Votre chantier pourrait être le prochain." text="Décrivez-nous votre projet, nous venons le mesurer gratuitement." />
+</Base>
+
+<style>
+  .filters {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius);
+    background: var(--stone-50);
+    border: 1px solid var(--stone-200);
+  }
+  .filters__row {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .filters__label {
+    flex: none;
+    width: 90px;
+    padding-top: 0.5rem;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--green-500);
+  }
+  .filters__btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .fbtn {
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--stone-200);
+    background: var(--white);
+    font-family: var(--font-ui);
+    font-weight: 500;
+    font-size: 0.88rem;
+    color: var(--ink);
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      color 150ms ease,
+      transform 160ms var(--ease-out);
+  }
+  .fbtn:hover {
+    border-color: var(--green-500);
+  }
+  .fbtn:active {
+    transform: scale(0.96);
+  }
+  .fbtn.is-active {
+    background: var(--green-900);
+    border-color: var(--green-900);
+    color: var(--white);
+  }
+  .filters__count {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+  }
+  .empty {
+    display: flex;
+    gap: 0.6rem;
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    background: var(--stone-50);
+    color: var(--ink-2);
+  }
+  .empty :global(svg) {
+    color: var(--lime-600);
+    font-size: 1.3rem;
+    flex: none;
+  }
+</style>

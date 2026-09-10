@@ -1,0 +1,41 @@
+---
+import Base from '../../layouts/Base.astro';
+import Rays from '../../components/Rays.astro';
+import Icon from '../../components/Icon.astro';
+---
+
+<Base title="Merci, votre demande est envoyée | Fenêtres & Vérandas LUZ" description="Votre demande de devis a bien été transmise à Fenêtres & Vérandas LUZ." noindex>
+  <section class="section merci on-dark">
+    <Rays class="rays-giant rays-giant--bl" animated />
+    <div class="container container--narrow merci__in">
+      <p class="eyebrow"><Rays /> Demande envoyée</p>
+      <h1>Merci, on s’en occupe.</h1>
+      <p class="lead">Un conseiller LUZ vous rappelle sous 48 h ouvrées pour convenir d’un rendez-vous. En attendant, découvrez nos réalisations ou nos conseils.</p>
+      <div class="cluster">
+        <a class="btn btn--primary" href="/realisations/">Voir nos réalisations <Icon id="arrow" /></a>
+        <a class="btn btn--ghost" href="/">Retour à l’accueil</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .merci {
+    background: var(--green-900);
+    min-height: 60vh;
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+  }
+  .merci__in {
+    position: relative;
+    text-align: center;
+  }
+  .merci .eyebrow {
+    justify-content: center;
+  }
+  .merci .cluster {
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+</style>

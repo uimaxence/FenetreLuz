@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+import { agences } from '../data/agences';
+const j = agences.jonzac;
+const r = agences.royan;
+const L = site.legal;
+---
+
+<Base title="Mentions légales | Fenêtres & Vérandas LUZ" description="Mentions légales du site fenetresluz.com, édité par la SARL FENETRES LUZ (Fenêtres & Vérandas LUZ)." noindex>
+  <PageHero title="Mentions légales" crumbs={[{ label: 'Mentions légales' }]} compact />
+  <section class="section">
+    <div class="container container--narrow prose">
+      <p class="note">Les éléments entre crochets restent à compléter (hébergeur, prestataire, numéros d'assurance et de qualification) avant la mise en ligne.</p>
+
+      <h2>Éditeur du site</h2>
+      <p>
+        <strong>{site.legalName}</strong>, {L.forme} au capital de {L.capital}<br />
+        Nom commercial et enseigne : {site.name}<br />
+        Siège social : {j.address.street}, {j.address.zip} {j.address.city} (SIRET {L.siretSiege})<br />
+        Établissement de Royan : {r.address.street}, {r.address.zip} {r.address.city} (SIRET {L.siretRoyan})<br />
+        SIREN {L.siren} — RCS {L.rcs} {L.siren} — Code APE {L.ape}<br />
+        N° de TVA intracommunautaire : {L.tva}<br />
+        Immatriculée au Registre national des entreprises depuis le {L.immatriculation}<br />
+        Téléphone : {j.phone} — E-mail : <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+      <p>Directeur de la publication : {L.gerant}, gérant.</p>
+
+      <h2>Hébergement</h2>
+      <p>[Nom de l’hébergeur retenu — adresse — téléphone]</p>
+
+      <h2>Conception et réalisation</h2>
+      <p>[Nom de l’agence / prestataire — site web]</p>
+
+      <h2>Assurances et qualifications</h2>
+      <p>
+        Assurance responsabilité civile et décennale : Generali [numéro de contrat, zone de couverture géographique].<br />
+        Certification RGE (Reconnu Garant de l’Environnement) — Qualibat [numéro de qualification, validité].
+      </p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>L’ensemble des contenus de ce site (textes, photographies de chantiers, logo, motif graphique) est la propriété de {site.legalName} ou de ses partenaires et ne peut être reproduit sans autorisation écrite. Les marques MéO, Janneau, Concept Alu, HORIZAL, Soliso, EHRET, Soprofen, Gypass, Somfy, DEA, Vulcan et TWIC ainsi que les logos RGE, Qualibat et Generali sont la propriété de leurs titulaires respectifs et sont reproduits au titre des réseaux et certifications dont l’entreprise est membre.</p>
+
+      <h2>Données personnelles</h2>
+      <p>Les informations recueillies via les formulaires sont destinées à {site.legalName} pour le traitement de votre demande. Consultez notre <a href="/politique-confidentialite/">politique de confidentialité</a> pour connaître vos droits.</p>
+
+      <h2>Crédits photographiques</h2>
+      <p>Photographies de chantiers et d’équipe : {site.name}. Certains visuels d’illustration (articles, produits sans photo de chantier) sont générés ou issus de banques d’images ; ils n’illustrent pas des réalisations de l’entreprise.</p>
+
+      <h2>Médiation de la consommation</h2>
+      <p>Conformément aux articles L.611-1 et suivants du Code de la consommation, en cas de litige non résolu, le client consommateur peut recourir gratuitement au médiateur de la consommation dont relève l’entreprise : [nom et coordonnées du médiateur — à renseigner].</p>
+    </div>
+  </section>
+</Base>

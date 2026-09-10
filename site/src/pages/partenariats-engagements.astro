@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Icon from '../components/Icon.astro';
+import Placeholder from '../components/Placeholder.astro';
+import CtaBand from '../components/CtaBand.astro';
+import type { ImageMetadata } from 'astro';
+
+// Logos des partenaires : src/assets/logos/partenaires/<id>.svg|png (voir LOGOS-A-RECUPERER.md)
+const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/partenaires/*.{svg,png}', { eager: true });
+const logoFor = (id: string) => Object.entries(logos).find(([p]) => p.split('/').pop()!.replace(/\.(svg|png)$/i, '') === id)?.[1].default;
+
+/** Textes à compléter avec Benoît (roadmap §1 : nature exacte de chaque partenariat, logos, photos). */
+const partenaires = [
+  {
+    id: 'ubj-rugby',
+    nom: 'UBJ Jonzac-Barbezieux Rugby',
+    type: 'Sport',
+    texte:
+      'Partenaire du club de rugby de Jonzac-Barbezieux : nous soutenons le club et ses équipes, des jeunes aux seniors, parce que l’esprit d’équipe et le travail bien fait sont aussi les nôtres. [À préciser avec le club : nature du partenariat, saison, visuels.]',
+    visuel: 'partenariat-ubj-rugby',
+  },
+  {
+    id: 'lions-club',
+    nom: 'Lions Club',
+    type: 'Solidarité',
+    texte:
+      'Membres et soutiens des actions solidaires du Lions Club sur le territoire jonzacais : collectes, événements caritatifs, aide aux personnes en difficulté. [À préciser : club exact, actions soutenues.]',
+    visuel: 'partenariat-lions-club',
+  },
+  {
+    id: 'eurochestries',
+    nom: 'Festival des Eurochestries',
+    type: 'Culture',
+    texte:
+      'Partenaire du festival international de musique classique qui réunit chaque été de jeunes orchestres du monde entier en Charente-Maritime. [À préciser : forme du soutien, édition.]',
+    visuel: 'partenariat-eurochestries',
+  },
+];
+---
+
+<Base
+  title="Partenariats & engagements locaux — UBJ Rugby, Lions Club, Eurochestries | Fenêtres & Vérandas LUZ"
+  description="Fenêtres & Vérandas LUZ soutient la vie locale en Haute-Saintonge : partenaire de l’UBJ Jonzac-Barbezieux Rugby, du Lions Club et du festival des Eurochestries."
+>
+  <PageHero
+    title="Partenariats & engagements"
+    eyebrow="Une entreprise d’ici"
+    lead="Nos clients sont nos voisins. Soutenir le rugby, la culture et la solidarité de Jonzac et de sa région fait partie de notre façon de travailler ici."
+    crumbs={[{ label: 'À propos', href: '/a-propos/' }, { label: 'Partenariats & engagements' }]}
+    placeholderId="partenariats-hero"
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Nos partenaires" title="Trois engagements, trois façons de faire vivre le territoire" />
+      <div class="grid grid--3">
+        {
+          partenaires.map((p, i) => (
+            <article class="part reveal" id={p.id} style={`--d:${i * 80}ms`}>
+              <div class="part__media">
+                <Placeholder id={p.visuel} ratio="4 / 3" />
+              </div>
+              <span class="tag">{p.type}</span>
+              {logoFor(p.id) && <img class="part__logo" src={logoFor(p.id)!.src} width={logoFor(p.id)!.width} height={logoFor(p.id)!.height} alt={`Logo ${p.nom}`} loading="lazy" decoding="async" />}
+              <h3>{p.nom}</h3>
+              <p>{p.texte}</p>
+            </article>
+          ))
+        }
+      </div>
+      <p class="note"><Icon id="handshake" /> Vous êtes une association ou un club de Haute-Saintonge ou du pays royannais ? <a href="/contact/">Parlons-en</a>.</p>
+    </div>
+  </section>
+
+  <CtaBand title="Envie d’en savoir plus sur LUZ&nbsp;?" text="Notre histoire, notre équipe, nos engagements." primaryHref="/a-propos/" primaryLabel="À propos de LUZ" />
+</Base>
+
+<style>
+  .part {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+  }
+  .part__media {
+    border-radius: var(--radius-s);
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+  }
+  .part h3 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+  .part__logo {
+    height: 48px;
+    width: auto;
+    max-width: 200px;
+    object-fit: contain;
+    margin: 0.25rem 0;
+  }
+  .part p {
+    margin: 0;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .note {
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin: 2rem 0 0;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    background: var(--lime-100);
+    color: var(--green-900);
+  }
+  .note :global(svg) {
+    font-size: 1.3rem;
+    flex: none;
+  }
+</style>

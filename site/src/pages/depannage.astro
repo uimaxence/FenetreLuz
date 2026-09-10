@@ -1,0 +1,262 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Icon from '../components/Icon.astro';
+import Rays from '../components/Rays.astro';
+import Faq from '../components/Faq.astro';
+import DevisForm from '../components/DevisForm.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+import { agencesList } from '../data/agences';
+import { equipePhoto } from '../data/photos';
+const hero = equipePhoto('pose-securite-3');
+const interventions = [
+  { i: 'volet', t: 'Volet roulant', d: 'Tablier bloqué, moteur en panne, sangle cassée, lames abîmées.' },
+  { i: 'store', t: 'Store banne & zip', d: 'Toile déchirée, bras faussé, moteur, capteur vent.' },
+  { i: 'portail', t: 'Portail & motorisation', d: 'Portail qui ne s’ouvre plus, télécommande, cellules, moteur.' },
+  { i: 'volet', t: 'Porte de garage', d: 'Ressort, câble, motorisation, panneau endommagé.' },
+  { i: 'fenetre', t: 'Fenêtres & portes', d: 'Réglage d’ouvrant, quincaillerie, joint, vitrage, poignée.' },
+  { i: 'volet', t: 'Volets battants', d: 'Pentures, arrêts, espagnolettes, lames.' },
+  { i: 'moteur', t: 'Alarme & domotique', d: 'Reprogrammation, télécommandes, box TaHoma.' },
+  { i: 'store', t: 'Stores intérieurs & moustiquaires', d: 'Mécanismes, toiles, guidages.' },
+];
+const faq = [
+  { q: 'Intervenez-vous sur des équipements que vous n’avez pas posés ?', a: 'Oui. Notre service dépannage intervient sur tous les volets, stores, portails, portes de garage et menuiseries, quelle que soit la marque ou l’installateur d’origine, dans la mesure où les pièces sont disponibles.' },
+  { q: 'Combien coûte une intervention ?', a: `Le forfait déplacement + diagnostic est de ${site.depannage.forfait}. Il comprend la recherche de panne et les petites interventions réalisables sur place. Les pièces et le temps supplémentaire sont chiffrés avant intervention. Voir la grille tarifaire ci-dessus.` },
+  { q: 'Sous quel délai intervenez-vous ?', a: 'Nous planifions l’intervention dans la semaine en général, plus vite en cas d’urgence (volet bloqué ouvert, portail qui ne ferme plus). Appelez l’agence la plus proche.' },
+  { q: 'Proposez-vous un contrat d’entretien ?', a: 'Oui : un forfait entretien annuel des ouvertures et fermetures (quincaillerie, joints, ventilation, évacuations) prolonge la durée de vie de vos menuiseries et évite les pannes.' },
+];
+---
+
+<Base
+  title="Dépannage volets, stores, portails & motorisations à Jonzac et Royan — Forfait 121 € TTC | LUZ"
+  description={`Service dépannage et entretien Fenêtres & Vérandas LUZ : volets roulants, stores, portails, portes de garage, motorisations, alarme. Intervention à domicile à Jonzac, Royan et en Charente-Maritime. Forfait diagnostic ${site.depannage.forfait}, même sur des équipements non posés par nous.`}
+>
+  <PageHero
+    title="Dépannage & entretien"
+    eyebrow="Réparation à domicile"
+    lead="Un dysfonctionnement, une casse après une tempête, un volet bloqué… les pannes arrivent. Notre service dépannage se déplace à Jonzac, Royan et alentours, sur nos installations comme sur celles d’autres installateurs."
+    crumbs={[{ label: 'Dépannage & entretien' }]}
+    image={hero}
+    imageAlt="Technicien LUZ intervenant sur une fenêtre en façade"
+  >
+    <div class="hero-ctas">
+      <a class="btn btn--primary btn--lg" href="#demande">Demander une intervention <Icon id="arrow" /></a>
+      {agencesList.map((a) => <a class="btn btn--ghost btn--lg" href={`tel:${a.tel}`}><Icon id="phone" /> {a.short} · {a.phone}</a>)}
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Types d’intervention" title="Ce que nous dépannons" />
+      <div class="grid grid--4">
+        {
+          interventions.map((it, i) => (
+            <div class="inter reveal" style={`--d:${(i % 4) * 60}ms`}>
+              <span class="inter__ic">
+                <Icon id={it.i} />
+              </span>
+              <h3>{it.t}</h3>
+              <p>{it.d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone pattern-rays">
+    <div class="container tarifs">
+      <div class="reveal">
+        <SectionHead eyebrow="Tarifs transparents" title={`Forfait intervention à partir de ${site.depannage.forfait}`} lead="Vous savez ce que vous payez avant que nous nous déplacions." />
+        <p class="tarifs__note">{site.depannage.note}</p>
+      </div>
+      <div class="tarifs__table reveal" style="--d:100ms">
+        <table>
+          <thead><tr><th>Prestation</th><th>Prix</th></tr></thead>
+          <tbody>
+            {site.depannage.grille.map((l) => <tr><td>{l.label}</td><td>{l.prix}</td></tr>)}
+          </tbody>
+        </table>
+        <p class="tarifs__ent"><Rays /> Le forfait entretien comprend la quincaillerie, les joints, la ventilation et l’évacuation d’eau de vos ouvertures et fermetures.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Comment ça se passe" title="Prise de rendez-vous en quatre temps" center />
+      <ol class="proc">
+        {
+          ['Vous décrivez la panne via le formulaire ou par téléphone', 'Un technicien vous rappelle pour préciser le problème', 'Nous planifions le rendez-vous à votre domicile', 'Nous intervenons, diagnostiquons et réparons'].map((t, i) => (
+            <li class="reveal" style={`--d:${i * 80}ms`}>
+              <span>{String(i + 1).padStart(2, '0')}</span>
+              {t}
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section--stone" id="demande">
+    <div class="container container--narrow">
+      <SectionHead eyebrow="Demande d’intervention" title="Décrivez votre panne" lead="Indiquez l’équipement concerné, la marque si vous la connaissez et le symptôme. Nous vous rappelons rapidement." center />
+      <div class="fcard">
+        <DevisForm defaultProjet="depannage" compact />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container container--narrow">
+      <SectionHead eyebrow="Questions fréquentes" title="Dépannage : vos questions" center />
+      <Faq items={faq} />
+    </div>
+  </section>
+
+  <CtaBand title="Une urgence&nbsp;? Appelez l’agence la plus proche." text="Jonzac et Royan : nos techniciens interviennent dans toute la Charente-Maritime." primaryHref="#demande" primaryLabel="Demander une intervention" />
+</Base>
+
+<style>
+  .hero-ctas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+  }
+  .inter {
+    padding: 1.4rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+  }
+  .inter__ic {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius);
+    background: var(--green-50);
+    color: var(--green-700);
+    font-size: 1.35rem;
+    margin-bottom: 0.4rem;
+  }
+  .inter h3 {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+  .inter p {
+    margin: 0;
+    font-size: 0.93rem;
+    color: var(--ink-2);
+  }
+  .tarifs {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  .tarifs__note {
+    font-size: 0.88rem;
+    color: var(--ink-3);
+  }
+  .tarifs__table {
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th,
+  td {
+    text-align: left;
+    padding: 0.9rem 1.25rem;
+    border-bottom: 1px solid var(--stone-200);
+  }
+  th {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--stone-50);
+    color: var(--green-900);
+  }
+  td:last-child {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--green-900);
+    white-space: nowrap;
+    text-align: right;
+  }
+  .tarifs__ent {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin: 0;
+    padding: 1rem 1.25rem;
+    font-size: 0.92rem;
+    color: var(--ink-2);
+    background: var(--lime-100);
+  }
+  .tarifs__ent :global(svg) {
+    width: 24px;
+    flex: none;
+    color: var(--green-800);
+    margin-top: 0.3rem;
+  }
+  .proc {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  .proc li {
+    padding: 1.25rem;
+    border-radius: var(--radius);
+    background: var(--green-900);
+    color: var(--white);
+    display: grid;
+    gap: 0.5rem;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    line-height: 1.35;
+  }
+  .proc span {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--lime);
+  }
+  .fcard {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: var(--radius-l);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    box-shadow: var(--shadow-s);
+  }
+  @media (max-width: 900px) {
+    .tarifs {
+      grid-template-columns: 1fr;
+    }
+    .proc {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  @media (max-width: 520px) {
+    .proc {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

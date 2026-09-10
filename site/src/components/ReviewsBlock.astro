@@ -1,0 +1,188 @@
+---
+/**
+ * Bloc avis Google. N'affiche que des données réelles (src/data/avis.ts) ;
+ * tant que les fiches ne sont pas renseignées, affiche les accès aux fiches et un emplacement de widget.
+ */
+import Icon from './Icon.astro';
+import { avis, fichesGoogle } from '../data/avis';
+interface Props {
+  limit?: number;
+}
+const { limit = 3 } = Astro.props;
+const list = avis.slice(0, limit);
+const fiches = [fichesGoogle.jonzac, fichesGoogle.royan];
+const fmt = (d: string) => new Date(d).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+---
+
+<div class="reviews">
+  <div class="reviews__fiches">
+    {
+      fiches.map((f, i) => (
+        <div class="fiche reveal" style={`--d:${i * 80}ms`}>
+          <span class="fiche__g" aria-hidden="true">G</span>
+          <div>
+            <strong>{f.label}</strong>
+            {f.note ? (
+              <span class="fiche__note">
+                <span class="stars" aria-label={`${f.note} sur 5`}>
+                  {[1, 2, 3, 4, 5].map(() => (
+                    <Icon id="star" />
+                  ))}
+                </span>
+                {f.note.toFixed(1)} · {f.nombre} avis
+              </span>
+            ) : (
+              <span class="fiche__note fiche__note--todo">Note Google à afficher</span>
+            )}
+          </div>
+          {f.url ? (
+            <a class="btn btn--outline btn--sm" href={f.url} target="_blank" rel="noopener">
+              Voir les avis <Icon id="arrow-up-right" />
+            </a>
+          ) : (
+            <a class="btn btn--outline btn--sm" href="/avis/">
+              Nos avis <Icon id="arrow" />
+            </a>
+          )}
+        </div>
+      ))
+    }
+  </div>
+
+  {
+    list.length > 0 ? (
+      <div class="reviews__grid">
+        {list.map((a, i) => (
+          <blockquote class="review reveal" style={`--d:${i * 70}ms`}>
+            <Icon id="quote" class="review__q" />
+            <span class="stars" aria-label={`${a.note} sur 5`}>
+              {Array.from({ length: a.note }).map(() => (
+                <Icon id="star" />
+              ))}
+            </span>
+            <p>{a.texte}</p>
+            <footer>
+              <strong>{a.auteur}</strong> · {a.agence === 'jonzac' ? 'Agence de Jonzac' : 'Agence de Royan'} · {fmt(a.date)}
+            </footer>
+          </blockquote>
+        ))}
+      </div>
+    ) : (
+      <p class="reviews__todo reveal">
+        <Icon id="star" /> Les avis Google des deux agences seront affichés ici (verbatims réels importés depuis les fiches Google Business, ou widget Guest-Suite).
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .reviews {
+    display: grid;
+    gap: 1.5rem;
+  }
+  .reviews__fiches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+    gap: 1rem;
+  }
+  .fiche {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius);
+  }
+  .fiche > div {
+    flex: 1;
+    display: grid;
+    gap: 0.2rem;
+  }
+  .fiche strong {
+    font-family: var(--font-ui);
+    font-weight: 600;
+    color: var(--green-900);
+  }
+  .fiche__g {
+    flex: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--stone-50);
+    border: 1px solid var(--stone-200);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--green-900);
+  }
+  .fiche__note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+  }
+  .fiche__note--todo {
+    color: var(--ink-3);
+    font-style: italic;
+  }
+  .stars {
+    display: inline-flex;
+    gap: 0.05rem;
+    color: #f5b301;
+  }
+  .stars :global(svg) {
+    fill: currentColor;
+    stroke: none;
+    font-size: 0.95rem;
+  }
+  .reviews__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+    gap: 1rem;
+  }
+  .review {
+    position: relative;
+    margin: 0;
+    padding: 1.5rem 1.4rem 1.3rem;
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius);
+    display: grid;
+    gap: 0.6rem;
+  }
+  .review__q {
+    position: absolute;
+    right: 1rem;
+    top: 0.9rem;
+    font-size: 1.6rem;
+    color: var(--lime);
+  }
+  .review p {
+    margin: 0;
+    line-height: 1.55;
+  }
+  .review footer {
+    font-size: 0.85rem;
+    color: var(--ink-2);
+  }
+  .reviews__todo {
+    margin: 0;
+    padding: 1rem 1.25rem;
+    border: 1px dashed var(--stone-200);
+    border-radius: var(--radius);
+    color: var(--ink-2);
+    font-size: 0.95rem;
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+  }
+  .reviews__todo :global(svg) {
+    color: #f5b301;
+    margin-top: 0.2rem;
+  }
+</style>

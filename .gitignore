@@ -1,0 +1,16 @@
+# OS / éditeurs
+.DS_Store
+*.log
+
+# Node / Astro
+node_modules/
+dist/
+.astro/
+.env
+
+# Photos brutes (273 Mo, EXIF/GPS non nettoyés) : hors du dépôt public.
+# Les versions normalisées sont dans site/src/assets/photos/ (voir site/scripts/prepare-photos.py).
+assets/PHOTOS SITE LUZ/
+
+# Extrait INPI (données personnelles des dirigeants)
+Export_Portail_Data_FENETRES_LUZ_Du_*.pdf

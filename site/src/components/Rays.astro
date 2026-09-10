@@ -1,0 +1,32 @@
+---
+/**
+ * Motif « rayons » du logo LUZ (5 gouttes en éventail), revectorisé.
+ * Hérite de `currentColor`. `animated` déclenche l'ouverture en éventail au chargement.
+ */
+interface Props {
+  class?: string;
+  animated?: boolean;
+  title?: string;
+  style?: string;
+}
+// `rest` transporte l'attribut data-astro-cid-* du parent pour que ses styles scopés s'appliquent ici.
+const { class: cls, animated = false, title, style, ...rest } = Astro.props;
+---
+
+<svg
+  {...rest}
+  viewBox="-50 -48 100 48"
+  fill="currentColor"
+  class:list={[cls, { 'rays-anim': animated }]}
+  style={style}
+  aria-hidden={title ? undefined : 'true'}
+  role={title ? 'img' : undefined}
+  focusable="false"
+>
+  {title && <title>{title}</title>}
+  <path d="M0 -16C0.77 -30.5 2.8 -38.35 3.5 -45A3.5 3.5 0 1 0 -3.5 -45C-2.8 -38.35 -0.77 -30.5 0 -16Z"></path>
+  <path d="M-10.93 -13.02C-19.02 -23.86 -21.86 -30.41 -25.6 -35.96A3.5 3.5 0 1 0 -30.96 -31.46C-26.15 -26.81 -20.19 -22.87 -10.93 -13.02Z"></path>
+  <path d="M10.93 -13.02C20.19 -22.87 26.15 -26.81 30.96 -31.46A3.5 3.5 0 1 0 25.6 -35.96C21.86 -30.41 19.02 -23.86 10.93 -13.02Z"></path>
+  <path d="M-19.41 -4.84C-32.32 -8.85 -38.47 -12.48 -44.76 -14.77A3.5 3.5 0 1 0 -46.45 -7.97C-39.83 -7.04 -32.69 -7.36 -19.41 -4.84Z"></path>
+  <path d="M19.41 -4.84C32.69 -7.36 39.83 -7.04 46.45 -7.97A3.5 3.5 0 1 0 44.76 -14.77C38.47 -12.48 32.32 -8.85 19.41 -4.84Z"></path>
+</svg>

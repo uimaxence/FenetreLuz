@@ -1,0 +1,289 @@
+---
+import Logo from './Logo.astro';
+import Rays from './Rays.astro';
+import Icon from './Icon.astro';
+import { site, nav } from '../data/site';
+import { agencesList } from '../data/agences';
+import { prestationsMenu } from '../data/prestations';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer on-dark">
+  <Rays class="rays-giant rays-giant--br footer__rays" />
+  <div class="container container--wide footer__in">
+    <div class="footer__brand">
+      <a href="/" aria-label="Fenêtres & Vérandas LUZ — Accueil"><Logo variant="light" class="footer__logo" /></a>
+      <p class="footer__pitch">
+        Menuisier-installateur multi-marques en Charente-Maritime et Charente depuis plus de 20 ans. Fenêtres, portes,
+        vérandas, pergolas, portails, volets et stores : conseil en showroom, métré, pose par nos équipes, service
+        après-vente.
+      </p>
+      <ul class="footer__certs" aria-label="Certifications">
+        <li>Certifié RGE</li>
+        <li>Qualibat</li>
+        <li>Menuisier d’Excellence MéO</li>
+        <li>Menuisier Créateur Janneau</li>
+        <li>Portalier HORIZAL</li>
+        <li>Expert Storiste Soliso</li>
+      </ul>
+      <ul class="footer__social">
+        <li><a href={site.social.facebook} target="_blank" rel="noopener" aria-label="Facebook"><Icon id="facebook" /></a></li>
+        <li><a href={site.social.instagram} target="_blank" rel="noopener" aria-label="Instagram"><Icon id="instagram" /></a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col footer__col--agences">
+      <h2 class="footer__title">Nos agences</h2>
+      {
+        agencesList.map((a) => (
+          <address class="footer__agence">
+            <a class="footer__agence-name" href={`/agences/${a.slug}/`}>
+              {a.name}
+            </a>
+            <span>
+              {a.address.street}
+              <br />
+              {a.address.zip} {a.address.city}
+            </span>
+            <a class="footer__tel" href={`tel:${a.tel}`}>
+              <Icon id="phone" /> {a.phone}
+            </a>
+            <span class="footer__hours">
+              {a.hours.map((h) => (
+                <span>
+                  {h.days} : {h.time}
+                </span>
+              ))}
+            </span>
+          </address>
+        ))
+      }
+      <a class="footer__mail" href={`mailto:${site.email}`}><Icon id="mail" /> {site.email}</a>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__title">Prestations</h2>
+      <ul class="footer__links">
+        {prestationsMenu.map((p) => <li><a href={`/prestations/${p.slug}/`}>{p.title}</a></li>)}
+        <li><a href="/depannage/">Dépannage & entretien</a></li>
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__title">Zones d’intervention</h2>
+      <ul class="footer__links">
+        {nav.footer.zones.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="footer__title">L’entreprise</h2>
+      <ul class="footer__links">
+        {nav.footer.entreprise.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        <li><a href="/devis/">Demande de devis</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer__bottom">
+    <div class="container container--wide footer__bottom-in">
+      <p>© {year} {site.name} — Menuiserie à Jonzac & Royan, Charente-Maritime.</p>
+      <ul class="footer__legal">
+        {nav.footer.legal.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    background: var(--green-950);
+    color: rgba(255, 255, 255, 0.82);
+    overflow: hidden;
+    margin-top: 0;
+  }
+  .footer__rays {
+    opacity: 0.08;
+    width: clamp(520px, 55vw, 980px);
+    right: -14%;
+    bottom: -8%;
+  }
+  .footer__in {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.5fr 1.2fr 1fr 1fr 1fr;
+    gap: 2.5rem 2rem;
+    padding-block: clamp(3rem, 6vw, 5rem) 3rem;
+  }
+  .footer__logo {
+    --logo-w: 74px;
+  }
+  .footer__pitch {
+    margin-top: 1.25rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    max-width: 34ch;
+  }
+  .footer__certs {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .footer__certs li {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.55rem;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  .footer__social {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+    display: flex;
+    gap: 0.5rem;
+  }
+  .footer__social a {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--white);
+    font-size: 1.15rem;
+    transition:
+      background-color 160ms ease,
+      color 160ms ease;
+  }
+  .footer__social a:hover {
+    background: var(--lime);
+    color: var(--green-950);
+  }
+  .footer__title {
+    font-family: var(--font-ui);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 1.1rem;
+  }
+  .footer__links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.45rem;
+  }
+  .footer__links a {
+    color: rgba(255, 255, 255, 0.82);
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+  .footer__links a:hover {
+    color: var(--lime);
+  }
+  .footer__agence {
+    font-style: normal;
+    display: grid;
+    gap: 0.25rem;
+    font-size: 0.93rem;
+    line-height: 1.4;
+    margin-bottom: 1.25rem;
+  }
+  .footer__agence-name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1.35rem;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .footer__agence-name:hover {
+    color: var(--lime);
+  }
+  .footer__tel {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--white);
+    text-decoration: none;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 1.02rem;
+  }
+  .footer__tel:hover,
+  .footer__mail:hover {
+    color: var(--lime);
+  }
+  .footer__hours {
+    display: grid;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .footer__mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 0.93rem;
+  }
+  .footer__bottom {
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-block: 1.1rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .footer__bottom-in {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1.5rem;
+  }
+  .footer__bottom p {
+    margin: 0;
+  }
+  .footer__legal {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+  }
+  .footer__legal a {
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+  }
+  .footer__legal a:hover {
+    color: var(--lime);
+  }
+  @media (max-width: 1100px) {
+    .footer__in {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+    .footer__brand {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (max-width: 640px) {
+    .footer__in {
+      grid-template-columns: 1fr 1fr;
+    }
+    .footer__col--agences {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

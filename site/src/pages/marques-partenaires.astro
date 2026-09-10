@@ -1,0 +1,183 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import type { ImageMetadata } from 'astro';
+import { marques } from '../data/marques';
+import { prestationBySlug } from '../data/prestations';
+import { equipePhoto } from '../data/photos';
+const hero = equipePhoto('certificat-meo');
+const principales = marques.filter((m) => m.principale);
+const autres = marques.filter((m) => !m.principale);
+
+// Logos officiels : src/assets/logos/marques/<slug>.svg|png (voir LOGOS-A-RECUPERER.md)
+const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/marques/*.{svg,png}', { eager: true });
+const certLogos = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/certifications/*.{svg,png}', { eager: true });
+const find = (g: Record<string, { default: ImageMetadata }>, slug: string) =>
+  Object.entries(g).find(([p]) => p.split('/').pop()!.replace(/\.(svg|png)$/i, '') === slug)?.[1].default;
+// Logo de marque, sinon logo du réseau/certification de la même marque
+const logoFor = (slug: string) => find(logos, slug) ?? find(certLogos, slug);
+---
+
+<Base
+  title="Nos marques partenaires — MéO, Janneau, Concept Alu, HORIZAL, Soliso | Fenêtres & Vérandas LUZ"
+  description="Fenêtres & Vérandas LUZ est installateur agréé de fabricants français : Menuisier d’Excellence MéO, Menuisier Créateur Janneau, concessionnaire Concept Alu, Portalier HORIZAL, Expert Storiste Soliso, ainsi que EHRET, Soprofen, Gypass, Somfy, DEA et Vulcan."
+>
+  <PageHero
+    title="Nos marques partenaires"
+    eyebrow="Fabricants français, installateur agréé"
+    lead="Nous ne fabriquons pas : nous choisissons, nous concevons et nous posons. Chaque marque ci-dessous nous a formés et audités. C’est votre garantie d’un produit bien choisi et bien installé."
+    crumbs={[{ label: 'Marques partenaires' }]}
+    image={hero}
+    imageAlt="Signature du certificat Menuisier d’Excellence MéO"
+  />
+
+  <section class="section">
+    <div class="container">
+      <SectionHead eyebrow="Réseaux & certifications" title="Cinq fabricants dont nous sommes installateur certifié" />
+      <div class="brands">
+        {
+          principales.map((m, i) => (
+            <article class="brand reveal" id={m.slug} style={`--d:${(i % 2) * 80}ms`}>
+              <div class="brand__head">
+                {logoFor(m.slug) ? <img class="brand__logoimg" src={logoFor(m.slug)!.src} width={logoFor(m.slug)!.width} height={logoFor(m.slug)!.height} alt={m.name} loading="lazy" decoding="async" /> : <span class="brand__logo">{m.name}</span>}
+                {m.label && <span class="badge badge--lime">{m.label}</span>}
+              </div>
+              <p class="brand__cat">{m.categorie}{m.origine && ` · ${m.origine}`}</p>
+              <p class="brand__desc">{m.description}</p>
+              <ul class="list-rays">
+                {m.produits.map((p) => (
+                  <li>{p}</li>
+                ))}
+              </ul>
+              <p class="brand__links">
+                {m.prestations.map((s) => {
+                  const p = prestationBySlug(s);
+                  return p && !p.draft ? (
+                    <a class="link-arrow" href={`/prestations/${p.slug}/`}>
+                      {p.title} <Icon id="arrow" />
+                    </a>
+                  ) : null;
+                })}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--stone pattern-rays">
+    <div class="container">
+      <SectionHead eyebrow="Et aussi" title="Les autres marques que nous posons" />
+      <div class="grid grid--3">
+        {
+          autres.map((m, i) => (
+            <article class="brand brand--small reveal" id={m.slug} style={`--d:${(i % 3) * 70}ms`}>
+              <div class="brand__head">
+                {logoFor(m.slug) ? <img class="brand__logoimg" src={logoFor(m.slug)!.src} width={logoFor(m.slug)!.width} height={logoFor(m.slug)!.height} alt={m.name} loading="lazy" decoding="async" /> : <span class="brand__logo">{m.name}</span>}
+                {m.aVenir && <span class="badge">Bientôt</span>}
+              </div>
+              <p class="brand__cat">{m.categorie}</p>
+              <p class="brand__desc">{m.description}</p>
+              <p class="brand__links">
+                {m.prestations.map((s) => {
+                  const p = prestationBySlug(s);
+                  return p && !p.draft ? (
+                    <a class="link-arrow" href={`/prestations/${p.slug}/`}>
+                      {p.nav} <Icon id="arrow" />
+                    </a>
+                  ) : null;
+                })}
+              </p>
+            </article>
+          ))
+        }
+      </div>
+          </div>
+  </section>
+
+  <CtaBand />
+</Base>
+
+<style>
+  .brands {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .brand {
+    padding: 1.75rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+  }
+  .brand__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .brand__logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--green-900);
+    letter-spacing: 0.01em;
+  }
+  .brand--small .brand__logo {
+    font-size: 1.7rem;
+  }
+  .brand__logoimg {
+    height: 52px;
+    width: auto;
+    max-width: 220px;
+    object-fit: contain;
+  }
+  .brand--small .brand__logoimg {
+    height: 40px;
+  }
+  .brand__cat {
+    margin: 0;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--green-500);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .brand__desc {
+    margin: 0;
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .brand__links {
+    margin: 0.5rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+  }
+  .brand__links .link-arrow {
+    font-size: 0.82rem;
+  }
+  .note-logos {
+    margin: 2rem 0 0;
+    font-size: 0.88rem;
+    color: var(--ink-3);
+    font-style: italic;
+  }
+  @media (max-width: 800px) {
+    .brands {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+/**
+ * Visuel « à générer » (voir IMAGES-A-GENERER.md à la racine du projet).
+ * - Si un fichier src/assets/gen/{id}.{jpg,png,webp} existe, il est affiché (optimisé par astro:assets, recadré au ratio).
+ * - Sinon : dégradé vert + rayons, avec l'identifiant affiché discrètement pour repérer le visuel à produire.
+ */
+import { Picture } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Rays from './Rays.astro';
+
+interface Props {
+  id: string;
+  label?: string;
+  ratio?: string; // ex. "16 / 9"
+  class?: string;
+  eager?: boolean;
+}
+const { id, label, ratio = '16 / 9', class: cls, eager = false, ...rest } = Astro.props;
+
+const gen = import.meta.glob<{ default: ImageMetadata }>('../assets/gen/*.{jpg,jpeg,png,webp}', { eager: true });
+const found = Object.entries(gen).find(([path]) => path.split('/').pop()!.replace(/\.(jpe?g|png|webp)$/i, '') === id)?.[1].default;
+---
+
+{
+  found ? (
+    <div {...rest} class:list={['ph', 'ph--img', cls]} style={`aspect-ratio:${ratio}`}>
+      <Picture
+        src={found}
+        alt={label ?? ''}
+        widths={[480, 800, 1200, 1800]}
+        sizes="(max-width: 900px) 100vw, 60vw"
+        formats={['webp']}
+        loading={eager ? 'eager' : 'lazy'}
+        decoding="async"
+        class="ph__real"
+        pictureAttributes={{ class: 'ph__pic' }}
+      />
+    </div>
+  ) : (
+    <div {...rest} class:list={['ph', cls]} style={`aspect-ratio:${ratio}`} role="img" aria-label={label ?? 'Visuel à venir'}>
+      <Rays class="ph__rays" />
+      <span class="ph__id">Visuel à générer · {id}</span>
+    </div>
+  )
+}
+
+<style>
+  .ph {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--green-800), var(--green-950));
+    border-radius: inherit;
+    min-height: 120px;
+  }
+  /* L'image remplit tout le cadre, quel que soit le ratio du fichier fourni. */
+  .ph :global(.ph__pic) {
+    position: absolute;
+    inset: 0;
+  }
+  .ph :global(.ph__real) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .ph__rays {
+    position: absolute;
+    width: 70%;
+    left: 50%;
+    bottom: -6%;
+    transform: translateX(-50%);
+    color: var(--lime);
+    opacity: 0.22;
+  }
+  .ph__id {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.65rem;
+    font-family: var(--font-ui);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.55);
+  }
+</style>

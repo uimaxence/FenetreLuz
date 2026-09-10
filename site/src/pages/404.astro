@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import Rays from '../components/Rays.astro';
+import Icon from '../components/Icon.astro';
+---
+
+<Base title="Page introuvable | Fenêtres & Vérandas LUZ" description="La page demandée n’existe pas ou a été déplacée." noindex>
+  <section class="nf on-dark">
+    <Rays class="rays-giant rays-giant--br" animated />
+    <div class="container container--narrow nf__in">
+      <p class="eyebrow"><Rays /> Erreur 404</p>
+      <h1>Cette fenêtre donne sur un mur.</h1>
+      <p class="lead">La page que vous cherchez n’existe pas ou a changé d’adresse. Voici quelques ouvertures.</p>
+      <div class="cluster">
+        <a class="btn btn--primary" href="/">Accueil <Icon id="arrow" /></a>
+        <a class="btn btn--ghost" href="/prestations/">Nos prestations</a>
+        <a class="btn btn--ghost" href="/realisations/">Nos réalisations</a>
+        <a class="btn btn--ghost" href="/contact/">Contact</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf {
+    position: relative;
+    background: var(--green-900);
+    min-height: 65vh;
+    display: grid;
+    align-items: center;
+    overflow: hidden;
+    padding-block: 4rem;
+  }
+  .nf__in {
+    position: relative;
+    text-align: center;
+  }
+  .nf .eyebrow {
+    justify-content: center;
+  }
+  .nf .cluster {
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+</style>

@@ -1,0 +1,204 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import Icon from '../../components/Icon.astro';
+import Rays from '../../components/Rays.astro';
+import Placeholder from '../../components/Placeholder.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import LocalCta from '../../components/LocalCta.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { prestationBySlug } from '../../data/prestations';
+import { site } from '../../data/site';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('conseils', ({ data }) => !data.draft);
+  return articles.map((a) => ({ params: { id: a.id }, props: { a } }));
+}
+const { a } = Astro.props;
+const { Content } = await render(a);
+const presta = a.data.prestation ? prestationBySlug(a.data.prestation) : undefined;
+const others = (await getCollection('conseils', ({ data, id }) => !data.draft && id !== a.id)).slice(0, 3);
+const dateFr = a.data.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+
+const jsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: a.data.title,
+    description: a.data.description,
+    datePublished: a.data.date.toISOString(),
+    dateModified: (a.data.updated ?? a.data.date).toISOString(),
+    author: { '@type': 'Organization', name: site.name, '@id': `${site.url}/#organization` },
+    publisher: { '@id': `${site.url}/#organization` },
+    mainEntityOfPage: `${site.url}/conseils/${a.id}/`,
+    inLanguage: 'fr-FR',
+    keywords: a.data.keywords.join(', '),
+  },
+];
+---
+
+<Base title={`${a.data.title} | Conseils LUZ`} description={a.data.description} ogType="article" jsonLd={jsonLd}>
+  <div class="rbar" aria-hidden="true"><span data-reading-bar></span></div>
+  <article data-article>
+    <header class="ahead">
+      <div class="container container--narrow">
+        <Breadcrumb items={[{ label: 'Conseils', href: '/conseils/' }, { label: a.data.title }]} />
+        <p class="eyebrow ahead__eyebrow"><Rays /> Guide pratique</p>
+        <h1 class="ahead__title">{a.data.title}</h1>
+        <p class="lead">{a.data.description}</p>
+        <p class="ahead__meta">
+          <span><Icon id="calendar" /> {dateFr}</span>
+          <span><Icon id="clock" /> {a.data.readingTime} min de lecture</span>
+          {presta && <a href={`/prestations/${presta.slug}/`}><Icon id={presta.icon} /> {presta.title}</a>}
+        </p>
+      </div>
+      <div class="container ahead__cover">
+        <Placeholder id={a.data.cover ?? `conseil-${a.id}`} ratio="21 / 9" class="ahead__ph" />
+      </div>
+    </header>
+
+    <div class="container container--narrow">
+      <div class="prose abody">
+        <Content />
+      </div>
+      {
+        presta && (
+          <a class="anext reveal" href={`/prestations/${presta.slug}/`}>
+            <span class="anext__ic">
+              <Icon id={presta.icon} />
+            </span>
+            <span>
+              <strong>Découvrir notre prestation {presta.title.toLowerCase()}</strong>
+              <small>{presta.card}</small>
+            </span>
+            <Icon id="arrow" />
+          </a>
+        )
+      }
+    </div>
+  </article>
+
+  <section class="section section--stone pattern-rays">
+    <div class="container">
+      <p class="eyebrow"><Rays /> Passer à l’action</p>
+      <h2>Votre projet à Jonzac ou à Royan</h2>
+      <LocalCta produit={presta ? presta.nav.toLowerCase() : 'projet'} />
+    </div>
+  </section>
+
+  {
+    others.length > 0 && (
+      <section class="section">
+        <div class="container">
+          <p class="eyebrow">
+            <Rays /> À lire aussi
+          </p>
+          <h2>D’autres guides</h2>
+          <div class="grid grid--3 mt-2">
+            {others.map((o, i) => (
+              <ArticleCard article={o} delay={i * 70} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <CtaBand />
+</Base>
+
+<style>
+  .rbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    z-index: 200;
+    pointer-events: none;
+  }
+  .rbar span {
+    display: block;
+    height: 100%;
+    background: var(--lime);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  .ahead {
+    padding-top: 1.5rem;
+  }
+  .ahead__eyebrow {
+    margin-top: 1.5rem;
+  }
+  .ahead__title {
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  }
+  .ahead__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    color: var(--ink-2);
+    margin-bottom: 2rem;
+  }
+  .ahead__meta span,
+  .ahead__meta a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .ahead__meta a {
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .ahead__cover :global(.ahead__ph) {
+    border-radius: var(--radius-l);
+  }
+  .abody {
+    padding-block: clamp(2rem, 4vw, 3.5rem) 2rem;
+  }
+  .anext {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: clamp(2rem, 4vw, 3.5rem);
+    border-radius: var(--radius);
+    background: var(--green-900);
+    color: var(--white);
+    text-decoration: none;
+    transition: transform 300ms var(--ease-out);
+  }
+  .anext:hover {
+    transform: translateY(-3px);
+    color: var(--white);
+  }
+  .anext__ic {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    border-radius: var(--radius);
+    background: var(--lime);
+    color: var(--green-950);
+    font-size: 1.4rem;
+  }
+  .anext > span:nth-child(2) {
+    flex: 1;
+    display: grid;
+  }
+  .anext strong {
+    font-family: var(--font-ui);
+    font-weight: 600;
+  }
+  .anext small {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  .anext > :global(svg:last-child) {
+    color: var(--lime);
+    font-size: 1.3rem;
+  }
+</style>

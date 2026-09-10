@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import CtaBand from '../../components/CtaBand.astro';
+const articles = (await getCollection('conseils', ({ data }) => !data.draft)).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<Base
+  title="Conseils & guides menuiserie — Prix, aides, choix des matériaux | Fenêtres & Vérandas LUZ"
+  description="Prix d’une véranda ou d’une pergola, aides pour changer ses fenêtres, PVC ou aluminium, rénovation ou dépose totale : les guides pratiques de Fenêtres & Vérandas LUZ pour préparer votre projet en Charente-Maritime."
+>
+  <PageHero
+    title="Conseils & guides"
+    eyebrow="Préparer votre projet"
+    lead="Des réponses claires, chiffrées et locales aux questions que vous vous posez avant de nous appeler : budgets, aides, matériaux, démarches."
+    crumbs={[{ label: 'Conseils' }]}
+    compact
+  />
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--3">
+        {articles.map((a, i) => <ArticleCard article={a} delay={(i % 3) * 70} />)}
+      </div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

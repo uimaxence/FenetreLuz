@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Icon from '../components/Icon.astro';
+import AgenceCard from '../components/AgenceCard.astro';
+import DevisForm from '../components/DevisForm.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { agencesList } from '../data/agences';
+import { villes } from '../data/villes';
+import { site } from '../data/site';
+
+const jsonLd = agencesList.map((a) => ({
+  '@context': 'https://schema.org',
+  '@type': 'HomeAndConstructionBusiness',
+  '@id': `${site.url}/agences/${a.slug}/#localbusiness`,
+  name: `${site.name} — ${a.name}`,
+  url: `${site.url}/agences/${a.slug}/`,
+  telephone: a.tel,
+  email: a.email,
+  address: { '@type': 'PostalAddress', streetAddress: a.address.street, postalCode: a.address.zip, addressLocality: a.address.city, addressCountry: 'FR' },
+  openingHoursSpecification: a.openingHoursSpecification.map((o) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: o.days, opens: o.opens, closes: o.closes })),
+  parentOrganization: { '@id': `${site.url}/#organization` },
+}));
+---
+
+<Base
+  title="Contact & agences — Fenêtres & Vérandas LUZ à Jonzac et Royan"
+  description="Contactez Fenêtres & Vérandas LUZ : agence de Jonzac (Saint-Germain-de-Lusignan) 05 46 70 48 38 et agence de Royan (Breuillet) 05 46 21 37 21. Horaires, adresses, itinéraires et formulaire de contact."
+  jsonLd={jsonLd}
+>
+  <PageHero
+    title="Contact & agences"
+    eyebrow="Deux agences en Charente-Maritime"
+    lead="Un showroom à Jonzac, un bureau à Breuillet en pays royannais, et des conseillers qui se déplacent chez vous dans toute la Charente-Maritime et l’ouest de la Charente."
+    crumbs={[{ label: 'Contact' }]}
+    compact
+  />
+
+  <section class="section">
+    <div class="container">
+      <div class="grid grid--2">
+        {agencesList.map((a, i) => <AgenceCard agence={a} delay={i * 100} />)}
+      </div>
+      <p class="zones">
+        <Icon id="map" /> Nous intervenons aussi à
+        {villes.map((v, i) => <><a href={`/menuiserie-${v.slug}/`}>{v.name}</a>{i < villes.length - 1 ? ', ' : ''}</>)}
+        et dans toutes les communes alentour. <a href={`mailto:${site.email}`}>{site.email}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--stone pattern-rays">
+    <div class="container container--narrow">
+      <SectionHead eyebrow="Écrivez-nous" title="Une question, un projet, un dépannage ?" lead="Nous répondons sous 48 h ouvrées. Pour une urgence, appelez directement l’agence." center />
+      <div class="fcard">
+        <DevisForm compact />
+      </div>
+    </div>
+  </section>
+
+  <CtaBand title="Vous préférez passer nous voir&nbsp;?" text="Le showroom de Jonzac est ouvert du lundi au samedi matin, l’agence de Breuillet le matin et sur rendez-vous." primaryHref="/agences/jonzac/" primaryLabel="Le showroom de Jonzac" />
+</Base>
+
+<style>
+  .zones {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    margin: 2rem 0 0;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    background: var(--stone-50);
+    color: var(--ink-2);
+    flex-wrap: wrap;
+  }
+  .zones :global(svg) {
+    color: var(--green-500);
+    font-size: 1.3rem;
+    flex: none;
+  }
+  .zones a {
+    font-weight: 600;
+  }
+  .fcard {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border-radius: var(--radius-l);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    box-shadow: var(--shadow-s);
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+import Icon from './Icon.astro';
+import Placeholder from './Placeholder.astro';
+import type { CollectionEntry } from 'astro:content';
+interface Props {
+  article: CollectionEntry<'conseils'>;
+  delay?: number;
+}
+const { article: a, delay = 0 } = Astro.props;
+const d = a.data.date.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<a class="art reveal" href={`/conseils/${a.id}/`} style={`--d:${delay}ms`}>
+  <div class="art__media">
+    <Placeholder id={a.data.cover ?? `conseil-${a.id}`} ratio="16 / 10" />
+  </div>
+  <div class="art__body">
+    <span class="art__meta"><Icon id="calendar" /> {d} · {a.data.readingTime} min de lecture</span>
+    <h3 class="art__title">{a.data.title}</h3>
+    <p class="art__desc">{a.data.description}</p>
+    <span class="link-arrow">Lire l’article <Icon id="arrow" /></span>
+  </div>
+</a>
+
+<style>
+  .art {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition:
+      transform 300ms var(--ease-out),
+      box-shadow 300ms var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .art:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+      color: var(--ink);
+    }
+  }
+  .art__media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+  }
+  .art__body {
+    padding: 1.1rem 1.25rem 1.25rem;
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+  }
+  .art__meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    color: var(--ink-3);
+  }
+  .art__title {
+    margin: 0;
+    font-size: 1.15rem;
+    line-height: 1.3;
+  }
+  .art__desc {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .art .link-arrow {
+    font-size: 0.85rem;
+    margin-top: 0.3rem;
+  }
+</style>

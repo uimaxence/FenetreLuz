@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { prestationsPubliees } from '../data/prestations';
+import { agencesList } from '../data/agences';
+import { villes } from '../data/villes';
+import { croisees } from '../data/croisees';
+import { realisations } from '../data/realisations';
+import { nav } from '../data/site';
+const articles = await getCollection('conseils', ({ data }) => !data.draft);
+---
+
+<Base title="Plan du site | Fenêtres & Vérandas LUZ" description="Toutes les pages du site fenetresluz.com : prestations, agences, zones d’intervention, réalisations, conseils et informations pratiques.">
+  <PageHero title="Plan du site" crumbs={[{ label: 'Plan du site' }]} compact />
+  <section class="section">
+    <div class="container plan">
+      <div>
+        <h2>Prestations</h2>
+        <ul>
+          <li><a href="/prestations/">Toutes les prestations</a></li>
+          {prestationsPubliees.map((p) => <li><a href={`/prestations/${p.slug}/`}>{p.title}</a></li>)}
+          <li><a href="/depannage/">Dépannage & entretien</a></li>
+        </ul>
+        <h2>Agences & zones</h2>
+        <ul>
+          {agencesList.map((a) => <li><a href={`/agences/${a.slug}/`}>Menuiserie à {a.city}</a></li>)}
+          {villes.map((v) => <li><a href={`/menuiserie-${v.slug}/`}>Menuiserie à {v.name}</a></li>)}
+          {croisees.map((c) => <li><a href={`/${c.slug}/`}>{c.produit} à Royan</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2>L’entreprise</h2>
+        <ul>
+          {nav.footer.entreprise.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+          <li><a href="/aides-financement/">Aides & financement</a></li>
+          <li><a href="/devis/">Demande de devis</a></li>
+          {nav.footer.legal.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        </ul>
+        <h2>Conseils</h2>
+        <ul>
+          <li><a href="/conseils/">Tous les conseils</a></li>
+          {articles.map((a) => <li><a href={`/conseils/${a.id}/`}>{a.data.title}</a></li>)}
+        </ul>
+      </div>
+      <div>
+        <h2>Réalisations</h2>
+        <ul>
+          <li><a href="/realisations/">Toutes les réalisations</a></li>
+          {realisations.map((r) => <li><a href={`/realisations/${r.slug}/`}>{r.title} — {r.ville}</a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .plan {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.3fr;
+    gap: 2.5rem;
+  }
+  .plan h2 {
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .plan h2:first-child {
+    margin-top: 0;
+  }
+  .plan ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.95rem;
+  }
+  .plan a {
+    text-decoration: none;
+  }
+  .plan a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 800px) {
+    .plan {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
