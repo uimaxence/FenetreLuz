@@ -13,8 +13,8 @@
     "assets": "python3 scripts/prepare-gen-logos.py"
   },
   "dependencies": {
-    "@astrojs/node": "^11.1.5",
     "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/vercel": "^11.0.10",
     "@fontsource-variable/source-sans-3": "^5.2.5",
     "@fontsource/barlow": "^5.2.5",
     "@fontsource/barlow-condensed": "^5.2.5",

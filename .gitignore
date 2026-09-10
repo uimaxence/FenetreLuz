@@ -6,6 +6,7 @@
 node_modules/
 dist/
 .astro/
+.vercel/
 .env
 
 # Photos brutes (273 Mo, EXIF/GPS non nettoyés) : hors du dépôt public.

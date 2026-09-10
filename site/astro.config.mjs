@@ -1,20 +1,20 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
-import node from '@astrojs/node';
+import vercel from '@astrojs/vercel';
 
 /**
  * Site vitrine Fenêtres & Vérandas LUZ
  * - Rendu statique (HTML généré au build) pour toutes les pages → SEO + performance.
- * - L'adaptateur Node ne sert qu'à la route API du formulaire (src/pages/api/devis.ts, prerender=false).
- *   Il peut être remplacé par @astrojs/vercel, @astrojs/netlify, etc. selon l'hébergement retenu.
+ * - L'adaptateur Vercel ne sert qu'à la route API du formulaire (src/pages/api/devis.ts, prerender=false),
+ *   déployée en fonction serverless. Le build écrit dans .vercel/output/ (Build Output API).
  */
 export default defineConfig({
   site: 'https://www.fenetresluz.com',
   output: 'static',
   trailingSlash: 'always',
   compressHTML: true,
-  adapter: node({ mode: 'standalone' }),
+  adapter: vercel(),
   integrations: [
     sitemap({
       filter: (page) =>
