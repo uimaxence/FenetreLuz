@@ -82,7 +82,7 @@ Tâches :
 ## 5. Développement du site
 - [ ] Setup technique (stack, hébergement, nom de domaine — fenetresluz.com existant à vérifier/migrer)
   > Décision : le domaine fenetresluz.com est conservé (ancienneté + backlinks). Vérifier l'accès au registrar/DNS avec Benoît.
-  > Stack livrée : Astro 7 (pages 100 % pré-rendues en HTML, adaptateur Node pour l'API du formulaire uniquement), projet dans `site/` (voir `site/README.md`). Reste : choix de l'hébergeur (Node ou adaptateur Vercel/Netlify) et accès DNS.
+  > Stack livrée : Astro 7 (pages 100 % pré-rendues en HTML, adaptateur Vercel pour l'API du formulaire uniquement), projet dans `site/` (voir `site/README.md`). Hébergement : Vercel (dépôt GitHub `uimaxence/FenetreLuz`, Root Directory `site`). Reste : accès DNS et variables SMTP sur Vercel.
 - [ ] Intégration du design validé
   > v1 intégrée (92 pages générées), en attente de validation DA par Benoît/Élodie (section 4). Captures et corrections faites sur desktop 1440 px et mobile 390 px.
 - [x] Gabarit pages prestations (répété par marque/gamme)

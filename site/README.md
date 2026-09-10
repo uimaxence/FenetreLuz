@@ -9,7 +9,7 @@ cd site
 npm install
 npm run dev        # http://localhost:4321
 npm run build      # génère dist/ (client statique + serveur Node pour l'API du formulaire)
-npm run preview    # ou : node dist/server/entry.mjs
+vercel build && vercel deploy --prebuilt   # aperçu déployé (astro preview n'est pas pris en charge par l'adaptateur Vercel)
 npm run check      # vérification TypeScript / Astro
 npm run photos     # (re)génère src/assets/photos depuis ../assets/PHOTOS SITE LUZ
 ```
@@ -21,7 +21,7 @@ Prérequis : Node ≥ 22.12, Python 3 + Pillow pour `npm run photos`.
 | Sujet | Choix |
 |---|---|
 | Framework | Astro 7, `output: 'static'` — toutes les pages sont pré-rendues. Seule `/api/devis/` est servie par Node (`prerender = false`). |
-| Adaptateur | `@astrojs/node` (standalone). Remplaçable par `@astrojs/vercel` / `@astrojs/netlify` selon l'hébergeur ; les pages restent statiques. |
+| Adaptateur | `@astrojs/vercel` : pages statiques + `/api/devis/` en fonction serverless. Sur Vercel, régler **Root Directory = `site`** (sinon le `vercel.json` à la racine du dépôt prend le relais). Variables SMTP à déclarer dans le projet Vercel (voir `.env.example`). |
 | Images | `astro:assets` (`<Picture>`), WebP + JPEG de secours, `srcset` multi-largeurs, lazy loading sauf LCP (`fetchpriority="high"`). Les sources sont normalisées à 2 200 px max et **sans EXIF** (GPS supprimé) par `scripts/prepare-photos.py`. |
 | Polices | Auto-hébergées via Fontsource : Barlow Condensed 700 (titres), Barlow 500/600 (UI), Source Sans 3 variable (texte). Le mot-symbole « LUZ » est un tracé SVG (aucune police de logo à charger). |
 | Styles | CSS natif, variables dans `src/styles/global.css`, styles scopés par composant. Palette dérivée du site actuel (vert profond `#154418`, citron `#D4DC3F`, CTA orange `#EE4E28`, logo `#009639`). |
