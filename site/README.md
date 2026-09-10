@@ -47,6 +47,7 @@ site/
     ├── layouts/Base.astro    <head> SEO, JSON-LD, polices, scripts
     ├── pages/                routes (voir ci-dessous)
     ├── scripts/main.ts       interactions (reveal, compteurs, menus, filtres, formulaire, galerie)
+    ├── integrations/vercelRedirects.mjs  corrige les 301 de l'adaptateur Vercel (slash final optionnel, avant la 308)
     └── styles/global.css     tokens, typographie, boutons, motifs rayons, animations
 ```
 

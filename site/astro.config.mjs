@@ -2,12 +2,14 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
+import vercelRedirects from './src/integrations/vercelRedirects.mjs';
 
 /**
  * Site vitrine Fenêtres & Vérandas LUZ
  * - Rendu statique (HTML généré au build) pour toutes les pages → SEO + performance.
  * - L'adaptateur Vercel ne sert qu'à la route API du formulaire (src/pages/api/devis.ts, prerender=false),
  *   déployée en fonction serverless. Le build écrit dans .vercel/output/ (Build Output API).
+ * - `vercelRedirects` corrige les 301 de l'adaptateur incompatibles avec trailingSlash 'always' (voir src/integrations).
  */
 export default defineConfig({
   site: 'https://www.fenetresluz.com',
@@ -16,6 +18,7 @@ export default defineConfig({
   compressHTML: true,
   adapter: vercel(),
   integrations: [
+    vercelRedirects(),
     sitemap({
       filter: (page) =>
         !page.includes('/api/') &&
