@@ -1,0 +1,11 @@
+{
+  "_doc": "Configuration manuelle des fiches Google Business. placeId : identifiant Google de la fiche (node scripts/fetch-avis.mjs --find \"LUZ Jonzac\" pour le trouver). reviewUrl : lien court « laisser un avis » copié depuis la fiche (bouton « Demander des avis »), utilisé pour les boutons et les QR codes ; laissé vide, le lien fourni par l'API est utilisé.",
+  "jonzac": {
+    "placeId": "ChIJOVK27AJQAEgRUyL_6Nvdprc",
+    "reviewUrl": ""
+  },
+  "royan": {
+    "placeId": "ChIJScwnEDRxAUgRWKg9bzBRsOE",
+    "reviewUrl": ""
+  }
+}

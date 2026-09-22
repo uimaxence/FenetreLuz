@@ -183,7 +183,7 @@ const jsonLd = [
       <SectionHead eyebrow="Avis clients" title={`Les avis Google de l’agence de ${a.city}`} row>
         <a class="link-arrow" href="/avis/">Tous les avis <Icon id="arrow" /></a>
       </SectionHead>
-      <ReviewsBlock limit={3} />
+      <ReviewsBlock limit={3} agence={a.slug} />
     </div>
   </section>
 

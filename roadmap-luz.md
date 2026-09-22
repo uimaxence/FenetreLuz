@@ -92,6 +92,7 @@ Tâches :
 - [x] Formulaire de contact + demande de devis
   > Formulaire unique (projet + secteur + coordonnées, RGPD, anti-robot) sur /devis/, /contact/, /depannage/ et pages agences. Endpoint `/api/devis/` : envoi SMTP dès que `.env` est renseigné (sinon journalisation).
 - [ ] Intégration des avis Google (2 fiches)
+  > Câblage en place (22 sept. 2026) : `site/scripts/fetch-avis.mjs` interroge l'API Places (New) avec `GOOGLE_PLACES_API_KEY` et écrit `src/data/avis-google.json` (note, nombre, 5 avis max par fiche) ; lancé par `npm run avis` et avant chaque build (`prebuild`). Place ID et liens « laisser un avis » à renseigner dans `src/data/google-fiches.json` ; verbatims supplémentaires dans `avisManuels` (`avis.ts`). Reste : clé API + Place ID + liens, variable Vercel.
   > Bloc et page /avis/ prêts, aucun avis inventé : renseigner `site/src/data/avis.ts` (liens des fiches, note, verbatims réels) une fois l'accès aux fiches confirmé.
 - [x] Page financement ARKEA
   > Section dédiée sur /aides-financement/ avec mentions légales crédit — conditions précises et exemple représentatif à récupérer (section 1).

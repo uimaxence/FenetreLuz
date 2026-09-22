@@ -1,16 +1,18 @@
 ---
 /**
- * Bloc avis Google. N'affiche que des données réelles (src/data/avis.ts) ;
+ * Bloc avis Google. N'affiche que des données réelles (src/data/avis.ts : API Places + verbatims manuels) ;
  * tant que les fiches ne sont pas renseignées, affiche les accès aux fiches et un emplacement de widget.
  */
 import Icon from './Icon.astro';
-import { avis, fichesGoogle } from '../data/avis';
+import { avis, fichesGoogle, type AgenceSlug } from '../data/avis';
 interface Props {
   limit?: number;
+  /** Restreint le bloc à une agence (page agence) ; par défaut, les deux fiches et tous les avis. */
+  agence?: AgenceSlug;
 }
-const { limit = 3 } = Astro.props;
-const list = avis.slice(0, limit);
-const fiches = [fichesGoogle.jonzac, fichesGoogle.royan];
+const { limit = 3, agence } = Astro.props;
+const list = (agence ? avis.filter((a) => a.agence === agence) : avis).slice(0, limit);
+const fiches = agence ? [fichesGoogle[agence]] : [fichesGoogle.jonzac, fichesGoogle.royan];
 const fmt = (d: string) => new Date(d).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
 ---
 
