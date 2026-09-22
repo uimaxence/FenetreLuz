@@ -1,0 +1,126 @@
+{
+  "_doc": "Fichier GÉNÉRÉ par `npm run avis` (scripts/fetch-avis.mjs) : ne pas éditer à la main. Regénéré avant chaque build si GOOGLE_PLACES_API_KEY est définie.",
+  "fetchedAt": "2026-09-22T09:38:52.046Z",
+  "fiches": {
+    "jonzac": {
+      "placeId": "ChIJOVK27AJQAEgRUyL_6Nvdprc",
+      "nom": "Fenêtres & Vérandas LUZ (anciennement Fenêtres PARTHENAY) - Concept Alu - JONZAC",
+      "note": 4.8,
+      "nombre": 153,
+      "url": "https://maps.google.com/?cid=13233508491651392083&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+      "writeAReviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x48005002ecb65239:0xb7a6dddbe8ff2253!12e1?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+      "avis": [
+        {
+          "id": "places/ChIJOVK27AJQAEgRUyL_6Nvdprc/reviews/Ci9DQUlRQUNvZENodHljRjlvT2todFdYQlVZWFZKTXkxc1YzTkJSVTVIUVY5U1kzYxAB",
+          "auteur": "Noelle Mercier",
+          "note": 5,
+          "date": "2026-07-30T16:04:07.674945219Z",
+          "texte": "Rapidité, efficacité..tout ce que l'on demande à une entreprise !\nEn bonus, le technicien ( M.Martin Sébastien ) est une personne compétente, réactive qui tient au courant spontanément le client de l'avancée de la commande, des travaux ....etc.\nMerci beaucoup",
+          "agence": "jonzac",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2todFdYQlVZWFZKTXkxc1YzTkJSVTVIUVY5U1kzYxAB!2m1!1s0x48005002ecb65239:0xb7a6dddbe8ff2253"
+        },
+        {
+          "id": "places/ChIJOVK27AJQAEgRUyL_6Nvdprc/reviews/Ci9DQUlRQUNvZENodHljRjlvT2xZM05qbFZSa3REU1RsQ2VXRXhSRTl5VDNkclkwRRAB",
+          "auteur": "stef Laubreton",
+          "note": 5,
+          "date": "2026-06-05T14:55:17.309574374Z",
+          "texte": "accueil en magasin, visite à domicile, intervention et installation du matériel, réponses aux questions d'après vente, tout est parfait!\nMerci 👍😊",
+          "agence": "jonzac",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2xZM05qbFZSa3REU1RsQ2VXRXhSRTl5VDNkclkwRRAB!2m1!1s0x48005002ecb65239:0xb7a6dddbe8ff2253"
+        },
+        {
+          "id": "places/ChIJOVK27AJQAEgRUyL_6Nvdprc/reviews/Ci9DQUlRQUNvZENodHljRjlvT25jellucE5iM05zUmtWMlNsUlRRbTl1VldOdk5FRRAB",
+          "auteur": "Claude Leone",
+          "note": 5,
+          "date": "2026-04-28T08:41:16.787566431Z",
+          "texte": "Changement d’une porte d’entrée. Travaux effectués ce professionnel ne fait pas de rénovation pour changer une porte d’entrée il remplace l’intégralité la porte et le châssis ce qui a fait la différence pour mon choix en tant que novice la commerciale m’a bien expliqué pourquoi.\nLe technicien poseur a parfaitement effectué la prestation avec une grande minutie et professionnalisme laissant un chantier nickel suite à la pose. Je recommande ce professionnel.",
+          "agence": "jonzac",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25jellucE5iM05zUmtWMlNsUlRRbTl1VldOdk5FRRAB!2m1!1s0x48005002ecb65239:0xb7a6dddbe8ff2253"
+        },
+        {
+          "id": "places/ChIJOVK27AJQAEgRUyL_6Nvdprc/reviews/Ci9DQUlRQUNvZENodHljRjlvT21WWk1FMXhaa1pNWldONWFtWTJPVEpOV1hSWVZVRRAB",
+          "auteur": "Anne SOLER",
+          "note": 5,
+          "date": "2026-02-10T09:35:29.841526338Z",
+          "texte": "En panne de portail électrique et une porte fenêtre qui ne ferme plus à clé… nous étions dépannés moins de deux heures après être passés au magasin signaler notre problème. La Société LUZ est très professionnelle, le personnel est sympathique et réactif. C’est bien agréable d avoir des artisans de confiance.",
+          "agence": "jonzac",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21WWk1FMXhaa1pNWldONWFtWTJPVEpOV1hSWVZVRRAB!2m1!1s0x48005002ecb65239:0xb7a6dddbe8ff2253"
+        },
+        {
+          "id": "places/ChIJOVK27AJQAEgRUyL_6Nvdprc/reviews/Ci9DQUlRQUNvZENodHljRjlvT25wNmMxTjZNR3RrYzFSVFlsSTBNVmRsVWxjdE5YYxAB",
+          "auteur": "John DOE",
+          "note": 5,
+          "date": "2026-02-09T09:53:42.631924671Z",
+          "texte": "Nous avons sollicité la société Luz quelques années auparavant pour des portes de garage et sommes entièrement satisfaits de la prestation (contact commercial, affinage du devis, pose).\n\nPlus récemment, nous avons demandé de l'assistance concernant l'étanchéité d'une porte d'entrée existante : la société Luz s'est déplacée là où d'autres sociétés refusaient et nous a permis d'identifier avec efficacité le problème afin qu'il puisse être résolu.\n\nMerci beaucoup !",
+          "agence": "jonzac",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25wNmMxTjZNR3RrYzFSVFlsSTBNVmRsVWxjdE5YYxAB!2m1!1s0x48005002ecb65239:0xb7a6dddbe8ff2253"
+        }
+      ]
+    },
+    "royan": {
+      "placeId": "ChIJScwnEDRxAUgRWKg9bzBRsOE",
+      "nom": "Fenêtres & Vérandas LUZ",
+      "note": 4.9,
+      "nombre": 60,
+      "url": "https://maps.google.com/?cid=16262587522901452888&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+      "writeAReviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x480171341027cc49:0xe1b051306f3da858!12e1?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
+      "avis": [
+        {
+          "id": "places/ChIJScwnEDRxAUgRWKg9bzBRsOE/reviews/Ci9DQUlRQUNvZENodHljRjlvT2pabk5EUjBTVmxWVkRFdE5GbzVWVWRzZGw5U1QxRRAB",
+          "auteur": "Benoit BOULOUX",
+          "note": 5,
+          "date": "2026-07-20T07:14:30.976331540Z",
+          "texte": "Nous avons fais confiance à LUZ pour notre projet : 1 huisserie de garage et 4 volets.\nAu final, des produits de qualité (JANNEAU, SIB) très bien posés par des professionnels qualifiés, attachés à la finition de leur chantier.\nUne équipe commerciale au top, soucieuse en permanence de la satisfaction du client.\nNous recommandons vivement cette entreprise et referons appel à eux sans aucune hésitation.",
+          "agence": "royan",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2pabk5EUjBTVmxWVkRFdE5GbzVWVWRzZGw5U1QxRRAB!2m1!1s0x480171341027cc49:0xe1b051306f3da858"
+        },
+        {
+          "id": "places/ChIJScwnEDRxAUgRWKg9bzBRsOE/reviews/Ci9DQUlRQUNvZENodHljRjlvT25STVYwUmxRamx0WWxwaWVteFpPVkI1WTBSQ2NXYxAB",
+          "auteur": "Maite Carro",
+          "note": 5,
+          "date": "2026-06-25T08:50:32.935544434Z",
+          "texte": "Très satisfaite de cette entreprise. De la commande à la pose rien à dire. Tout s est passé à merveille. Très bon contact avec Élodie la commerciale et Loris poseur très compétent. Je recommande vivement. Travail soigné",
+          "agence": "royan",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT25STVYwUmxRamx0WWxwaWVteFpPVkI1WTBSQ2NXYxAB!2m1!1s0x480171341027cc49:0xe1b051306f3da858"
+        },
+        {
+          "id": "places/ChIJScwnEDRxAUgRWKg9bzBRsOE/reviews/Ci9DQUlRQUNvZENodHljRjlvT21kWGVHczNjV1ZVYVVka01sVkxNSEZTYW5ObVVtYxAB",
+          "auteur": "Francine Gillois",
+          "note": 5,
+          "date": "2026-06-20T11:30:02.493340344Z",
+          "texte": "Très  satisfait de notre commande et du travail de pose de notre porte d'entrée.  Je recommande l’entreprise Luz sans problème.\nLes poseurs étaient très professionnels",
+          "agence": "royan",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT21kWGVHczNjV1ZVYVVka01sVkxNSEZTYW5ObVVtYxAB!2m1!1s0x480171341027cc49:0xe1b051306f3da858"
+        },
+        {
+          "id": "places/ChIJScwnEDRxAUgRWKg9bzBRsOE/reviews/Ci9DQUlRQUNvZENodHljRjlvT2pCdk5GWk5jR05XTFRJeFduRlRkbTlSUzBOSWIwRRAB",
+          "auteur": "Raphael BARDAN",
+          "note": 5,
+          "date": "2026-06-05T16:41:34.029041821Z",
+          "texte": "J'ai fait appel à cette entreprise dans le cadre de mon activité professionnelle. J'ai un client qui m'a sollicité pour la réalisation d'une pergola. Ayant entendu parler de Fenêtres & Vérandas LUZ, j'ai fait appel à leur service. Mon client est super content ! N'hésitez pas à les contacter ils ont toute ma confiance.",
+          "agence": "royan",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2pCdk5GWk5jR05XTFRJeFduRlRkbTlSUzBOSWIwRRAB!2m1!1s0x480171341027cc49:0xe1b051306f3da858"
+        },
+        {
+          "id": "places/ChIJScwnEDRxAUgRWKg9bzBRsOE/reviews/Ci9DQUlRQUNvZENodHljRjlvT2xNMmRUVXdNa3hQUzFWM1ZHZFBSRXQyZW14dlZWRRAB",
+          "auteur": "François avel",
+          "note": 2,
+          "date": "2026-05-31T10:27:49.838176386Z",
+          "texte": "Très déçu par la prestation de cette société, manque de finitions, travail pas soigné, à fuir, surtout par  rapport aux prix ,portes fenêtres qui ne ferme plus, et j en passe.\nChantier mettoyé, lame de cutter qui traîne et vis",
+          "agence": "royan",
+          "source": "google",
+          "url": "https://www.google.com/maps/reviews/data=!4m6!14m5!1m4!2m3!1sCi9DQUlRQUNvZENodHljRjlvT2xNMmRUVXdNa3hQUzFWM1ZHZFBSRXQyZW14dlZWRRAB!2m1!1s0x480171341027cc49:0xe1b051306f3da858"
+        }
+      ]
+    }
+  }
+}

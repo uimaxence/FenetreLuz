@@ -6,11 +6,13 @@
   "description": "Site vitrine Fenêtres & Vérandas LUZ — menuiserie, fenêtres, vérandas, portails en Charente-Maritime",
   "scripts": {
     "dev": "astro dev",
+    "prebuild": "node scripts/fetch-avis.mjs",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
     "photos": "python3 scripts/prepare-photos.py",
-    "assets": "python3 scripts/prepare-gen-logos.py"
+    "assets": "python3 scripts/prepare-gen-logos.py",
+    "avis": "node scripts/fetch-avis.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",
