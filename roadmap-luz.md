@@ -23,7 +23,9 @@
   > Rédigés (v1) dans `site/src/data/realisations.ts` à partir des noms de fichiers — à faire relire par Élodie/Benoît (coloris, gammes, communes).
 - [x] Sélectionner les photos hero (accueil + pages prestations)
   > Fait — accueil : fondu enchaîné de 3 photos (pergola Oléron, maison charentaise Saint-Genis, double pergola jonzacais — la photo piscine au ciel gris a été écartée) ; fenêtres : longère d'Archiac ; portes : porte verte de Saujon ; pergolas : double pergola jonzacais ; portails : Étaules ; volets : maison de maître EHRET ; stores : store Hermès Royan ; carports : Royan ; motorisation : portail Semussac. Braseros sans photo (visuel à générer, voir `IMAGES-A-GENERER.md`).
-- [ ] Récupérer les photos d'équipe
+  > Proposition v2 (`/v2/`, voir §4) : hero statique sur la double pergola du pays jonzacais (photo la plus lumineuse du dossier).
+- [x] Récupérer les photos d'équipe
+  > Reçues dans le Drive d'Élodie (11 portraits studio, groupe bureau, équipe commerciale, showroom, 3 photos de pose, 2 certificats). Bilan d'utilisation : les 118 photos du Drive sont en local et 116 sont intégrées (les 2 photos intérieures sombres des coulissants de Pons ont été écartées). Il n'y a pas de photo non récupérée : la remarque de Benoît (« il y en avait davantage ») vient du fait que l'accueil v1 n'en montre qu'une dizaine. Manque toujours le portrait d'Olivier Michaud (Royan).
 - [ ] Confirmer les horaires définitifs des deux agences avant mise en ligne (Benoît a indiqué qu'ils pouvaient évoluer)
 - [x] Extraire les infos légales du Kbis (SIRET, forme juridique, RCS, capital)
   > Fait à partir de l'attestation INPI du 07/09/2026 : SARL FENETRES LUZ, capital 5 000 €, SIREN 533 386 132, SIRET siège …00039 (Saint-Germain-de-Lusignan) et Breuillet …00021, APE 4332A, immatriculation 21/07/2011, TVA FR42533386132. Intégré dans `site/src/data/site.ts`, /mentions-legales/ et le Schema Organization. À confirmer par Benoît : greffe du RCS (Saintes ?) et la mention « plus de 20 ans » (immatriculation en 2011, fonds acheté).
@@ -46,6 +48,7 @@ D'après la carte cantonale fournie par Benoît, 3 zones sont identifiées :
 
 Tâches :
 - [ ] Faire valider par Benoît la liste précise des communes par zone (la carte donne les cantons, pas la liste commune par commune)
+  > Première version codée dans la carte interactive de `/v2/` (`site/src/components/ZonesMap.astro`, données `site/src/data/zones-map.json` générées par `site/scripts/build-zones-map.py`) : zones approchées par intercommunalité — Jonzac = CC Haute-Saintonge (129 communes), Royan = CARA + Oléron + Bassin de Marennes (47), développement = CA Saintes, Cœur de Saintonge, Gémozac, Grand Cognac, 4B Sud Charente, Rouillacais (177). À ajuster commune par commune avec Benoît (modifier `ZONES` dans le script).
 - [ ] Prioriser les communes "cœur de zone" Jonzac pour les pages villes
 - [ ] Prioriser les communes "cœur de zone" Royan pour les pages villes
 - [ ] Lister les communes de la zone en développement à cibler en SEO (sans agence physique dans un premier temps — vocabulaire "intervient à" plutôt que "agence à")
@@ -85,6 +88,8 @@ Tâches :
   > Stack livrée : Astro 7 (pages 100 % pré-rendues en HTML, adaptateur Vercel pour l'API du formulaire uniquement), projet dans `site/` (voir `site/README.md`). Hébergement : Vercel (dépôt GitHub `uimaxence/FenetreLuz`, Root Directory `site`). Reste : accès DNS et variables SMTP sur Vercel.
 - [ ] Intégration du design validé
   > v1 intégrée (92 pages générées), en attente de validation DA par Benoît/Élodie (section 4). Captures et corrections faites sur desktop 1440 px et mobile 390 px.
+  > Premier retour de Benoît (25 septembre 2026) : base validée ; demandes = logo officiel repris tel quel, plus d'humain (photos d'équipe), zone d'intervention sous forme de carte cliquable (comme Fenêtres sur Loire), plus de photos de chantiers. Réponse : page `/v2/` (non indexée, hors sitemap) = proposition de nouvel accueil avec hero photo statique, carte « équipe » dans le hero, section équipe (mosaïque + 12 portraits + interlocuteurs), mur de 9 chantiers, carte interactive des zones. À présenter en visio ; si validée, remplacer `index.astro` et supprimer `/v2/`.
+- [ ] Reprendre le logo officiel tel quel (remarque de Benoît : le mot-symbole vectorisé n'est pas fidèle) — demander le PDF vectoriel ou reconstruire à partir de `assets/logo.png`
 - [x] Gabarit pages prestations (répété par marque/gamme)
   > `site/src/pages/prestations/[slug].astro` piloté par `src/data/prestations.ts` (10 pages publiées, terrasses-bois en brouillon).
 - [x] Gabarit pages zones/villes
