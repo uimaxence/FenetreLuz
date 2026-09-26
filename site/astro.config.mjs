@@ -24,7 +24,8 @@ export default defineConfig({
         !page.includes('/api/') &&
         !page.includes('/mentions-legales/') &&
         !page.includes('/politique-confidentialite/') &&
-        !page.includes('/devis/merci/'),
+        !page.includes('/devis/merci/') &&
+        !page.includes('/v2/'), // proposition de refonte de l'accueil, non indexée
       changefreq: 'monthly',
       priority: 0.7,
       serialize(item) {
