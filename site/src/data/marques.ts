@@ -17,9 +17,9 @@ export const marques: Marque[] = [
     name: 'MéO',
     label: 'Menuisier d’Excellence MéO',
     categorie: 'Fenêtres & portes d’entrée bois-alu',
-    produits: ['Fenêtres mixtes bois-aluminium', 'Portes d’entrée (10 gammes, 74 modèles)', 'Portes-fenêtres et baies', 'Murs-rideaux bois-alu'],
+    produits: ['Fenêtres mixtes bois-aluminium', 'Portes d’entrée bois-alu (82 modèles, configurateur en ligne)', 'Portes-fenêtres et baies coulissantes', 'Verrières et murs-rideaux bois-alu', 'MéO Connect : baie motorisée, volets et poignée connectés'],
     description:
-      'Fabricant français de menuiseries haut de gamme, MéO associe la chaleur du bois à l’intérieur et la résistance de l’aluminium à l’extérieur. LUZ fait partie du réseau des Menuisiers d’Excellence MéO : nos métreurs et poseurs sont formés par le fabricant.',
+      'Fabricant français de menuiseries haut de gamme, MéO associe la chaleur du bois à l’intérieur et la résistance de l’aluminium à l’extérieur. LUZ fait partie du Club des Menuisiers d’Excellence MéO : nos métreurs et poseurs sont formés par le fabricant, et nos clients bénéficient de l’extension de garantie MéO à 15 ans.',
     origine: 'Fabrication française',
     prestations: ['fenetres', 'portes-entree'],
     principale: true,

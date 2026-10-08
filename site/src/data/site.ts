@@ -65,6 +65,7 @@ export const nav = {
     entreprise: [
       { label: 'À propos de LUZ', href: '/a-propos/' },
       { label: 'Nos marques partenaires', href: '/marques-partenaires/' },
+      { label: 'Menuisier d’Excellence MéO', href: '/marques-partenaires/#menuisier-excellence-meo' },
       { label: 'Partenariats & engagements', href: '/partenariats-engagements/' },
       { label: 'Avis clients', href: '/avis/' },
       { label: 'Conseils & guides', href: '/conseils/' },

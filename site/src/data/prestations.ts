@@ -142,12 +142,12 @@ export const prestations: Prestation[] = [
     metaDescription:
       'Porte d’entrée sur mesure MéO et Janneau posée à Jonzac, Royan, Saintes et en Charente-Maritime : aluminium, bois-alu, PVC, modèles contemporains ou traditionnels, sécurité et isolation. Devis gratuit.',
     icon: 'porte',
-    card: 'Plus de 370 modèles MéO et Janneau, du contemporain vitré à la porte cintrée traditionnelle, sur mesure.',
+    card: 'Plus de 380 modèles MéO et Janneau, du contemporain vitré à la porte cintrée traditionnelle, sur mesure.',
     lead: 'La porte d’entrée donne le ton de votre maison et protège ce qu’il y a derrière. Isolation, sécurité, esthétique : nous la dessinons avec vous parmi les gammes MéO et Janneau, puis nous la posons.',
     hero: { real: 'porte-entree-meo-saujon' },
     facts: [
       { label: 'Matériaux', value: 'Alu, bois-alu, bois, PVC, acier' },
-      { label: 'Modèles', value: '+370 modèles sur mesure' },
+      { label: 'Modèles', value: '+380 modèles sur mesure' },
       { label: 'Sécurité', value: 'Serrure multipoints, vitrage feuilleté' },
       { label: 'Aides', value: 'TVA 5,5 % (porte isolante)' },
     ],
@@ -172,7 +172,7 @@ export const prestations: Prestation[] = [
       },
     ],
     gammes: [
-      { title: 'Portes MéO', marque: 'MéO', text: '10 gammes et 74 modèles : Ruisseau, Fiction, Phèdre, Cybèle, Manoir, Apparence, Rivière… en bois-alu ou aluminium, avec vitrages et ferrages haut de gamme.' },
+      { title: 'Portes MéO', marque: 'MéO', text: '82 modèles pleins, vitrés ou semi-vitrés en bois-aluminium, avec vitrages et ferrages haut de gamme. À composer en ligne avec le configurateur MéO, puis à chiffrer avec nous.' },
       { title: 'Portes Janneau', marque: 'Janneau', text: 'Plus de 300 portes en aluminium, PVC ou bois, contemporaines ou classiques, configurables (couleur, vitrage, tierce, semi-fixe).' },
     ],
     marques: ['meo', 'janneau'],

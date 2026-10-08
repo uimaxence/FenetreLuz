@@ -1,0 +1,208 @@
+---
+/**
+ * Bloc « Menuisier d'Excellence MéO » : le label, la gamme bois-alu, le
+ * configurateur de porte d'entrée et l'extension de garantie.
+ * - accent="configurateur" (portes d'entrée) : le configurateur en premier ;
+ * - accent="gamme" (fenêtres, page marques) : la gamme en premier.
+ */
+import type { ImageMetadata } from 'astro';
+import Icon from './Icon.astro';
+import Rays from './Rays.astro';
+import { meo } from '../data/meo';
+import { prestationBySlug } from '../data/prestations';
+
+interface Props {
+  accent?: 'configurateur' | 'gamme';
+  /** Lien vers la fiche MéO de la page marques (masqué sur cette page). */
+  lienMarques?: boolean;
+  id?: string;
+}
+const { accent = 'gamme', lienMarques = true, id } = Astro.props;
+
+const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/certifications/*.{svg,png}', { eager: true });
+const logo = Object.entries(logos).find(([p]) => /\/meo\.(svg|png)$/i.test(p))?.[1].default;
+---
+
+<section class="section meo" id={id}>
+  <div class="container">
+    <div class="meo__grid">
+      <div class="meo__intro reveal">
+        <p class="eyebrow"><Rays /> Menuisier d’Excellence MéO</p>
+        <h2>{accent === 'configurateur' ? 'Composez votre porte d’entrée MéO en ligne' : 'Nos menuiseries bois-aluminium MéO'}</h2>
+        <p class="meo__text">{meo.presentation}</p>
+        <p class="meo__text">
+          LUZ fait partie du Club des Menuisiers d’Excellence MéO, créé en {meo.clubDepuis} : nos métreurs et nos poseurs sont formés par le fabricant, et nos clients
+          ont droit à l’extension de garantie réservée au Club.
+        </p>
+        <ul class="list-rays meo__engagements">
+          {meo.engagements.map((e) => <li>{e}</li>)}
+        </ul>
+        {lienMarques && (
+          <a class="link-arrow" href="/marques-partenaires/#meo">
+            MéO dans nos marques partenaires <Icon id="arrow" />
+          </a>
+        )}
+      </div>
+
+      <div class="meo__side">
+        <div class:list={['meo__card', 'meo__card--config', 'reveal', { 'meo__card--first': accent === 'configurateur' }]}>
+          {logo && <img class="meo__logo" src={logo.src} width={logo.width} height={logo.height} alt="MéO" loading="lazy" decoding="async" />}
+          <span class="badge badge--lime">Configurateur de porte d’entrée</span>
+          <h3>Dessinez votre porte, voyez-la sur votre façade</h3>
+          <p>
+            Forme, couleurs intérieure et extérieure, vitrage, poignée : composez votre porte parmi les 82 modèles MéO, simulez-la sur la photo de votre maison et
+            téléchargez sa fiche. Nous la chiffrons ensuite avec la pose.
+          </p>
+          <div class="meo__actions">
+            <a class="btn btn--primary" href={meo.configurateur} target="_blank" rel="noopener">Ouvrir le configurateur <Icon id="arrow-up-right" /></a>
+            <a class="btn btn--outline" href="/devis/">Chiffrer ma porte</a>
+          </div>
+        </div>
+
+        <div class:list={['meo__card', 'reveal', { 'meo__card--first': accent === 'gamme' }]} style="--d:80ms">
+          <span class="badge">La gamme</span>
+          <ul class="meo__gamme">
+            {meo.gamme.map((g) => {
+              const p = g.prestation ? prestationBySlug(g.prestation) : undefined;
+              return (
+                <li>
+                  <strong>{g.nom}</strong>
+                  <span>{g.texte}</span>
+                  {p && !p.draft && (
+                    <a class="link-arrow" href={`/prestations/${p.slug}/`}>
+                      {p.nav} <Icon id="arrow" />
+                    </a>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div class="meo__card meo__card--garantie reveal" style="--d:160ms">
+          <span class="badge badge--lime"><Icon id="check" /> Extension de garantie {meo.garantie.duree}</span>
+          <p>{meo.garantie.texte}</p>
+          <p class="meo__small">{meo.garantie.activation}</p>
+          <p class="meo__links">
+            <a class="link-arrow" href={meo.extensionGarantie} target="_blank" rel="noopener">Activer sur le site de MéO <Icon id="arrow-up-right" /></a>
+            <a class="link-arrow" href={meo.conditionsGarantie} target="_blank" rel="noopener">Lire les conditions <Icon id="arrow-up-right" /></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .meo {
+    background: var(--stone-50);
+    border-top: 1px solid var(--stone-200);
+    border-bottom: 1px solid var(--stone-200);
+  }
+  .meo__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 2.5rem 4rem;
+    align-items: start;
+  }
+  .meo__intro h2 {
+    margin-bottom: 1rem;
+  }
+  .meo__text {
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .meo__engagements {
+    margin: 1.25rem 0 1.5rem;
+  }
+  .meo__side {
+    display: grid;
+    gap: 1rem;
+  }
+  .meo__card {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.6rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+  }
+  .meo__card--first {
+    order: -1;
+  }
+  .meo__card .badge {
+    justify-self: start;
+  }
+  .meo__card h3 {
+    font-size: 1.35rem;
+    margin: 0;
+  }
+  .meo__card p {
+    margin: 0;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .meo__logo {
+    width: 64px;
+    height: auto;
+    justify-self: start;
+  }
+  .meo__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.25rem;
+  }
+  .meo__gamme {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .meo__gamme li {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--stone-200);
+  }
+  .meo__gamme li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .meo__gamme strong {
+    font-family: var(--font-ui);
+    color: var(--green-900);
+  }
+  .meo__gamme span {
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .meo__gamme .link-arrow {
+    font-size: 0.85rem;
+    margin-top: 0.15rem;
+  }
+  .meo__card--garantie {
+    background: var(--green-900);
+    border-color: var(--green-900);
+  }
+  .meo__card--garantie p {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .meo__small {
+    font-size: 0.9rem;
+  }
+  .meo__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+  .meo__card--garantie .link-arrow {
+    color: var(--lime);
+  }
+  @media (max-width: 900px) {
+    .meo__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
