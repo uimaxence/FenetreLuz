@@ -89,7 +89,8 @@ Tâches :
 - [ ] Intégration du design validé
   > v1 intégrée (92 pages générées), en attente de validation DA par Benoît/Élodie (section 4). Captures et corrections faites sur desktop 1440 px et mobile 390 px.
   > Premier retour de Benoît (25 septembre 2026) : base validée ; demandes = logo officiel repris tel quel, plus d'humain (photos d'équipe), zone d'intervention sous forme de carte cliquable (comme Fenêtres sur Loire), plus de photos de chantiers. Réponse : page `/v2/` (non indexée, hors sitemap) = proposition de nouvel accueil avec hero photo statique, carte « équipe » dans le hero, section équipe (mosaïque + 12 portraits + interlocuteurs), mur de 9 chantiers, carte interactive des zones. À présenter en visio ; si validée, remplacer `index.astro` et supprimer `/v2/`.
-- [ ] Reprendre le logo officiel tel quel (remarque de Benoît : le mot-symbole vectorisé n'est pas fidèle) — demander le PDF vectoriel ou reconstruire à partir de `assets/logo.png`
+- [x] Reprendre le logo officiel tel quel (remarque de Benoît : le mot-symbole vectorisé n'est pas fidèle) — demander le PDF vectoriel ou reconstruire à partir de `assets/logo.png`
+  > Fait le 8 octobre 2026 avec le fichier fourni par Benoît (`site/src/assets/logos/logo luz.png`, blanc sur transparent, 160 px) : recadré en `logo-luz.png` et affiché par `Logo.astro` en masque CSS (vert #009639 dans le header, blanc dans le footer). `public/logo-luz.png` (Schema.org) régénéré en vert sur blanc. Limite : source bitmap de 110 × 158 px, légèrement douce en Retina dans le footer — demander un export vectoriel (SVG/PDF) ou un PNG ≥ 600 px pour les grands formats, l'image Open Graph et les favicons (toujours sur le motif revectorisé).
 - [x] Gabarit pages prestations (répété par marque/gamme)
   > `site/src/pages/prestations/[slug].astro` piloté par `src/data/prestations.ts` (10 pages publiées, terrasses-bois en brouillon).
 - [x] Gabarit pages zones/villes
