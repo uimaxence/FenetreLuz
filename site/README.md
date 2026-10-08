@@ -72,6 +72,7 @@ site/
 - **Un chantier** : ajouter les photos dans `assets/PHOTOS SITE LUZ/REALISATIONS …`, le mapping dans `scripts/prepare-photos.py`, lancer `npm run photos`, puis décrire le chantier dans `src/data/realisations.ts` (`photos` = nombre de photos).
 - **Un article** : nouveau fichier `src/content/conseils/<slug>.md` avec le frontmatter des articles existants.
 - **Avis Google** : `src/data/avis.ts` (liens des fiches + verbatims réels uniquement).
+- **MéO (Menuisier d'Excellence)** : `src/data/meo.ts` (configurateur portemeo.com, gamme, engagements, extension de garantie 15 ans). Le bloc `MeoBlock` s'affiche sur les prestations dont `marques` contient `meo` (fenêtres, portes d'entrée) et sur `/marques-partenaires/#menuisier-excellence-meo`.
 - **Visuels générés** : déposer `src/assets/gen/<id>.jpg` (identifiants et prompts dans `../IMAGES-A-GENERER.md`).
 - **Logos officiels** : déposer les SVG/PNG dans `src/assets/logos/{certifications,marques,partenaires}/<id>.svg` (liste dans `../LOGOS-A-RECUPERER.md`) ; ils remplacent automatiquement les badges typographiques.
 

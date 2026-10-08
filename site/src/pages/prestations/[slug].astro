@@ -10,6 +10,7 @@ import Faq from '../../components/Faq.astro';
 import Placeholder from '../../components/Placeholder.astro';
 import LocalCta from '../../components/LocalCta.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import MeoBlock from '../../components/MeoBlock.astro';
 import { prestationsPubliees, type Prestation } from '../../data/prestations';
 import { realisationsByPrestation } from '../../data/realisations';
 import { marqueBySlug } from '../../data/marques';
@@ -148,6 +149,8 @@ const jsonLd = [
       </section>
     )
   }
+
+  {p.marques.includes('meo') && <MeoBlock accent={p.slug === 'portes-entree' ? 'configurateur' : 'gamme'} />}
 
   {
     p.arguments.length > 0 && (
