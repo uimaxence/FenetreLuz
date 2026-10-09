@@ -7,8 +7,9 @@ Sources (téléchargées à l'exécution, mises en cache dans le dossier tempora
 - contours communaux + intercommunalité de rattachement : https://geo.api.gouv.fr
 - contours départementaux : https://france-geojson.gregoiredavid.fr
 
-Les 3 zones (historique Jonzac / actuelle Royan / en développement) suivent la carte cantonale
-fournie par Benoît (roadmap-luz.md §2), approchées par intercommunalité (EPCI). La liste des
+Les 2 zones (agence de Jonzac / agence de Royan) suivent la carte cantonale fournie par Benoît
+(roadmap-luz.md §2), approchées par intercommunalité (EPCI) ; l'ancienne zone « en développement »
+est répartie entre les deux agences (Saintes → Royan, Cognac → Jonzac) à sa demande. La liste des
 communes reste à faire valider commune par commune ; il suffit de modifier ZONES ci-dessous.
 
 Dépendance : shapely (pip install shapely).   Usage : python3 scripts/build-zones-map.py
@@ -30,15 +31,20 @@ CACHE.mkdir(exist_ok=True)
 
 # Zone -> codes EPCI (SIREN) — voir https://geo.api.gouv.fr/epcis?codeDepartement=17
 ZONES = {
-    "jonzac": ["200041523"],  # CC de la Haute-Saintonge (Jonzac, Archiac, Montendre, Montguyon, Mirambeau, Pons…)
-    "royan": ["241700640", "241700624", "241700699"],  # CA Royan Atlantique, CC Île d'Oléron, CC Bassin de Marennes
-    "dev": [
-        "200036473",  # CA Saintes Grandes Rives
-        "241700517",  # CC Cœur de Saintonge (Saint-Porchaire)
-        "241700632",  # CC Gémozac et Saintonge viticole
+    # Retour de Benoît (9 octobre 2026) : plus de « zone en développement », tout est rattaché à une agence.
+    "jonzac": [
+        "200041523",  # CC de la Haute-Saintonge (Jonzac, Archiac, Montendre, Montguyon, Mirambeau, Pons…)
         "200070514",  # CA Grand Cognac (Cognac, Jarnac, Châteauneuf, Segonzac)
         "200029734",  # CC des 4B Sud Charente (Barbezieux, Baignes)
         "241600303",  # CC du Rouillacais
+    ],
+    "royan": [
+        "241700640",  # CA Royan Atlantique
+        "241700624",  # CC de l'Île d'Oléron
+        "241700699",  # CC du Bassin de Marennes
+        "200036473",  # CA Saintes Grandes Rives
+        "241700517",  # CC Cœur de Saintonge (Saint-Porchaire)
+        "241700632",  # CC de Gémozac et de la Saintonge viticole
     ],
 }
 EPCI_TO_ZONE = {code: z for z, codes in ZONES.items() for code in codes}

@@ -28,7 +28,7 @@ export const croisees: Croisee[] = [
     h1: 'Véranda à Royan : votre pièce en plus face à l’océan',
     metaTitle: 'Véranda à Royan — Installateur Concept Alu certifié RGE | LUZ Royan',
     metaDescription:
-      'Véranda et extension aluminium à Royan, Saint-Georges-de-Didonne, Saint-Palais et Vaux-sur-Mer. Concessionnaire Concept Alu, conception 3D, pose par notre agence de Breuillet. Devis gratuit.',
+      'Véranda et extension aluminium à Royan, Saint-Georges-de-Didonne, Saint-Palais et Vaux-sur-Mer. Partenaire Concept Alu, conception 3D, pose par notre agence de Breuillet. Devis gratuit.',
     lead: 'À Royan et sur la Côte de Beauté, la véranda doit profiter de la lumière sans souffrir du vent et du sel. Notre agence de Breuillet conçoit et pose des vérandas et extensions Concept Alu adaptées au littoral.',
     sections: [
       {
@@ -41,7 +41,7 @@ export const croisees: Croisee[] = [
       {
         title: 'Un interlocuteur local',
         text: [
-          'Olivier Michaud, responsable de l’agence de Royan, vient chez vous pour l’étude, vous présente le projet en 3D et suit la pose réalisée par nos propres équipes. Le service après-vente est assuré depuis Breuillet.',
+          'Olivier Michaud, commercial de l’agence de Royan, vient chez vous pour l’étude, vous présente le projet en 3D et suit la pose réalisée par nos propres équipes. Le service après-vente est assuré depuis Breuillet.',
         ],
       },
     ],
@@ -99,10 +99,10 @@ export const croisees: Croisee[] = [
     ville: 'Royan',
     agence: 'royan',
     h1: 'Portail aluminium à Royan',
-    metaTitle: 'Portail alu à Royan — Portalier HORIZAL, motorisation, pose | LUZ Royan',
+    metaTitle: 'Portail alu à Royan — Portails HORIZAL, motorisation, pose | LUZ Royan',
     metaDescription:
       'Portail aluminium battant ou coulissant HORIZAL à Royan, Vaux-sur-Mer, Saint-Palais, Breuillet et Saujon : laquage Qualimarine, motorisation Somfy / DEA, clôtures assorties. Devis gratuit.',
-    lead: 'Un portail en bord de mer doit résister au sel avant tout. Portalier agréé HORIZAL, notre agence de Breuillet pose des portails aluminium assemblés sans soudure, laqués Qualimarine et motorisés, de Royan à La Tremblade.',
+    lead: 'Un portail en bord de mer doit résister au sel avant tout. Partenaire HORIZAL, notre agence de Breuillet pose des portails aluminium assemblés sans soudure, laqués Qualimarine et motorisés, de Royan à La Tremblade.',
     sections: [
       {
         title: 'Le bon portail pour une entrée royannaise',
@@ -132,7 +132,7 @@ export const croisees: Croisee[] = [
     ville: 'Royan',
     agence: 'royan',
     h1: 'Store banne et stores extérieurs à Royan',
-    metaTitle: 'Store banne à Royan — Storiste Soliso, pose & dépannage | LUZ Royan',
+    metaTitle: 'Store banne à Royan — Stores Soliso, pose & dépannage | LUZ Royan',
     metaDescription:
       'Store banne coffre, store vertical zip, moustiquaires et stores intérieurs à Royan, Saint-Georges-de-Didonne, Saint-Palais et Saujon. Expert Storiste Soliso, motorisation Somfy avec capteur vent. Devis gratuit.',
     lead: 'Ombre sur la terrasse à l’heure du déjeuner, toile à l’abri des embruns le reste du temps : à Royan, le store banne se choisit à coffre intégral et motorisé avec capteur de vent. Expert Storiste Soliso, notre agence de Breuillet vous conseille et pose.',
@@ -146,7 +146,7 @@ export const croisees: Croisee[] = [
       },
     ],
     points: [
-      { title: 'Expert Storiste', text: 'Formé par Soliso, fabricant français depuis 1947.' },
+      { title: 'Formés par Soliso', text: 'Fabricant français de stores depuis 1947.' },
       { title: 'Capteur vent', text: 'Indispensable sur le littoral, inclus dans nos motorisations.' },
       { title: 'Pose sur tout support', text: 'Pierre, parpaing, isolation extérieure, ossature bois.' },
       { title: 'Dépannage', text: 'Toiles, bras et moteurs remplacés sur tous stores.' },

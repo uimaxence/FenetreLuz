@@ -1,13 +1,13 @@
 /**
  * Chantiers LUZ. Les photos sont dans src/assets/photos/real/{slug}-{n}.jpg
  * (générées depuis les dossiers d'Élodie par scripts/prepare-photos.py).
- * zone : jonzac (Haute-Saintonge), royan (littoral), dev (Saintes / Cognac / Charente).
+ * zone : jonzac (Haute-Saintonge et Charente), royan (littoral, Marennes-Oléron et Saintonge de Saintes).
  */
 export type Realisation = {
   slug: string;
   title: string;
   ville: string;
-  zone: 'jonzac' | 'royan' | 'dev';
+  zone: 'jonzac' | 'royan';
   prestation: string; // slug prestation
   prestationLabel: string;
   marque: string;
@@ -318,7 +318,7 @@ export const realisations: Realisation[] = [
     slug: 'fenetres-pvc-petits-bois-pons',
     title: 'Fenêtres PVC à petits bois incorporés',
     ville: 'Pons',
-    zone: 'dev',
+    zone: 'jonzac',
     prestation: 'fenetres',
     prestationLabel: 'Fenêtres',
     marque: 'Janneau',
@@ -455,7 +455,7 @@ export const realisations: Realisation[] = [
     slug: 'porte-entree-meo-manoir-saintes',
     title: 'Porte d’entrée MéO modèle Manoir',
     ville: 'Saintes',
-    zone: 'dev',
+    zone: 'royan',
     prestation: 'portes-entree',
     prestationLabel: 'Porte d’entrée',
     marque: 'MéO',
@@ -500,7 +500,7 @@ export const realisations: Realisation[] = [
     slug: 'porte-entree-meo-riviere-cognac',
     title: 'Porte d’entrée tiercée en bois, modèle Rivière',
     ville: 'Cognac',
-    zone: 'dev',
+    zone: 'jonzac',
     prestation: 'portes-entree',
     prestationLabel: 'Porte d’entrée',
     marque: 'MéO',
@@ -587,7 +587,7 @@ export const realisations: Realisation[] = [
     slug: 'portail-alu-horizal-jarnac',
     title: 'Portail aluminium vert sur domaine viticole',
     ville: 'Jarnac',
-    zone: 'dev',
+    zone: 'jonzac',
     prestation: 'portails-clotures',
     prestationLabel: 'Portail',
     marque: 'HORIZAL',
@@ -788,7 +788,6 @@ export const realisationsByPrestation = (slug: string) =>
 export const realisationsByZone = (zone: Realisation['zone']) => realisations.filter((r) => r.zone === zone);
 
 export const zoneLabels: Record<Realisation['zone'], string> = {
-  jonzac: 'Pays jonzacais',
-  royan: 'Pays royannais',
-  dev: 'Saintes & Charente',
+  jonzac: 'Jonzac, Haute-Saintonge & Charente',
+  royan: 'Royan, littoral & Saintes',
 };

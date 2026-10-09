@@ -23,8 +23,8 @@ const photos = realPhotos(r.slug);
 const presta = prestationBySlug(r.prestation)!;
 
 // Page locale liée (le chantier relie l'axe prestation et l'axe ville)
-let localHref = `/agences/${r.zone === 'dev' ? 'jonzac' : r.zone}/`;
-let localLabel = `Menuiserie à ${r.zone === 'dev' ? 'Jonzac' : agences[r.zone].city}`;
+let localHref = `/agences/${r.zone}/`;
+let localLabel = `Menuiserie à ${agences[r.zone].city}`;
 const v = villes.find((x) => r.ville.toLowerCase().includes(x.name.toLowerCase().replace('île d’', '')) || (x.slug === 'cognac' && /jarnac|cognac/i.test(r.ville)) || (x.slug === 'saintes' && /saintes|pons/i.test(r.ville)));
 if (v) {
   localHref = `/menuiserie-${v.slug}/`;

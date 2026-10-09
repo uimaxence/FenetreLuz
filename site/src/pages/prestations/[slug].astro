@@ -1,4 +1,5 @@
 ---
+import { Picture } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionHead from '../../components/SectionHead.astro';
@@ -16,7 +17,7 @@ import { realisationsByPrestation } from '../../data/realisations';
 import { marqueBySlug } from '../../data/marques';
 import { croiseeBySlug } from '../../data/croisees';
 import { site } from '../../data/site';
-import { realPhoto, equipePhoto } from '../../data/photos';
+import { realPhoto, realPhotos, equipePhoto } from '../../data/photos';
 
 export function getStaticPaths() {
   return prestationsPubliees.map((p) => ({ params: { slug: p.slug }, props: { p } }));
@@ -25,7 +26,14 @@ const { p } = Astro.props as { p: Prestation };
 
 const hero = 'real' in p.hero ? realPhoto(p.hero.real, p.hero.i ?? 1) : 'equipe' in p.hero ? equipePhoto(p.hero.equipe) : undefined;
 const placeholderId = 'gen' in p.hero ? p.hero.gen : undefined;
-const reals = realisationsByPrestation(p.slug).sort((a, b) => Number(!!b.featured) - Number(!!a.featured)).slice(0, 3);
+const allReals = realisationsByPrestation(p.slug).sort((a, b) => Number(!!b.featured) - Number(!!a.featured));
+const reals = allReals.slice(0, 3);
+// Galerie : jusqu'à 8 photos nettes (chantiers non marqués lowRes), 2 par chantier maximum
+const galerie = allReals
+  .filter((r) => !r.lowRes)
+  .flatMap((r) => realPhotos(r.slug).slice(0, 2).map((img, i) => ({ r, img, i })))
+  .filter((g) => !('real' in p.hero && g.r.slug === p.hero.real && g.i === (p.hero.i ?? 1) - 1))
+  .slice(0, 8);
 const marques = p.marques.map(marqueBySlug).filter(Boolean);
 const croisee = p.croisee ? croiseeBySlug(p.croisee) : undefined;
 const others = prestationsPubliees.filter((x) => x.slug !== p.slug).slice(0, 3);
@@ -58,6 +66,7 @@ const jsonLd = [
     lead={p.lead}
     crumbs={[{ label: 'Prestations', href: '/prestations/' }, { label: p.title }]}
     image={hero}
+    imagePosition={'real' in p.hero ? p.hero.pos : undefined}
     imageAlt={p.title}
     placeholderId={placeholderId}
   >
@@ -166,6 +175,42 @@ const jsonLd = [
               </div>
             ))}
           </div>
+        </div>
+      </section>
+    )
+  }
+
+  {
+    galerie.length >= 4 && (
+      <section class="section" id="galerie">
+        <div class="container">
+          <SectionHead eyebrow="En images" title={`${p.title} : nos poses en Charente-Maritime`} row>
+            <a class="link-arrow" href={`/realisations/?prestation=${p.slug}`}>
+              Voir les chantiers <Icon id="arrow" />
+            </a>
+          </SectionHead>
+          <ul class="galerie">
+            {galerie.map((g, i) => (
+              <li class="galerie__item reveal" style={`--d:${(i % 4) * 60}ms`}>
+                <a href={`/realisations/${g.r.slug}/`} aria-label={`${g.r.title} — ${g.r.ville}`}>
+                  <Picture
+                    src={g.img}
+                    alt={`${g.r.title} — ${g.r.ville}`}
+                    widths={[400, 640, 900]}
+                    sizes="(max-width: 700px) 50vw, 25vw"
+                    formats={['webp']}
+                    loading="lazy"
+                    decoding="async"
+                    class="galerie__img"
+                    pictureAttributes={{ class: 'galerie__pic' }}
+                  />
+                  <span class="galerie__cap">
+                    <Icon id="pin" /> {g.r.ville}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
     )
@@ -498,5 +543,59 @@ const jsonLd = [
   }
   .callout--lime > span:not(.tag):not(.link-arrow) {
     color: var(--ink-2);
+  }
+  /* ---- Galerie « En images » ---- */
+  .galerie {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.9rem;
+  }
+  .galerie__item a {
+    position: relative;
+    display: block;
+    aspect-ratio: 1;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--stone-100);
+  }
+  .galerie :global(.galerie__pic) {
+    position: absolute;
+    inset: 0;
+  }
+  .galerie :global(.galerie__img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 800ms var(--ease-out);
+  }
+  .galerie__cap {
+    position: absolute;
+    left: 0.6rem;
+    bottom: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.3rem 0.6rem;
+    border-radius: 999px;
+    background: rgba(11, 46, 16, 0.72);
+    color: var(--white);
+    font-family: var(--font-ui);
+    font-size: 0.74rem;
+    font-weight: 500;
+    backdrop-filter: blur(4px);
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .galerie__item a:hover :global(.galerie__img) {
+      transform: scale(1.06);
+    }
+  }
+  @media (max-width: 700px) {
+    .galerie {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
   }
 </style>
