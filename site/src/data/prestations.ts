@@ -24,7 +24,7 @@ export type Prestation = {
   icon: IconId;
   card: string; // accroche 1 ligne (cartes)
   lead: string; // chapô page
-  hero: { real: string; i?: number } | { equipe: string } | { gen: string };
+  hero: { real: string; i?: number; pos?: string } | { equipe: string } | { gen: string }; // pos : object-position du recadrage (ex. '50% 30%')
   facts: { label: string; value: string }[];
   sections: { title: string; text: string[]; items?: { title: string; text: string }[]; images?: string[] }[]; // images : ids de visuels (src/assets/gen)
   gammes: { title: string; marque?: string; text: string }[];
@@ -49,7 +49,7 @@ export const prestations: Prestation[] = [
     icon: 'fenetre',
     card: 'Rénovation ou dépose totale, PVC, alu, bois ou mixte : des fenêtres MéO et Janneau posées par nos équipes.',
     lead: 'Changer ses fenêtres, c’est gagner en confort thermique, en silence et en lumière. Nous posons des menuiseries françaises MéO et Janneau, en rénovation comme en dépose totale, dans toute la Charente-Maritime.',
-    hero: { real: 'baies-vitrees-alu-janneau-archiac' },
+    hero: { real: 'fenetres-pvc-volets-alu-saint-genis-de-saintonge' },
     facts: [
       { label: 'Matériaux', value: 'PVC, aluminium, bois, bois-alu' },
       { label: 'Fabricants', value: 'MéO, Janneau (France)' },
@@ -144,7 +144,7 @@ export const prestations: Prestation[] = [
     icon: 'porte',
     card: 'Plus de 380 modèles MéO et Janneau, du contemporain vitré à la porte cintrée traditionnelle, sur mesure.',
     lead: 'La porte d’entrée donne le ton de votre maison et protège ce qu’il y a derrière. Isolation, sécurité, esthétique : nous la dessinons avec vous parmi les gammes MéO et Janneau, puis nous la posons.',
-    hero: { real: 'porte-entree-meo-saujon' },
+    hero: { real: 'porte-entree-cintree-meo-gemozac', i: 2, pos: '50% 42%' },
     facts: [
       { label: 'Matériaux', value: 'Alu, bois-alu, bois, PVC, acier' },
       { label: 'Modèles', value: '+380 modèles sur mesure' },
@@ -197,11 +197,11 @@ export const prestations: Prestation[] = [
     h1: 'Vérandas et extensions aluminium en Charente-Maritime',
     metaTitle: 'Véranda & extension en Charente-Maritime (17) — Concept Alu, pose & devis | LUZ',
     metaDescription:
-      'Véranda ou extension aluminium sur mesure à Jonzac, Royan, Saintes et en Charente-Maritime. Concessionnaire Concept Alu (HOMEA, ARMONIA, EXTANXIA), conception 3D, pose par nos équipes. Devis gratuit.',
+      'Véranda ou extension aluminium sur mesure à Jonzac, Royan, Saintes et en Charente-Maritime. Partenaire Concept Alu (HOMEA, ARMONIA, EXTANXIA), conception 3D, pose par nos équipes. Devis gratuit.',
     icon: 'veranda',
     card: 'Une pièce en plus, baignée de lumière : vérandas et extensions Concept Alu conçues en 3D et posées par LUZ.',
     lead: 'Gagner une pièce à vivre, ouvrir la maison sur le jardin, valoriser votre bien : la véranda ou l’extension aluminium Concept Alu s’adapte à votre maison, qu’elle soit charentaise en pierre ou contemporaine.',
-    hero: { real: 'veranda-pergola-piscine-pays-jonzacais' },
+    hero: { gen: 'veranda-hero-sans-piscine' }, // bannière recadrée de veranda-pergola-piscine-pays-jonzacais-1 (piscine et perche hors cadre), en attendant une photo propre
     facts: [
       { label: 'Fabricant', value: 'Concept Alu (France)' },
       { label: 'Gammes', value: 'HOMEA, ARMONIA, EXTANXIA' },
@@ -237,7 +237,7 @@ export const prestations: Prestation[] = [
     ],
     marques: ['concept-alu'],
     arguments: [
-      { title: 'Concessionnaire Concept Alu', text: 'Fabricant français avec son propre bureau d’études. Nous concevons votre projet avec leurs outils 3D et le faisons fabriquer sur mesure.' },
+      { title: 'Partenaire Concept Alu', text: 'Fabricant français avec son propre bureau d’études. Nous concevons votre projet avec leurs outils 3D et le faisons fabriquer sur mesure.' },
       { title: 'Un seul interlocuteur', text: 'Étude, dossier d’urbanisme, fabrication, pose, électricité et finitions : LUZ coordonne l’ensemble.' },
       { title: 'Véranda et pergola exposées', text: 'Venez voir une véranda et une pergola Concept Alu grandeur nature dans notre showroom de Jonzac.' },
       { title: 'Financement possible', text: 'Solutions de financement avec notre partenaire ARKEA pour lisser l’investissement (sous réserve d’acceptation).' },
@@ -434,7 +434,7 @@ export const prestations: Prestation[] = [
     metaDescription:
       'Portail aluminium battant ou coulissant HORIZAL, clôtures, garde-corps et barrières de piscine posés à Royan, Jonzac, Oléron et en Charente-Maritime. Portalier agréé, motorisation Somfy / DEA. Devis gratuit.',
     icon: 'portail',
-    card: 'Portalier agréé HORIZAL : plus de 300 modèles de portails alu sans soudure, clôtures et garde-corps assortis.',
+    card: 'Portails aluminium HORIZAL : plus de 300 modèles de portails alu sans soudure, clôtures et garde-corps assortis.',
     lead: 'Battant ou coulissant, plein, ajouré ou à lames horizontales, motorisé ou non : le portail aluminium HORIZAL est fabriqué sur mesure et assemblé sans soudure pour durer, même au bord de la mer. Clôtures, portillons et garde-corps sont dessinés dans la même ligne.',
     hero: { real: 'portail-alu-horizal-etaules' },
     facts: [
@@ -477,7 +477,7 @@ export const prestations: Prestation[] = [
     ],
     marques: ['horizal', 'somfy', 'dea'],
     arguments: [
-      { title: 'Portalier agréé HORIZAL', text: 'Formés par le fabricant à la conception et à la pose ; garantie constructeur et pose décennale.' },
+      { title: 'Formés par HORIZAL', text: 'Formés par le fabricant à la conception et à la pose ; garantie constructeur et pose décennale.' },
       { title: 'Maçonnerie coordonnée', text: 'Piliers, seuils, fourreaux électriques : nous préparons ou coordonnons les travaux préalables.' },
       { title: 'Dépannage & motorisation', text: 'Notre service dépannage intervient sur les motorisations, même sur un portail existant.' },
       { title: 'Résistance au bord de mer', text: 'Laquage Qualimarine et visserie inox pour Royan, Oléron et la presqu’île d’Arvert.' },
@@ -497,10 +497,10 @@ export const prestations: Prestation[] = [
     h1: 'Stores bannes, stores extérieurs et intérieurs',
     metaTitle: 'Store banne & stores extérieurs en Charente-Maritime (17) — Soliso, pose & devis | LUZ',
     metaDescription:
-      'Store banne coffre ou cassette, store vertical zip screen, moustiquaires et stores intérieurs Soliso posés à Royan, Jonzac et en Charente-Maritime par un Expert Storiste. Devis gratuit.',
+      'Store banne coffre ou cassette, store vertical zip screen, moustiquaires et stores intérieurs Soliso posés à Royan, Jonzac et en Charente-Maritime par nos équipes. Devis gratuit.',
     icon: 'store',
-    card: 'Expert Storiste Soliso : stores bannes, zip screen, moustiquaires et stores intérieurs, motorisés et résistants au vent.',
-    lead: 'Ombrager la terrasse, protéger les vitrages du soleil, garder les insectes dehors, tamiser la lumière à l’intérieur : nous sommes Expert Storiste Soliso, fabricant français depuis 1947.',
+    card: 'Stores Soliso : stores bannes, zip screen, moustiquaires et stores intérieurs, motorisés et résistants au vent.',
+    lead: 'Ombrager la terrasse, protéger les vitrages du soleil, garder les insectes dehors, tamiser la lumière à l’intérieur : nous posons les stores Soliso, fabricant français depuis 1947.',
     hero: { real: 'store-banne-hermes-royan' },
     facts: [
       { label: 'Fabricant', value: 'Soliso Europe (France, depuis 1947)' },
@@ -536,7 +536,7 @@ export const prestations: Prestation[] = [
     ],
     marques: ['soliso', 'somfy'],
     arguments: [
-      { title: 'Expert Storiste', text: 'Formation fabricant, conseil sur les toiles et la tenue au vent selon votre exposition.' },
+      { title: 'Formés par Soliso', text: 'Formation fabricant, conseil sur les toiles et la tenue au vent selon votre exposition.' },
       { title: 'Pose et réglage', text: 'Fixation adaptée au support (pierre, parpaing, isolation extérieure), réglage de l’inclinaison et des fins de course.' },
       { title: 'Motorisation Somfy', text: 'Télécommande, capteurs soleil / vent, intégration TaHoma.' },
       { title: 'Dépannage toiles et moteurs', text: 'Remplacement de toile, de bras ou de moteur sur tous stores, y compris anciens.' },
@@ -552,20 +552,20 @@ export const prestations: Prestation[] = [
   {
     slug: 'motorisation',
     nav: 'Motorisation & domotique',
-    title: 'Motorisation, domotique & alarme',
-    h1: 'Motorisation, domotique et alarme Somfy',
+    title: 'Motorisation & domotique',
+    h1: 'Motorisation et domotique Somfy',
     metaTitle: 'Motorisation portail, volets & domotique Somfy en Charente-Maritime (17) | LUZ',
     metaDescription:
-      'Motorisation de portails, portes de garage, volets et stores, domotique TaHoma et alarme Somfy Home Keeper Pro installées à Jonzac, Royan et en Charente-Maritime. Devis gratuit.',
+      'Motorisation de portails, portes de garage, volets et stores, domotique Somfy TaHoma installées à Jonzac, Royan et en Charente-Maritime. Devis gratuit.',
     icon: 'moteur',
-    card: 'Portail, porte de garage, volets, stores et alarme pilotés d’une seule application : Somfy et DEA installés par LUZ.',
-    lead: 'Ouvrir le portail depuis la voiture, fermer tous les volets d’un geste, recevoir une alerte si une porte s’ouvre : la motorisation et la domotique rendent la maison plus confortable et plus sûre. Nous installons Somfy et DEA sur vos équipements neufs ou existants.',
+    card: 'Portail, porte de garage, volets et stores pilotés d’une seule application : Somfy et DEA installés par LUZ.',
+    lead: 'Ouvrir le portail depuis la voiture, fermer tous les volets d’un geste, programmer la maison pendant vos absences : la motorisation et la domotique rendent la maison plus confortable et plus sûre. Nous installons Somfy et DEA sur vos équipements neufs ou existants.',
     hero: { real: 'portail-horizal-motorisation-integree-semussac' },
     facts: [
       { label: 'Marques', value: 'Somfy, DEA System' },
       { label: 'Équipements', value: 'Portails, garages, volets, stores, pergolas' },
       { label: 'Domotique', value: 'Somfy TaHoma, io-homecontrol' },
-      { label: 'Alarme', value: 'Somfy Home Keeper Pro' },
+      { label: 'Commande', value: 'Télécommande, smartphone, capteurs' },
     ],
     sections: [
       {
@@ -582,75 +582,73 @@ export const prestations: Prestation[] = [
         ],
       },
       {
-        title: 'Domotique et alarme',
-        images: ['alarme-domotique-tablette'],
+        title: 'Domotique',
         text: [
-          'La box Somfy TaHoma réunit volets, portail, éclairage, chauffage et alarme dans une seule application, avec des scénarios (départ, nuit, vacances) et une simulation de présence. L’alarme Somfy Home Keeper Pro, installée et paramétrée par nos soins, reste fonctionnelle en cas de coupure d’électricité ou d’internet et vous prévient sur votre téléphone.',
+          'La box Somfy TaHoma réunit volets, portail, stores, éclairage et chauffage dans une seule application, avec des scénarios (départ, nuit, vacances) et une simulation de présence. Nous l’installons et la paramétrons avec vous, puis nous restons joignables pour la faire évoluer.',
         ],
       },
     ],
     gammes: [
       { title: 'Motorisations Somfy', marque: 'Somfy', text: 'Portails, garages, volets, stores, pergolas ; protocole io-homecontrol sécurisé.' },
       { title: 'Motorisations DEA', marque: 'DEA System', text: 'Automatismes robustes pour portails lourds et usages intensifs.' },
-      { title: 'TaHoma & Home Keeper Pro', marque: 'Somfy', text: 'Box domotique et alarme connectée, installation et mise en service par LUZ.' },
+      { title: 'TaHoma', marque: 'Somfy', text: 'Box domotique connectée, installation et mise en service par LUZ.' },
     ],
     marques: ['somfy', 'dea'],
     arguments: [
       { title: 'Installateurs formés', text: 'Nos techniciens sont formés aux motorisations Somfy et DEA et à la programmation TaHoma.' },
       { title: 'Compatible avec l’existant', text: 'Nous motorisons volets, portails et stores que vous possédez déjà.' },
       { title: 'Dépannage réactif', text: 'Panne de moteur, télécommande perdue, reprogrammation : notre service dépannage se déplace.' },
-      { title: 'Évolutif', text: 'Commencez par le portail, ajoutez les volets puis l’alarme : tout communique.' },
+      { title: 'Évolutif', text: 'Commencez par le portail, ajoutez les volets puis les stores : tout communique.' },
     ],
     faq: [
       { q: 'Combien coûte la motorisation d’un portail ?', a: 'De 1 200 à 2 500 € posée selon le type de portail (battant ou coulissant), le moteur (à bras, à vérins, enterré) et les accessoires (digicode, interphone).' },
       { q: 'Peut-on motoriser des volets roulants existants ?', a: 'Oui, si le tablier et le coffre sont en bon état : le moteur remplace l’axe manuel. Les moteurs solaires évitent tout câblage.' },
-      { q: 'L’alarme fonctionne-t-elle sans internet ?', a: 'Oui : Home Keeper Pro est autonome, avec batterie et transmetteur de secours ; l’application n’est qu’un moyen de pilotage supplémentaire.' },
     ],
-    keywords: ['motorisation portail', 'domotique', 'alarme somfy'],
+    keywords: ['motorisation portail', 'domotique', 'domotique somfy'],
   },
   {
     slug: 'braseros',
     nav: 'Braseros',
-    title: 'Braseros & planchas',
-    h1: 'Braseros et planchas Vulcan',
-    metaTitle: 'Brasero plancha Vulcan à Jonzac & Royan — Showroom & conseils | Fenêtres & Vérandas LUZ',
+    title: 'Braseros',
+    h1: 'Braseros Vulcan',
+    metaTitle: 'Brasero Vulcan à Jonzac & Royan — Showroom & conseils | Fenêtres & Vérandas LUZ',
     metaDescription:
-      'Braseros-planchas Vulcan en acier à découvrir et tester dans notre showroom de Jonzac : cuisine extérieure au feu de bois, convivialité toute l’année. Conseils et livraison en Charente-Maritime.',
+      'Braseros Vulcan en acier à découvrir dans notre showroom de Jonzac : le feu de bois au centre de la terrasse, convivialité toute l’année. Conseils et livraison en Charente-Maritime.',
     icon: 'brasero',
-    card: 'Le feu au centre de la terrasse : braseros-planchas Vulcan en acier, à voir et tester à Jonzac.',
-    lead: 'Après la pergola et la terrasse, il manquait le feu. Les braseros-planchas Vulcan réunissent famille et amis autour d’une cuisson au bois, du printemps aux soirées d’hiver. Venez les voir en démonstration dans notre showroom.',
+    card: 'Le feu au centre de la terrasse : braseros Vulcan en acier, à voir dans notre showroom de Jonzac.',
+    lead: 'Après la pergola et la terrasse, il manquait le feu. Les braseros Vulcan réunissent famille et amis autour du feu, du printemps aux soirées d’hiver. Venez les voir en démonstration dans notre showroom.',
     hero: { gen: 'brasero-terrasse' },
     facts: [
       { label: 'Marque', value: 'Vulcan' },
-      { label: 'Matériau', value: 'Acier épais, plaque de cuisson' },
-      { label: 'Usage', value: 'Brasero, plancha, chauffage extérieur' },
+      { label: 'Matériau', value: 'Acier épais' },
+      { label: 'Usage', value: 'Feu de bois, chauffage extérieur' },
       { label: 'Où', value: 'Showroom de Jonzac' },
     ],
     sections: [
       {
-        title: 'Cuisiner et se chauffer au feu de bois',
+        title: 'Se réunir autour du feu',
         text: [
-          'Le brasero-plancha combine un foyer central et une plaque de cuisson annulaire en acier : au centre, le feu ; autour, une zone de cuisson dont la température décroît vers l’extérieur, pour saisir viandes, poissons et légumes en même temps. Le soir venu, il devient un chauffage d’ambiance qui prolonge la soirée sur la terrasse.',
+          'Un foyer rond en acier épais, posé sur la terrasse ou dans le jardin : le brasero Vulcan chauffe, éclaire et rassemble. L’acier monte vite en température et la rouille de surface, voulue, protège le métal au fil des saisons.',
         ],
       },
       {
         title: 'Modèles et accessoires',
         text: [
-          'Plusieurs diamètres pour 4 à 12 convives, sur pied haut ou bas, avec couvercles, grilles, planches et housses de protection. Nous vous conseillons le modèle adapté à votre terrasse et à votre usage.',
+          'Plusieurs diamètres et hauteurs selon la taille de la terrasse, avec couvercles, grilles et housses de protection. Nous vous conseillons le modèle adapté à votre terrasse et à votre pergola.',
         ],
       },
     ],
-    gammes: [{ title: 'Braseros-planchas', marque: 'Vulcan', text: 'Foyer acier, plaque de cuisson intégrée, plusieurs diamètres et hauteurs, accessoires de cuisson.' }],
+    gammes: [{ title: 'Braseros', marque: 'Vulcan', text: 'Foyer rond en acier épais, plusieurs diamètres et hauteurs, couvercles, grilles et housses en accessoires.' }],
     marques: ['vulcan'],
     arguments: [
-      { title: 'Démonstration en showroom', text: 'Voyez le brasero allumé et testez la cuisson à Jonzac (sur rendez-vous).' },
+      { title: 'À voir en showroom', text: 'Les braseros Vulcan sont exposés dans notre showroom de Jonzac.' },
       { title: 'Conseil d’aménagement', text: 'Placement sur la terrasse, distance par rapport à la pergola et aux menuiseries : nous vous guidons.' },
     ],
     faq: [
       { q: 'Peut-on utiliser un brasero sous une pergola ?', a: 'Sous une pergola bioclimatique, lames ouvertes et avec une distance suffisante, oui. Nous vous conseillons l’emplacement en fonction de votre installation.' },
-      { q: 'Où voir les braseros ?', a: 'Dans notre showroom de Jonzac (Saint-Germain-de-Lusignan), aux horaires d’ouverture ; démonstration sur rendez-vous.' },
+      { q: 'Où voir les braseros ?', a: 'Dans notre showroom de Jonzac (Saint-Germain-de-Lusignan), aux horaires d’ouverture.' },
     ],
-    keywords: ['brasero', 'brasero plancha'],
+    keywords: ['brasero', 'brasero vulcan'],
   },
   {
     slug: 'terrasses-bois',

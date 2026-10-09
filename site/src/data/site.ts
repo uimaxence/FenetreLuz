@@ -35,9 +35,7 @@ export const site = {
     { id: 'qualibat', label: 'Qualibat', sub: 'Qualification bâtiment' },
     { id: 'meo', label: 'Menuisier d’Excellence', sub: 'Réseau MéO' },
     { id: 'janneau', label: 'Menuisier Créateur', sub: 'Réseau Janneau' },
-    { id: 'horizal', label: 'Portalier agréé', sub: 'HORIZAL' },
-    { id: 'soliso', label: 'Expert Storiste', sub: 'Soliso Europe' },
-    { id: 'concept-alu', label: 'Concessionnaire', sub: 'Concept Alu' },
+    { id: 'concept-alu', label: 'Partenaire', sub: 'Concept Alu' },
     { id: 'generali', label: 'Assurance décennale', sub: 'Generali' },
   ],
   depannage: {

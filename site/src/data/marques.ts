@@ -39,11 +39,11 @@ export const marques: Marque[] = [
   {
     slug: 'concept-alu',
     name: 'Concept Alu',
-    label: 'Concessionnaire Concept Alu',
+    label: 'Partenaire Concept Alu',
     categorie: 'Vérandas, extensions, pergolas, carports',
     produits: ['Vérandas HOMEA et ARMONIA', 'Extensions EXTANXIA Still et Deko', 'Pergolas bioclimatiques', 'Carports, pool houses, auvents'],
     description:
-      'Concept Alu conçoit des vérandas, extensions et pergolas en aluminium avec son propre bureau d’études et de R&D. En tant que concessionnaire, LUZ dessine votre projet avec leurs outils de conception 3D et le fait fabriquer sur mesure.',
+      'Concept Alu conçoit des vérandas, extensions et pergolas en aluminium avec son propre bureau d’études et de R&D. En tant que partenaire, LUZ dessine votre projet avec leurs outils de conception 3D et le fait fabriquer sur mesure.',
     origine: 'Fabrication française',
     prestations: ['verandas-extensions', 'pergolas', 'carports-pool-house'],
     principale: true,
@@ -51,7 +51,7 @@ export const marques: Marque[] = [
   {
     slug: 'horizal',
     name: 'HORIZAL',
-    label: 'Portalier agréé HORIZAL',
+    label: 'Portails aluminium HORIZAL',
     categorie: 'Portails, clôtures, garde-corps',
     produits: ['Portails battants et coulissants (+300 modèles)', 'Clôtures aluminium', 'Garde-corps verre, tôle laser, inox', 'Barrières de piscine'],
     description:
@@ -63,7 +63,7 @@ export const marques: Marque[] = [
   {
     slug: 'soliso',
     name: 'Soliso Europe',
-    label: 'Expert Storiste Soliso',
+    label: 'Stores Soliso Europe',
     categorie: 'Stores extérieurs & intérieurs',
     produits: ['Stores bannes coffre, cassette, traditionnels', 'Stores verticaux zip screen', 'Pergolas stores', 'Moustiquaires', 'Stores intérieurs'],
     description:
@@ -105,9 +105,9 @@ export const marques: Marque[] = [
     slug: 'somfy',
     name: 'Somfy',
     categorie: 'Motorisation & domotique',
-    produits: ['Moteurs de volets et stores io / RTS', 'Motorisation de portails et portes de garage', 'Box domotique TaHoma', 'Alarme Home Keeper Pro'],
+    produits: ['Moteurs de volets et stores io / RTS', 'Motorisation de portails et portes de garage', 'Box domotique TaHoma'],
     description:
-      'Leader mondial de la motorisation de l’habitat. Volets, stores, portails et alarme se pilotent depuis une télécommande ou une application, avec des scénarios adaptés à votre quotidien.',
+      'Leader mondial de la motorisation de l’habitat. Volets, stores et portails se pilotent depuis une télécommande ou une application, avec des scénarios adaptés à votre quotidien.',
     prestations: ['motorisation', 'volets', 'stores'],
   },
   {
@@ -122,8 +122,8 @@ export const marques: Marque[] = [
     slug: 'vulcan',
     name: 'Vulcan',
     categorie: 'Braseros',
-    produits: ['Braseros-planchas en acier', 'Accessoires de cuisson extérieure'],
-    description: 'Braseros et planchas à bois pour cuisiner et se réunir dehors toute l’année. À découvrir en démonstration dans notre showroom de Jonzac.',
+    produits: ['Braseros en acier', 'Accessoires'],
+    description: 'Braseros à bois pour se réunir dehors toute l’année autour du feu. À découvrir dans notre showroom de Jonzac.',
     prestations: ['braseros'],
   },
   {

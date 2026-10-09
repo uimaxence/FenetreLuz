@@ -18,7 +18,7 @@ const LABELS: Record<string, string> = {
   'portail-cloture': 'Portail / clôture',
   'volets-garage': 'Volets / porte de garage',
   stores: 'Stores',
-  'motorisation-alarme': 'Motorisation / alarme',
+  'motorisation-alarme': 'Motorisation / domotique',
   depannage: 'Dépannage',
   autre: 'Autre',
   jonzac: 'Jonzac / Haute-Saintonge',

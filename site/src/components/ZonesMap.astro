@@ -2,7 +2,7 @@
 /**
  * Carte interactive des zones d'intervention (Charente-Maritime + Charente).
  * Données : src/data/zones-map.json, générées par scripts/build-zones-map.py (contours IGN via geo.api.gouv.fr,
- * zones approchées par intercommunalité d'après la carte cantonale de Benoît — à valider commune par commune).
+ * deux secteurs rattachés chacun à une agence, approchés par intercommunalité — à valider commune par commune).
  * Interaction : clic (ou clavier) sur une zone, un département ou un bouton de légende → panneau de détail ;
  * les repères de villes sont des liens vers les pages agences / villes quand elles existent.
  */
@@ -10,7 +10,7 @@ import Icon from './Icon.astro';
 import map from '../data/zones-map.json';
 import { agences, type Agence } from '../data/agences';
 
-type ZoneId = 'jonzac' | 'royan' | 'dev';
+type ZoneId = 'jonzac' | 'royan';
 type Commune = { n: string; d: string; p: number };
 type City = { id: string; label: string; kind: 'agence' | 'ville' | 'town'; href: string | null; x: number; y: number; zone: string | null; dep: string };
 
@@ -34,36 +34,28 @@ const principales = (list: Commune[], n = 12) => [...list].sort((a, b) => b.p - 
 
 const zoneMeta: Record<ZoneId, { kicker: string; title: string; text: string; agence: Agence[]; extra?: { label: string; href: string }[] }> = {
   jonzac: {
-    kicker: 'Zone historique · Haute-Saintonge',
-    title: 'Autour de Jonzac',
-    text: `Notre agence historique et son showroom de 200 m² à Saint-Germain-de-Lusignan. ${zones.jonzac.count} communes de la Haute-Saintonge, de Pons à Montguyon et de Mirambeau à Archiac, desservies en moins de 30 minutes.`,
+    kicker: 'Agence de Jonzac · Haute-Saintonge & Charente',
+    title: 'Jonzac, la Haute-Saintonge et le pays de Cognac',
+    text: `Notre agence historique et son showroom de 200 m² à Saint-Germain-de-Lusignan suivent ${zones.jonzac.count} communes : toute la Haute-Saintonge, de Pons à Montguyon et de Mirambeau à Archiac, et l’ouest de la Charente jusqu’à Cognac, Jarnac, Châteauneuf, Barbezieux et Rouillac.`,
     agence: [agences.jonzac],
+    extra: [{ label: 'Menuiserie à Cognac', href: '/menuiserie-cognac/' }],
   },
   royan: {
-    kicker: 'Zone littorale · Pays royannais, Marennes-Oléron',
-    title: 'Royan, la Côte de Beauté et l’île d’Oléron',
-    text: `Depuis Breuillet, à dix minutes de Royan : ${zones.royan.count} communes de la Côte de Beauté, de la presqu’île d’Arvert, du bassin de Marennes et de l’île d’Oléron. Menuiseries choisies pour le climat marin.`,
+    kicker: 'Agence de Royan · Littoral, Marennes-Oléron & Saintes',
+    title: 'Royan, la Côte de Beauté, Oléron et Saintes',
+    text: `Depuis Breuillet, à dix minutes de Royan : ${zones.royan.count} communes de la Côte de Beauté, de la presqu’île d’Arvert, du bassin de Marennes, de l’île d’Oléron et de la Saintonge jusqu’à Saintes et Saint-Porchaire. Menuiseries choisies pour le climat marin.`,
     agence: [agences.royan],
     extra: [
+      { label: 'Menuiserie à Saintes', href: '/menuiserie-saintes/' },
       { label: 'Menuiserie sur l’île d’Oléron', href: '/menuiserie-ile-oleron/' },
       { label: 'Véranda à Royan', href: '/veranda-royan/' },
       { label: 'Pergola à Royan', href: '/pergola-royan/' },
       { label: 'Portail à Royan', href: '/portail-royan/' },
     ],
   },
-  dev: {
-    kicker: 'Zone en développement · Saintonge & Charente',
-    title: 'Saintes, Cognac et l’ouest de la Charente',
-    text: `Depuis nos deux agences, nous posons jusqu’à Saintes, Saint-Porchaire, Gémozac, Cognac, Jarnac, Châteauneuf, Barbezieux et Rouillac : ${zones.dev.count} communes où le déplacement pour le métré et le devis reste gratuit.`,
-    agence: [agences.jonzac, agences.royan],
-    extra: [
-      { label: 'Menuiserie à Saintes', href: '/menuiserie-saintes/' },
-      { label: 'Menuiserie à Cognac', href: '/menuiserie-cognac/' },
-    ],
-  },
 };
-const zoneIds: ZoneId[] = ['jonzac', 'royan', 'dev'];
-const zoneLabel: Record<ZoneId, string> = { jonzac: 'Zone historique (Jonzac)', royan: 'Zone littorale (Royan)', dev: 'Zone en développement' };
+const zoneIds: ZoneId[] = ['jonzac', 'royan'];
+const zoneLabel: Record<ZoneId, string> = { jonzac: 'Secteur de l’agence de Jonzac', royan: 'Secteur de l’agence de Royan' };
 
 const depMeta = {
   '17': {
@@ -71,14 +63,14 @@ const depMeta = {
     title: 'Charente-Maritime',
     text: `${deps['17'].covered} communes couvertes sur ${deps['17'].communes}, depuis nos agences de Jonzac et de Royan : toute la Haute-Saintonge, le pays royannais, Marennes-Oléron et la Saintonge de Saintes.`,
     agence: [agences.jonzac, agences.royan],
-    communes: [...zones.jonzac.communes, ...zones.royan.communes, ...zones.dev.communes].filter((c) => c.d === '17'),
+    communes: [...zones.jonzac.communes, ...zones.royan.communes].filter((c) => c.d === '17'),
   },
   '16': {
     kicker: 'Département',
     title: 'Charente',
     text: `${deps['16'].covered} communes de l’ouest de la Charente, depuis l’agence de Jonzac : le pays de Cognac, Jarnac, Châteauneuf, Barbezieux et le Rouillacais. Mêmes équipes, mêmes fabricants, mêmes aides à la rénovation.`,
     agence: [agences.jonzac],
-    communes: zones.dev.communes.filter((c) => c.d === '16'),
+    communes: zones.jonzac.communes.filter((c) => c.d === '16'),
   },
 };
 
@@ -171,7 +163,7 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
     <button type="button" class="zmap__reset" data-select="all" hidden><Icon id="close" /> Revenir à la vue d’ensemble</button>
     <!-- Vue d'ensemble -->
     <div class="zpanel" data-panel="all">
-      <p class="zpanel__kicker"><Icon id="map" /> Deux agences, trois zones</p>
+      <p class="zpanel__kicker"><Icon id="map" /> Deux agences, deux secteurs</p>
       <h3 class="zpanel__title">{totalCommunes} communes desservies en Charente-Maritime et Charente</h3>
       <p class="zpanel__text">
         Sélectionnez votre secteur sur la carte : vous verrez l’agence qui vous suit, les communes desservies et nos pages locales.
@@ -436,9 +428,6 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
   .zone--royan {
     fill: var(--green-800);
   }
-  .zone--dev {
-    fill: var(--lime);
-  }
   .zone:hover,
   .zone:focus-visible {
     filter: brightness(1.1) saturate(1.1);
@@ -559,9 +548,6 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
   .zmap__key--royan i {
     background: var(--green-800);
   }
-  .zmap__key--dev i {
-    background: var(--lime);
-  }
   .zmap__key--dep i {
     background: var(--stone-100);
     border-color: #b7bfae;
@@ -628,9 +614,6 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
   }
   .zpanel__dot--royan {
     background: var(--green-800);
-  }
-  .zpanel__dot--dev {
-    background: var(--lime);
   }
   .zpanel__title {
     margin: 0;

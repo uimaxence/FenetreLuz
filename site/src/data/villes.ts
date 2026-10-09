@@ -26,8 +26,8 @@ export const villes: Ville[] = [
     metaTitle: 'Menuiserie à Saintes — Fenêtres, Vérandas, Portails | LUZ Saintes',
     metaDescription:
       'Fenêtres & Vérandas LUZ intervient à Saintes et en Saintonge : fenêtres PVC, alu, bois, portes d’entrée, vérandas, pergolas, portails et volets. Entreprise RGE, fabricants français, devis gratuit.',
-    agence: 'jonzac',
-    distance: '35 min de notre agence de Jonzac, 30 min de Royan',
+    agence: 'royan',
+    distance: '30 min de notre agence de Royan, 35 min de Jonzac',
     lead: 'Saintes et sa couronne sont desservies par nos deux agences. Maisons de pierre du centre ancien, pavillons des années 70 à rénover, constructions neuves : nous posons fenêtres, portes, vérandas, pergolas et portails dans toute la Saintonge.',
     paragraphs: [
       'À Saintes, une grande partie des demandes concerne le remplacement de fenêtres : bois vieillissant sur les maisons anciennes, simple vitrage sur les pavillons. Nous proposons des menuiseries PVC Janneau, aluminium ou bois-alu MéO selon le secteur, en tenant compte des prescriptions des Architectes des Bâtiments de France dans le périmètre protégé du centre-ville.',
@@ -63,7 +63,7 @@ export const villes: Ville[] = [
     prestationsFocus: ['fenetres', 'portes-entree', 'volets', 'portails-clotures', 'verandas-extensions', 'pergolas'],
     realisations: ['porte-entree-meo-riviere-cognac', 'portail-alu-horizal-jarnac', 'baies-vitrees-alu-janneau-archiac', 'fenetres-alu-janneau-domaine-jonzac'],
     faq: [
-      { q: 'Intervenez-vous vraiment à Cognac ?', a: 'Oui, Cognac, Jarnac et Barbezieux font partie de notre zone en développement depuis l’agence de Jonzac. Le déplacement pour le métré et le devis est gratuit.' },
+      { q: 'Intervenez-vous vraiment à Cognac ?', a: 'Oui, Cognac, Jarnac et Barbezieux sont suivis par notre agence de Jonzac. Le déplacement pour le métré et le devis est gratuit.' },
       { q: 'Faites-vous des menuiseries adaptées aux maisons charentaises ?', a: 'C’est notre spécialité : fenêtres bois ou bois-alu avec petits bois, portes cintrées, volets battants alu à l’ancienne, dans les teintes traditionnelles.' },
     ],
     hero: { real: 'porte-entree-meo-riviere-cognac' },

@@ -49,7 +49,7 @@ const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURICompone
         ))
       }
     </ul>
-    {a.responsable && <p class="acard__resp"><Icon id="team" /> {a.responsable.name} · responsable d’agence</p>}
+    {a.responsable && <p class="acard__resp"><Icon id="team" /> {a.responsable.name} · {a.responsable.role.toLowerCase()}</p>}
     <div class="acard__actions">
       <a class="btn btn--dark btn--sm" href={`/agences/${a.slug}/`}>L’agence <Icon id="arrow" /></a>
       <a class="link-arrow" href={maps} target="_blank" rel="noopener">Itinéraire <Icon id="arrow-up-right" /></a>

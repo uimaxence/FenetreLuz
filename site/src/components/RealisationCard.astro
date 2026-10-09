@@ -10,8 +10,10 @@ interface Props {
   filterable?: boolean;
   ratio?: '4 / 3' | '3 / 4' | '1 / 1';
 }
-const { real: r, delay = 0, filterable = false, ratio = '4 / 3' } = Astro.props;
+const { real: r, delay = 0, filterable = false, ratio: ratioProp } = Astro.props;
 const photos = realPhotos(r.slug).slice(0, 4); // diaporama automatique quand il y a plusieurs photos
+// Cadrage : une photo verticale (porte, fenêtre) est présentée en carré plutôt que recadrée en 4/3.
+const ratio = ratioProp ?? (photos[0] && photos[0].height > photos[0].width ? '1 / 1' : '4 / 3');
 ---
 
 <a

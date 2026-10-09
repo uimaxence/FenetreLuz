@@ -96,7 +96,7 @@ export const agences: Record<'jonzac' | 'royan', Agence> = {
     showroom: 'Showroom & bureau',
     responsable: {
       name: 'Olivier Michaud',
-      role: 'Responsable de l’agence de Royan',
+      role: 'Commercial, agence de Royan',
       bio: 'Plus de trente ans de menuiserie en pays royannais. Olivier vous reçoit à Breuillet, se déplace chez vous pour le métré et suit votre chantier jusqu’à la réception.',
     },
     zoneLabel: 'Pays royannais, presqu’île d’Arvert, Marennes-Oléron',
@@ -104,7 +104,7 @@ export const agences: Record<'jonzac' | 'royan', Agence> = {
       'Notre agence du pays royannais, à Breuillet, à dix minutes de Royan. Menuiseries alu pour le bord de mer, vérandas, pergolas, portails et stores : un interlocuteur local qui connaît les contraintes du littoral.',
     description: [
       'Ouverte pour être au plus près de nos clients du littoral, l’agence de Breuillet couvre Royan et toute la Côte de Beauté, la presqu’île d’Arvert, le bassin de Marennes et l’île d’Oléron.',
-      'Le climat marin impose des choix précis : aluminium laqué avec label Qualimarine, quincaillerie inox, vitrages à contrôle solaire, stores résistants au vent. Olivier Michaud, responsable de l’agence, vous conseille sur ces points dès la première visite.',
+      'Le climat marin impose des choix précis : aluminium laqué avec label Qualimarine, quincaillerie inox, vitrages à contrôle solaire, stores résistants au vent. Olivier Michaud, votre commercial à Breuillet, vous conseille sur ces points dès la première visite.',
       'Nos équipes de pose sont les mêmes qu’à Jonzac : des salariés LUZ, pas de sous-traitance. Le service après-vente et le dépannage sont assurés depuis Breuillet pour tout le secteur.',
     ],
     communes: [

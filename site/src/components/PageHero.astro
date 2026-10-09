@@ -15,10 +15,11 @@ interface Props {
   crumbs: Crumb[];
   image?: ImageMetadata;
   imageAlt?: string;
+  imagePosition?: string; // object-position de la photo (recadrage)
   placeholderId?: string;
   compact?: boolean;
 }
-const { title, eyebrow, lead, crumbs, image, imageAlt = '', placeholderId, compact = false } = Astro.props;
+const { title, eyebrow, lead, crumbs, image, imageAlt = '', imagePosition, placeholderId, compact = false } = Astro.props;
 ---
 
 <section class:list={['phero', 'on-dark', { 'phero--compact': compact, 'phero--plain': !image && !placeholderId }]}>
@@ -34,6 +35,7 @@ const { title, eyebrow, lead, crumbs, image, imageAlt = '', placeholderId, compa
         fetchpriority="high"
         decoding="async"
         class="phero__img"
+        style={imagePosition ? `object-position:${imagePosition}` : undefined}
         pictureAttributes={{ class: 'phero__pic' }}
       />
     ) : placeholderId ? (
