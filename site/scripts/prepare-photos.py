@@ -17,6 +17,7 @@ SITE = HERE.parent
 SRC = SITE.parent / "assets" / "PHOTOS SITE LUZ"
 OUT = SITE / "src" / "assets" / "photos"
 R = "REALISATIONS "
+P2 = "PHOTOS SITE 2/"  # deuxième envoi de photos (octobre 2026), même dossier source
 
 # slug -> liste de photos sources (la première = photo principale)
 REALISATIONS = {
@@ -158,6 +159,18 @@ REALISATIONS = {
         R + "/VOLETS BATTANTS /Volets Battants Alu Ehret ISOLATION SUR MESURE PAYS JONZACAIS.jpg",
         R + "/VOLETS BATTANTS /Volets Battants Alu Ehret ISOLATION SUR MESURE PAYS JONZACAIS(1).jpg",
         R + "/VOLETS BATTANTS /Volets Battants Alu Ehret ISOLATION SUR MESURE PAYS JONZACAIS(2).jpg"],
+    # --- « PHOTOS SITE 2 » (deuxième envoi, 9 octobre 2026) ---
+    "veranda-concept-alu-les-mathes": [P2 + "véranda concept alu Les Mathes 1.jpg", P2 + "véranda concept alu Les Mathes 2.jpg"],
+    "baie-vitree-alu-janneau-jonzac": [P2 + "Baie vitrée Janneau Jonzac 1.jpg", P2 + "Baie vitrée Janneau Jonzac 2.jpg"],
+    "porte-entree-meo-royan": [P2 + "Porte d'entrée MéO Royan.jpg"],
+    "pergola-bioclimatique-saujon": [P2 + "pergola concept alu Saujon.jpg"],
+    "pergola-blanche-la-couronne": [P2 + "pergola blanche concept alu La Couronne 1.jpg", P2 + "pergola blanche concept alu La Couronne 2.jpg"],
+    "store-banne-breuillet": [P2 + "Store banne Breuillet.jpg"],
+    "volets-battants-alu-ehret-jonzac": [P2 + "Volets Battants Ehret Jonzac.jpg"],
+    "portail-portillon-horizal-etaules": [P2 + "portail + portillon Horizal Etaules.jpg"],
+    "portail-noir-horizal-pays-royannais": [P2 + "portail noir Horizal pays royannais.jpg"],  # « portail noir Horizal.jpg » est un doublon
+    "garde-corps-horizal-saint-palais-sur-mer": [P2 + "Garde-corps Horizal Saint-Palais.jpeg"],
+    "garde-corps-horizal-arvert": [P2 + "Garde-corps Horizal Arvert.jpg"],
 }
 
 EQUIPE = {
@@ -180,6 +193,7 @@ EQUIPE = {
     "pose-securite-3": "EQUIPE /Outils _ SYAM _ sécurité_.jpg",
     "certificat-meo": "EQUIPE /MEO.jpg",
     "benoit-eco-responsable-janneau": "EQUIPE /Benoit - Eco Responsable Janneau.jpg",
+    "olivier": P2 + "Olivier.jpg",
 }
 
 AGENCES = {"jonzac": "AGENCES/AGENCE JONZAC.jpg", "royan": "AGENCES/AGENCE ROYAN.jpg"}

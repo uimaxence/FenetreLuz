@@ -144,7 +144,7 @@ export const prestations: Prestation[] = [
     icon: 'porte',
     card: 'Plus de 380 modèles MéO et Janneau, du contemporain vitré à la porte cintrée traditionnelle, sur mesure.',
     lead: 'La porte d’entrée donne le ton de votre maison et protège ce qu’il y a derrière. Isolation, sécurité, esthétique : nous la dessinons avec vous parmi les gammes MéO et Janneau, puis nous la posons.',
-    hero: { real: 'porte-entree-cintree-meo-gemozac', i: 2, pos: '50% 42%' },
+    hero: { real: 'porte-entree-meo-royan' },
     facts: [
       { label: 'Matériaux', value: 'Alu, bois-alu, bois, PVC, acier' },
       { label: 'Modèles', value: '+380 modèles sur mesure' },
@@ -201,7 +201,7 @@ export const prestations: Prestation[] = [
     icon: 'veranda',
     card: 'Une pièce en plus, baignée de lumière : vérandas et extensions Concept Alu conçues en 3D et posées par LUZ.',
     lead: 'Gagner une pièce à vivre, ouvrir la maison sur le jardin, valoriser votre bien : la véranda ou l’extension aluminium Concept Alu s’adapte à votre maison, qu’elle soit charentaise en pierre ou contemporaine.',
-    hero: { gen: 'veranda-hero-sans-piscine' }, // bannière recadrée de veranda-pergola-piscine-pays-jonzacais-1 (piscine et perche hors cadre), en attendant une photo propre
+    hero: { real: 'veranda-concept-alu-les-mathes', pos: '62% 50%' },
     facts: [
       { label: 'Fabricant', value: 'Concept Alu (France)' },
       { label: 'Gammes', value: 'HOMEA, ARMONIA, EXTANXIA' },
@@ -501,7 +501,7 @@ export const prestations: Prestation[] = [
     icon: 'store',
     card: 'Stores Soliso : stores bannes, zip screen, moustiquaires et stores intérieurs, motorisés et résistants au vent.',
     lead: 'Ombrager la terrasse, protéger les vitrages du soleil, garder les insectes dehors, tamiser la lumière à l’intérieur : nous posons les stores Soliso, fabricant français depuis 1947.',
-    hero: { real: 'store-banne-hermes-royan' },
+    hero: { real: 'store-banne-breuillet', pos: '50% 42%' },
     facts: [
       { label: 'Fabricant', value: 'Soliso Europe (France, depuis 1947)' },
       { label: 'Extérieur', value: 'Bannes, zip screen, BSO, pergolas stores' },

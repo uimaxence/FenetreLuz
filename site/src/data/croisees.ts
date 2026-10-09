@@ -57,7 +57,7 @@ export const croisees: Croisee[] = [
       { q: 'Faut-il une autorisation à Royan ?', a: 'Oui : déclaration préalable jusqu’à 20 m² (40 m² en zone urbaine du PLU), permis de construire au-delà. Certains quartiers de Royan sont en site patrimonial remarquable : nous adaptons le projet aux prescriptions de l’ABF.' },
       { q: 'Peut-on voir une véranda avant de se décider ?', a: 'Une véranda Concept Alu est exposée dans notre showroom de Jonzac, et nous pouvons vous montrer des réalisations en pays royannais.' },
     ],
-    hero: { real: 'pergola-coulissants-verre-store-zip-pays-royannais' },
+    hero: { real: 'veranda-concept-alu-les-mathes' },
   },
   {
     slug: 'pergola-royan',
@@ -90,7 +90,7 @@ export const croisees: Croisee[] = [
       { q: 'Quel prix pour une pergola bioclimatique à Royan ?', a: 'De 8 000 à 15 000 € posée pour 12 à 20 m² à lames motorisées, hors coulissants et stores. Devis gratuit après visite.' },
       { q: 'Une pergola résiste-t-elle aux tempêtes du littoral ?', a: 'Oui : fixations renforcées, lames qui s’ouvrent automatiquement au-delà d’un seuil de vent, stores zip qui se replient. Nos pergolas sont posées à Royan, Saint-Palais, Oléron et La Tremblade depuis des années.' },
     ],
-    hero: { real: 'double-pergola-bioclimatique-pays-royannais' },
+    hero: { real: 'pergola-bioclimatique-saujon' },
   },
   {
     slug: 'portail-royan',
@@ -156,7 +156,7 @@ export const croisees: Croisee[] = [
       { q: 'Quel prix pour un store banne à Royan ?', a: 'De 1 500 à 3 500 € posé pour un store coffre motorisé de 4 à 5 m avec capteur vent, selon avancée et toile. Devis gratuit.' },
       { q: 'Réparez-vous les stores existants à Royan ?', a: 'Oui : changement de toile, de bras ou de moteur sur tous les stores, quelle que soit la marque. Voir notre service dépannage.' },
     ],
-    hero: { real: 'store-banne-hermes-royan' },
+    hero: { real: 'store-banne-breuillet' },
   },
 ];
 
