@@ -9,7 +9,7 @@ export type Membre = {
 /** Prénoms et rôles issus des fichiers photos fournis (noms de famille non communiqués). */
 export const equipe: Membre[] = [
   { prenom: 'Benoît', role: 'Gérant, fondateur', photo: 'benoit', pole: 'direction', agence: 'jonzac' },
-  { prenom: 'Olivier', role: 'Commercial', pole: 'commercial', agence: 'royan' },
+  { prenom: 'Olivier', role: 'Commercial', photo: 'olivier', pole: 'commercial', agence: 'royan' },
   { prenom: 'Élodie', role: 'Commerciale', photo: 'elodie', pole: 'commercial' },
   { prenom: 'Steve', role: 'Commercial', photo: 'steve', pole: 'commercial' },
   { prenom: 'Laura', role: 'Assistante commerciale', photo: 'laura', pole: 'bureau' },

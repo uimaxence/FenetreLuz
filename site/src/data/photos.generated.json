@@ -768,6 +768,126 @@
     "bytes": 506092,
     "file": "volets-battants-alu-ehret-pays-jonzacais-3.jpg"
    }
+  ],
+  "veranda-concept-alu-les-mathes": [
+   {
+    "w": 2200,
+    "h": 1002,
+    "src": "PHOTOS SITE 2/véranda concept alu Les Mathes 1.jpg",
+    "bytes": 462761,
+    "file": "veranda-concept-alu-les-mathes-1.jpg"
+   },
+   {
+    "w": 2200,
+    "h": 1777,
+    "src": "PHOTOS SITE 2/véranda concept alu Les Mathes 2.jpg",
+    "bytes": 710528,
+    "file": "veranda-concept-alu-les-mathes-2.jpg"
+   }
+  ],
+  "baie-vitree-alu-janneau-jonzac": [
+   {
+    "w": 2200,
+    "h": 1650,
+    "src": "PHOTOS SITE 2/Baie vitrée Janneau Jonzac 1.jpg",
+    "bytes": 524053,
+    "file": "baie-vitree-alu-janneau-jonzac-1.jpg"
+   },
+   {
+    "w": 2200,
+    "h": 1650,
+    "src": "PHOTOS SITE 2/Baie vitrée Janneau Jonzac 2.jpg",
+    "bytes": 627197,
+    "file": "baie-vitree-alu-janneau-jonzac-2.jpg"
+   }
+  ],
+  "porte-entree-meo-royan": [
+   {
+    "w": 2200,
+    "h": 1650,
+    "src": "PHOTOS SITE 2/Porte d'entrée MéO Royan.jpg",
+    "bytes": 459158,
+    "file": "porte-entree-meo-royan-1.jpg"
+   }
+  ],
+  "pergola-bioclimatique-saujon": [
+   {
+    "w": 2200,
+    "h": 1650,
+    "src": "PHOTOS SITE 2/pergola concept alu Saujon.jpg",
+    "bytes": 834598,
+    "file": "pergola-bioclimatique-saujon-1.jpg"
+   }
+  ],
+  "pergola-blanche-la-couronne": [
+   {
+    "w": 640,
+    "h": 360,
+    "src": "PHOTOS SITE 2/pergola blanche concept alu La Couronne 1.jpg",
+    "bytes": 38590,
+    "file": "pergola-blanche-la-couronne-1.jpg"
+   },
+   {
+    "w": 640,
+    "h": 360,
+    "src": "PHOTOS SITE 2/pergola blanche concept alu La Couronne 2.jpg",
+    "bytes": 41627,
+    "file": "pergola-blanche-la-couronne-2.jpg"
+   }
+  ],
+  "store-banne-breuillet": [
+   {
+    "w": 1650,
+    "h": 2200,
+    "src": "PHOTOS SITE 2/Store banne Breuillet.jpg",
+    "bytes": 873145,
+    "file": "store-banne-breuillet-1.jpg"
+   }
+  ],
+  "volets-battants-alu-ehret-jonzac": [
+   {
+    "w": 2200,
+    "h": 1184,
+    "src": "PHOTOS SITE 2/Volets Battants Ehret Jonzac.jpg",
+    "bytes": 353343,
+    "file": "volets-battants-alu-ehret-jonzac-1.jpg"
+   }
+  ],
+  "portail-portillon-horizal-etaules": [
+   {
+    "w": 2200,
+    "h": 1797,
+    "src": "PHOTOS SITE 2/portail + portillon Horizal Etaules.jpg",
+    "bytes": 1026247,
+    "file": "portail-portillon-horizal-etaules-1.jpg"
+   }
+  ],
+  "portail-noir-horizal-pays-royannais": [
+   {
+    "w": 1632,
+    "h": 1224,
+    "src": "PHOTOS SITE 2/portail noir Horizal pays royannais.jpg",
+    "bytes": 363357,
+    "file": "portail-noir-horizal-pays-royannais-1.jpg"
+   }
+  ],
+  "garde-corps-horizal-saint-palais-sur-mer": [
+   {
+    "w": 1107,
+    "h": 830,
+    "src": "PHOTOS SITE 2/Garde-corps Horizal Saint-Palais.jpeg",
+    "bytes": 178734,
+    "file": "garde-corps-horizal-saint-palais-sur-mer-1.jpg"
+   }
+  ],
+  "garde-corps-horizal-arvert": [
+   {
+    "w": 480,
+    "h": 360,
+    "src": "PHOTOS SITE 2/Garde-corps Horizal Arvert.jpg",
+    "bytes": 33485,
+    "file": "garde-corps-horizal-arvert-1.jpg"
+   }
   ]
  },
  "equipe": {
@@ -903,6 +1023,13 @@
    "src": "EQUIPE /Benoit - Eco Responsable Janneau.jpg",
    "bytes": 232013,
    "file": "benoit-eco-responsable-janneau.jpg"
+  },
+  "olivier": {
+   "w": 934,
+   "h": 1400,
+   "src": "PHOTOS SITE 2/Olivier.jpg",
+   "bytes": 96843,
+   "file": "olivier.jpg"
   }
  },
  "agences": {
