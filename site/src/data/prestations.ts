@@ -26,7 +26,7 @@ export type Prestation = {
   lead: string; // chapô page
   hero: { real: string; i?: number; pos?: string } | { equipe: string } | { gen: string }; // pos : object-position du recadrage (ex. '50% 30%')
   facts: { label: string; value: string }[];
-  sections: { title: string; text: string[]; items?: { title: string; text: string }[]; images?: string[]; credit?: string }[]; // images : ids de visuels (src/assets/gen) ; credit : mention affichée sous les visuels (photos fabricant)
+  sections: { title: string; text: string[]; items?: { title: string; text: string }[]; images?: string[]; imagesRatio?: string; credit?: string }[]; // images : ids de visuels (src/assets/gen) ; imagesRatio : ratio d'affichage (ex. '2 / 1' pour une bannière) ; credit : mention affichée sous les visuels
   gammes: { title: string; marque?: string; text: string }[];
   marques: string[];
   arguments: { title: string; text: string }[];
@@ -336,8 +336,9 @@ export const prestations: Prestation[] = [
       {
         title: 'Pool houses et abris de piscine',
         images: ['pool-house-alu'],
+        imagesRatio: '2 / 1',
         text: [
-          'Local technique, cuisine d’été, coin ombragé : le pool house aluminium reprend les codes de la pergola et de l’extension avec des parois pleines ou vitrées, un bardage bois ou alu et une toiture étanche. Nous le dessinons dans la continuité de votre terrasse.',
+          'Local technique, cuisine d’été, coin ombragé : le pool house aluminium Concept Alu reprend les codes de la pergola et de l’extension avec des parois pleines ou vitrées, des panneaux décoratifs ajourés, un bardage bois ou alu et une toiture étanche. Nous le dessinons dans la continuité de votre terrasse.',
         ],
       },
       {

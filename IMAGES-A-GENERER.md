@@ -144,6 +144,8 @@ Editorial photograph of a wall-mounted home automation touch panel in a bright e
 
 ### `pool-house-alu.jpg` — 3:2 — section « Pool houses » de /prestations/carports-pool-house/
 
+> **Remplacé le 12 octobre 2026** par un visuel Concept Alu fourni par Maxence (rendu 3D d'un pool house à panneaux ajourés au bord d'une piscine), affiché en bannière 2:1 dans la section « Pool houses » de /prestations/carports-pool-house/. L'ancien visuel généré est conservé dans `assets/PHOTOS SITE LUZ/remplace-pool-house-alu-genere.jpeg`.
+
 ```
 Editorial photograph of a flat-roof anthracite aluminium pool house with wooden cladding beside a family swimming pool, two sun loungers, clear sky, southwest France garden, no people, no text, realistic --ar 3:2 --style raw
 ```
