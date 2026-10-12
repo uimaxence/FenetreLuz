@@ -151,7 +151,7 @@ export const croisees: Croisee[] = [
       { title: 'Pose sur tout support', text: 'Pierre, parpaing, isolation extérieure, ossature bois.' },
       { title: 'Dépannage', text: 'Toiles, bras et moteurs remplacés sur tous stores.' },
     ],
-    realisations: ['store-banne-hermes-royan', 'pergola-coulissants-verre-store-zip-pays-royannais', 'moustiquaires-enroulables-neuillac'],
+    realisations: ['store-banne-breuillet', 'pergola-coulissants-verre-store-zip-pays-royannais', 'moustiquaires-enroulables-neuillac'],
     faq: [
       { q: 'Quel prix pour un store banne à Royan ?', a: 'De 1 500 à 3 500 € posé pour un store coffre motorisé de 4 à 5 m avec capteur vent, selon avancée et toile. Devis gratuit.' },
       { q: 'Réparez-vous les stores existants à Royan ?', a: 'Oui : changement de toile, de bras ou de moteur sur tous les stores, quelle que soit la marque. Voir notre service dépannage.' },

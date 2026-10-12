@@ -151,7 +151,7 @@ REALISATIONS = {
     "moustiquaires-enroulables-neuillac": [
         R + "/Store banne - Moustiquaires etc /Moustiquaires enroulables - Neuillac_.jpg",
         R + "/Store banne - Moustiquaires etc /Moustiquaires enroulables - Neuillac_(1).jpg"],
-    "store-banne-hermes-royan": [R + "/Store banne - Moustiquaires etc /Store Hermes - Royan_.jpg"],
+    "store-banne-hermes-royan": [R + "/Store banne - Moustiquaires etc /Store Hermes - Royan_.jpg"],  # retiré du site le 12 oct. 2026 (demande de Benoît), photo conservée
     "volets-battants-alu-persiennes-saint-georges-de-didonne": [
         R + "/VOLETS BATTANTS /Volet battant Alu persienné - st georges de Didonne_.jpg",
         R + "/VOLETS BATTANTS /Volet battant Alu persienné - st georges de Didonne_(1).jpg"],

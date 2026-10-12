@@ -1,6 +1,6 @@
 {
   "_doc": "Fichier GÉNÉRÉ par `npm run avis` (scripts/fetch-avis.mjs) : ne pas éditer à la main. Regénéré avant chaque build si GOOGLE_PLACES_API_KEY est définie.",
-  "fetchedAt": "2026-10-12T07:21:29.996Z",
+  "fetchedAt": "2026-10-12T07:29:59.878Z",
   "fiches": {
     "jonzac": {
       "placeId": "ChIJOVK27AJQAEgRUyL_6Nvdprc",

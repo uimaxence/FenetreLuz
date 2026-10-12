@@ -85,7 +85,7 @@ export const villes: Ville[] = [
     ],
     communes: ['Saint-Pierre-d’Oléron', 'Dolus-d’Oléron', 'Le Château-d’Oléron', 'Saint-Trojan-les-Bains', 'Saint-Georges-d’Oléron', 'Saint-Denis-d’Oléron', 'La Brée-les-Bains', 'Le Grand-Village-Plage', 'Marennes', 'Bourcefranc-le-Chapus'],
     prestationsFocus: ['fenetres', 'portails-clotures', 'pergolas', 'stores', 'volets', 'verandas-extensions'],
-    realisations: ['pergola-bioclimatique-ile-oleron', 'portail-portillon-horizal-vaux-sur-mer', 'store-banne-hermes-royan', 'volets-battants-alu-persiennes-saint-georges-de-didonne'],
+    realisations: ['pergola-bioclimatique-ile-oleron', 'portail-portillon-horizal-vaux-sur-mer', 'store-banne-breuillet', 'volets-battants-alu-persiennes-saint-georges-de-didonne'],
     faq: [
       { q: 'Quelles menuiseries choisir en bord de mer ?', a: 'Aluminium laqué Qualimarine ou PVC de gamme littorale, quincailleries inox, vitrages feuilletés et à contrôle solaire. Pour les portails, un laquage Qualimarine et un assemblage sans soudure sont indispensables.' },
       { q: 'Intervenez-vous pour une résidence secondaire ?', a: 'Oui, nous planifions les interventions selon vos présences sur l’île et vous envoyons un compte rendu photo à la fin du chantier.' },
