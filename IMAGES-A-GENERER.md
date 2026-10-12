@@ -35,6 +35,8 @@ Paramètres conseillés : Midjourney `--ar 16:9 --style raw --v 7` (adapter `--a
 
 ### `brasero-terrasse.jpg` — 16:9 (2400 × 1350) — hero de /prestations/braseros/
 
+> **Refait le 12 octobre 2026** à partir des photos du brasero Vulcan exposé en showroom (fournies par Benoît) avec fal.ai (`fal-ai/nano-banana/edit`, deux vues en référence, puis `fal-ai/clarity-upscaler` ×2) : le produit réel (vasque corten, couronne crantée, grille, socle noir à panneau corten et logo V) est posé sur une terrasse bois devant une maison charentaise, feu allumé. Deux visuels de section ajoutés de la même façon : `brasero-feu.jpg` (vue de face) et `brasero-detail.jpg` (vue 3/4, socle ouvert). Ce sont des mises en scène générées, pas des chantiers LUZ : ne pas les présenter comme réalisations.
+
 ```
 Editorial photograph of a black steel fire-pit plancha (brasero) in the center of a wooden deck terrace at dusk, warm glowing embers, grilled vegetables and a few glasses on the ring-shaped cooking plate, anthracite aluminium bioclimatic pergola softly out of focus in the background, limestone Charentaise house, golden hour light, no people in focus (silhouettes from behind acceptable), 35mm, shallow depth of field, realistic, no text, no logo --ar 16:9 --style raw
 ```
