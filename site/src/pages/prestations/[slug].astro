@@ -99,7 +99,7 @@ const jsonLd = [
               {s.images && (
                 <div class:list={['txt-media', 'reveal', 'reveal--scale', { 'txt-media--2': s.images.length > 1 }]}>
                   {s.images.map((id) => (
-                    <Placeholder id={id} label={s.title} ratio={s.images!.length > 1 ? '1 / 1' : '4 / 3'} class="txt-media__item" />
+                    <Placeholder id={id} label={s.title} ratio={s.imagesRatio ?? (s.images!.length > 1 ? '1 / 1' : '4 / 3')} class="txt-media__item" />
                   ))}
                   {s.credit && <p class="txt-media__credit">{s.credit}</p>}
                 </div>
