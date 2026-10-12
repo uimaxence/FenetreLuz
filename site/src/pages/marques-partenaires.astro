@@ -43,7 +43,7 @@ const logoFor = (slug: string) => find(logos, slug) ?? find(certLogos, slug);
           principales.map((m, i) => (
             <article class="brand reveal" id={m.slug} style={`--d:${(i % 2) * 80}ms`}>
               <div class="brand__head">
-                {logoFor(m.slug) ? <img class="brand__logoimg" src={logoFor(m.slug)!.src} width={logoFor(m.slug)!.width} height={logoFor(m.slug)!.height} alt={m.name} loading="lazy" decoding="async" /> : <span class="brand__logo">{m.name}</span>}
+                {logoFor(m.slug) ? <img class:list={['brand__logoimg', { 'brand__logoimg--tall': logoFor(m.slug)!.height > logoFor(m.slug)!.width * 0.75 }]} src={logoFor(m.slug)!.src} width={logoFor(m.slug)!.width} height={logoFor(m.slug)!.height} alt={m.name} loading="lazy" decoding="async" /> : <span class="brand__logo">{m.name}</span>}
                 {m.label && <span class="badge badge--lime">{m.label}</span>}
               </div>
               <p class="brand__cat">{m.categorie}{m.origine && ` · ${m.origine}`}</p>
@@ -80,7 +80,7 @@ const logoFor = (slug: string) => find(logos, slug) ?? find(certLogos, slug);
           autres.map((m, i) => (
             <article class="brand brand--small reveal" id={m.slug} style={`--d:${(i % 3) * 70}ms`}>
               <div class="brand__head">
-                {logoFor(m.slug) ? <img class="brand__logoimg" src={logoFor(m.slug)!.src} width={logoFor(m.slug)!.width} height={logoFor(m.slug)!.height} alt={m.name} loading="lazy" decoding="async" /> : <span class="brand__logo">{m.name}</span>}
+                {logoFor(m.slug) ? <img class:list={['brand__logoimg', { 'brand__logoimg--tall': logoFor(m.slug)!.height > logoFor(m.slug)!.width * 0.75 }]} src={logoFor(m.slug)!.src} width={logoFor(m.slug)!.width} height={logoFor(m.slug)!.height} alt={m.name} loading="lazy" decoding="async" /> : <span class="brand__logo">{m.name}</span>}
                 {m.aVenir && <span class="badge">Bientôt</span>}
               </div>
               <p class="brand__cat">{m.categorie}</p>
@@ -146,8 +146,14 @@ const logoFor = (slug: string) => find(logos, slug) ?? find(certLogos, slug);
     max-width: 220px;
     object-fit: contain;
   }
+  .brand__logoimg--tall {
+    height: 76px;
+  }
   .brand--small .brand__logoimg {
     height: 40px;
+  }
+  .brand--small .brand__logoimg--tall {
+    height: 64px;
   }
   .brand__cat {
     margin: 0;

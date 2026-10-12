@@ -19,7 +19,7 @@ LOGO_OUT = SITE / "src" / "assets" / "logos"
 
 # identifiants attendus (voir IMAGES-A-GENERER.md) — seuls ces fichiers sont pris dans PHOTOS SITE LUZ
 GEN_IDS = {
-    "brasero-terrasse", "terrasse-bois", "partenariats-hero", "partenariat-ubj-rugby", "partenariat-lions-club",
+    "brasero-terrasse", "brasero-feu", "brasero-detail", "terrasse-bois", "partenariats-hero", "partenariat-ubj-rugby", "partenariat-lions-club",
     "partenariat-eurochestries", "conseil-aides-fenetres", "conseil-prix-veranda", "conseil-prix-pergola",
     "conseil-choisir-fenetres", "conseil-remplacement-fenetre", "volet-roulant-detail", "porte-garage-sectionnelle",
     "store-interieur-veranda", "moustiquaire-baie", "motorisation-portail-telecommande", "alarme-domotique-tablette",
