@@ -162,6 +162,8 @@ Editorial photograph of a white aluminium safety fence with a self-closing gate 
 
 ### `mur-rideau-bois-alu.jpg` — 3:2 — section « Murs-rideaux » de /prestations/fenetres/
 
+> **Plus nécessaire** : le 12 octobre 2026, Maxence a fourni deux photos de la bibliothèque MéO (`mur-rideau-meo-1.jpg`, pignon vitré, crédit Jérémy Fiori ; `mur-rideau-meo-2.jpg`, façade toute hauteur, crédit Benoit Bost), intégrées dans la section avec la mention de crédit. Ce sont des réalisations MéO, pas des chantiers LUZ.
+
 ```
 Interior editorial photograph of a contemporary house extension with a fully glazed facade, wood-interior aluminium-exterior curtain wall profiles, view from inside towards a garden, warm daylight, no people, no text, realistic --ar 3:2 --style raw
 ```

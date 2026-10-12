@@ -26,7 +26,7 @@ export type Prestation = {
   lead: string; // chapô page
   hero: { real: string; i?: number; pos?: string } | { equipe: string } | { gen: string }; // pos : object-position du recadrage (ex. '50% 30%')
   facts: { label: string; value: string }[];
-  sections: { title: string; text: string[]; items?: { title: string; text: string }[]; images?: string[] }[]; // images : ids de visuels (src/assets/gen)
+  sections: { title: string; text: string[]; items?: { title: string; text: string }[]; images?: string[]; credit?: string }[]; // images : ids de visuels (src/assets/gen) ; credit : mention affichée sous les visuels (photos fabricant)
   gammes: { title: string; marque?: string; text: string }[];
   marques: string[];
   arguments: { title: string; text: string }[];
@@ -90,8 +90,11 @@ export const prestations: Prestation[] = [
       },
       {
         title: 'Murs-rideaux et grandes façades vitrées',
+        images: ['mur-rideau-meo-1', 'mur-rideau-meo-2'],
+        credit: 'Murs-rideaux bois-aluminium MéO — photos MéO, crédits Jérémy Fiori et Benoit Bost',
         text: [
           'Pour les extensions contemporaines, les salles de séjour ouvertes sur le jardin ou les locaux professionnels, nous réalisons des murs-rideaux et ensembles composés en bois-aluminium MéO ou en aluminium Janneau : profils porteurs, vitrages de grande dimension, ouvrants intégrés.',
+          'Pignon vitré jusqu’au faîtage, façade toute hauteur ouverte sur la terrasse : le bois à l’intérieur garde la chaleur de la pièce, l’aluminium à l’extérieur tient les grandes portées sans entretien.',
         ],
       },
     ],

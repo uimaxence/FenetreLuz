@@ -23,7 +23,7 @@ GEN_IDS = {
     "partenariat-eurochestries", "conseil-aides-fenetres", "conseil-prix-veranda", "conseil-prix-pergola",
     "conseil-choisir-fenetres", "conseil-remplacement-fenetre", "volet-roulant-detail", "porte-garage-sectionnelle",
     "store-interieur-veranda", "moustiquaire-baie", "motorisation-portail-telecommande", "alarme-domotique-tablette",
-    "pool-house-alu", "cloture-alu-lames", "barriere-piscine-alu", "mur-rideau-bois-alu", "showroom-menuiseries",
+    "pool-house-alu", "cloture-alu-lames", "barriere-piscine-alu", "mur-rideau-bois-alu", "mur-rideau-meo-1", "mur-rideau-meo-2", "showroom-menuiseries",
     "ambiance-saintes", "ambiance-cognac", "ambiance-oleron", "aides-conseiller-devis", "og-default-alt",
 }
 GEN_AS_LOGO = {"partenariat-eurochestries": "eurochestries", "partenariat-ubj-rugby-logo": "ubj-rugby", "partenariat-lions-club-logo": "lions-club", "arkea": "arkea"}
