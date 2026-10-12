@@ -30,7 +30,7 @@ export const realisations: Realisation[] = [
     description:
       'Duo véranda à toit plat et pergola à lames bioclimatiques en aluminium anthracite (RAL 7016), dans le prolongement d’une maison contemporaine et de sa piscine. La véranda accueille le séjour, la pergola abrite la terrasse : une seule ligne de toiture pour les deux.',
     details: [
-      { label: 'Produits', value: 'Véranda HOMEA + pergola bioclimatique' },
+      { label: 'Produits', value: 'Véranda EXTANXIA + pergola bioclimatique' },
       { label: 'Coloris', value: 'Gris anthracite RAL 7016' },
       { label: 'Options', value: 'Lames orientables motorisées, baies coulissantes' },
     ],

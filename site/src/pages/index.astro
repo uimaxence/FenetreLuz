@@ -38,7 +38,7 @@ const showroom = equipePhoto('showroom-steve-elodie');
 const commerciaux = equipePhoto('equipe-commerciale');
 const pose = equipePhoto('pose-securite-2');
 const benoit = equipePhoto('benoit');
-const olivier = equipePhoto('olivier');
+const respRoyan = agences.royan.responsable?.photo ? equipePhoto(agences.royan.responsable.photo) : undefined;
 
 // Mur de chantiers : 1 grande tuile + 8 tuiles (prestations variées, photos nettes, secteur Jonzac et Royan)
 const wall: { slug: string; i?: number; big?: boolean }[] = [
@@ -194,8 +194,8 @@ const description =
           <figcaption>Pose sécurisée : harnais et ligne de vie</figcaption>
         </figure>
         <figure class="team__cell reveal reveal--scale" style="--d:160ms">
-          {showroom && <Picture src={showroom} alt="Steve et Élodie, conseillers commerciaux, dans le showroom LUZ" widths={[500, 800]} sizes="(max-width: 900px) 50vw, 28vw" formats={['webp']} loading="lazy" decoding="async" class="team__img" pictureAttributes={{ class: 'team__pic' }} />}
-          <figcaption>Steve et Élodie, vos conseillers</figcaption>
+          {showroom && <Picture src={showroom} alt="Steve, commercial, et Élodie, responsable de l’agence de Royan, dans le showroom LUZ" widths={[500, 800]} sizes="(max-width: 900px) 50vw, 28vw" formats={['webp']} loading="lazy" decoding="async" class="team__img" pictureAttributes={{ class: 'team__pic' }} />}
+          <figcaption>Steve et Élodie, vos interlocuteurs</figcaption>
         </figure>
         <figure class="team__cell reveal reveal--scale" style="--d:240ms">
           {commerciaux && <Picture src={commerciaux} alt="L’équipe commerciale de Fenêtres & Vérandas LUZ" widths={[500, 800]} sizes="(max-width: 900px) 50vw, 28vw" formats={['webp']} loading="lazy" decoding="async" class="team__img" pictureAttributes={{ class: 'team__pic' }} />}
@@ -235,7 +235,7 @@ const description =
           </div>
         </div>
         <div class="contact reveal" style="--d:100ms">
-          {olivier ? <Image src={olivier} alt="" width={128} height={128} fit="cover" position="top" format="webp" loading="lazy" decoding="async" class="contact__img" /> : <span class="contact__img contact__img--soon" aria-hidden="true">O</span>}
+          {respRoyan ? <Image src={respRoyan} alt="" width={128} height={128} fit="cover" position="top" format="webp" loading="lazy" decoding="async" class="contact__img" /> : <span class="contact__img contact__img--soon" aria-hidden="true">{agences.royan.responsable?.name[0]}</span>}
           <div>
             <p class="tag">Agence de Royan</p>
             <strong>{agences.royan.responsable?.name}</strong>
