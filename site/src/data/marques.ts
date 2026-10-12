@@ -55,7 +55,7 @@ export const marques: Marque[] = [
     categorie: 'Portails, clôtures, garde-corps',
     produits: ['Portails battants et coulissants (+300 modèles)', 'Clôtures aluminium', 'Garde-corps verre, tôle laser, inox', 'Barrières de piscine'],
     description:
-      'HORIZAL fabrique des portails aluminium sur mesure assemblés mécaniquement sans soudure, avec un laquage labellisé Qualicoat et Qualimarine, idéal en bord de mer. LUZ est Portalier agréé HORIZAL : conception, pose et motorisation par nos équipes.',
+      'HORIZAL fabrique des portails aluminium sur mesure assemblés mécaniquement sans soudure, avec un laquage labellisé Qualicoat et Qualimarine, idéal en bord de mer. LUZ conçoit, pose et motorise les portails HORIZAL avec ses propres équipes.',
     origine: 'Fabrication française',
     prestations: ['portails-clotures'],
     principale: true,
@@ -67,7 +67,7 @@ export const marques: Marque[] = [
     categorie: 'Stores extérieurs & intérieurs',
     produits: ['Stores bannes coffre, cassette, traditionnels', 'Stores verticaux zip screen', 'Pergolas stores', 'Moustiquaires', 'Stores intérieurs'],
     description:
-      'Storiste français depuis 1947, Soliso fabrique des stores bannes, stores verticaux et pergolas toile reconnus pour leur tenue au vent et la qualité de leurs toiles. LUZ est Expert Storiste Soliso pour la Charente-Maritime.',
+      'Storiste français depuis 1947, Soliso fabrique des stores bannes, stores verticaux et pergolas toile reconnus pour leur tenue au vent et la qualité de leurs toiles. LUZ pose et dépanne les stores Soliso en Charente-Maritime.',
     origine: 'Fabrication française depuis 1947',
     prestations: ['stores', 'pergolas'],
     principale: true,

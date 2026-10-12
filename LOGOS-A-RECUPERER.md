@@ -9,7 +9,10 @@
 
 **Reçus et intégrés** : certifications RGE, Qualibat, MéO (Menuisiers d'Excellence), Janneau (Menuisier Créateur), HORIZAL (Portaliers), Soliso (Experts Storistes), Concept Alu, Generali · marques EHRET, Soprofen, Gypass, Somfy, DEA, Vulcan, TWIC · partenaire Eurochestries.
 
-**Encore attendus** : logos UBJ Jonzac-Barbezieux Rugby, Lions Club, ARKEA ; logos « produit » MéO, Janneau, Concept Alu, HORIZAL, Soliso (optionnel : la page marques utilise les logos réseau en attendant) ; logo LUZ vectoriel ; photo d'Olivier Michaud ; photos du bureau de Breuillet ; accès fiches Google ; attestations RGE et Generali ; conditions ARKEA ; horaires définitifs.
+**Mise à jour du 12 octobre 2026 — logos « marque » récupérés sur les sites officiels des fabricants** (dossier `marques/`, à la demande de Maxence) : MéO (`fenetremeo.com`, PNG couleur « La fenêtre émotion »), Janneau (`janneau.com`, SVG), HORIZAL (`horizal.com`, SVG marque, plus le badge « Portaliers »), EHRET (`ehret.com`, SVG), Soprofen (`soprofen.fr`, SVG du site), DEA (`deasystem.com`, SVG), TWIC (`twic.fr`, PNG 1600 px), Vulcan (`vulcan-brasero.com`, logo typo noire 2000 px). Soliso : seul un GIF de 191 px existe sur `soliso.com` → agrandi ×4 et nettoyé (provisoire, demander le fichier au fabricant). Concept Alu : site injoignable ce jour, le PNG fourni par Benoît reste en place. Somfy et Gypass inchangés (déjà corrects). Les badges réseau (Portaliers HORIZAL, Experts Storistes Soliso) restent dans `certifications/` mais ne sont plus affichés (demande de Benoît du 9 octobre). Anciens fichiers bruts conservés dans `assets/logos/marques/remplaces/`.
+> Ces logos sont ceux des sites officiels ; pour être irréprochable sur les droits d'usage, demander malgré tout le kit partenaire à chaque fabricant (ils le fournissent aux installateurs agréés).
+
+**Encore attendus** : logos UBJ Jonzac-Barbezieux Rugby, Lions Club, ARKEA ; logo Soliso en vectoriel et logo Concept Alu HD (kits partenaires) ; logo LUZ vectoriel ; photos du bureau de Breuillet ; accès fiches Google ; attestations RGE et Generali ; conditions ARKEA ; horaires définitifs.
 
 > Les fichiers se déposent dans `assets/logos/<dossier>/` à la racine (n'importe quel format) puis `npm run assets` dans `site/` les normalise (rognage des marges, PNG/SVG, renommage) vers `site/src/assets/logos/`.
 

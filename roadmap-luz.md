@@ -39,6 +39,7 @@
   > Reçus : logo Eurochestries, photo terrain UBJ, photo Lions Club. Restent les textes de chaque partenariat et les logos UBJ / Lions Club.
 - [x] Récupérer les logos fabricants en HD pour la page /marques-partenaires/ (MéO, Janneau, Concept Alu, HORIZAL, Soliso, EHRET, Vulcan, Somfy)
   > Reçus et intégrés (15 logos : 8 certifications/réseaux + 7 marques). Voir `LOGOS-A-RECUPERER.md` pour le statut détaillé et le reste à récupérer (ARKEA, UBJ, Lions Club, logo LUZ vectoriel).
+  > 12 octobre 2026 : logos « marque » récupérés sur les sites officiels des fabricants (MéO, Janneau, HORIZAL, EHRET, Soprofen, DEA, TWIC, Vulcan en vectoriel ou HD ; Soliso reconstruit à partir du petit logo du site, à remplacer par le kit fabricant). La page marques n'affiche plus les badges réseau « Portaliers » / « Experts Storistes ». Détail et sources dans `LOGOS-A-RECUPERER.md`.
 
 ## 2. Zones d'intervention & stratégie géographique
 D'après la carte cantonale fournie par Benoît, 3 zones sont identifiées :
