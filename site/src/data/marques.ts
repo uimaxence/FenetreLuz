@@ -41,7 +41,7 @@ export const marques: Marque[] = [
     name: 'Concept Alu',
     label: 'Partenaire Concept Alu',
     categorie: 'Vérandas, extensions, pergolas, carports',
-    produits: ['Vérandas HOMEA et ARMONIA', 'Extensions EXTANXIA Still et Deko', 'Pergolas bioclimatiques', 'Carports, pool houses, auvents'],
+    produits: ['Vérandas et extensions EXTANXIA', 'Pergolas bioclimatiques', 'Carports, pool houses, auvents'],
     description:
       'Concept Alu conçoit des vérandas, extensions et pergolas en aluminium avec son propre bureau d’études et de R&D. En tant que partenaire, LUZ dessine votre projet avec leurs outils de conception 3D et le fait fabriquer sur mesure.',
     origine: 'Fabrication française',

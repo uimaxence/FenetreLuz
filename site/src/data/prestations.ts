@@ -197,14 +197,14 @@ export const prestations: Prestation[] = [
     h1: 'Vérandas et extensions aluminium en Charente-Maritime',
     metaTitle: 'Véranda & extension en Charente-Maritime (17) — Concept Alu, pose & devis | LUZ',
     metaDescription:
-      'Véranda ou extension aluminium sur mesure à Jonzac, Royan, Saintes et en Charente-Maritime. Partenaire Concept Alu (HOMEA, ARMONIA, EXTANXIA), conception 3D, pose par nos équipes. Devis gratuit.',
+      'Véranda ou extension aluminium sur mesure à Jonzac, Royan, Saintes et en Charente-Maritime. Partenaire Concept Alu (gamme EXTANXIA), conception 3D, pose par nos équipes. Devis gratuit.',
     icon: 'veranda',
     card: 'Une pièce en plus, baignée de lumière : vérandas et extensions Concept Alu conçues en 3D et posées par LUZ.',
     lead: 'Gagner une pièce à vivre, ouvrir la maison sur le jardin, valoriser votre bien : la véranda ou l’extension aluminium Concept Alu s’adapte à votre maison, qu’elle soit charentaise en pierre ou contemporaine.',
     hero: { real: 'veranda-concept-alu-les-mathes', pos: '62% 50%' },
     facts: [
       { label: 'Fabricant', value: 'Concept Alu (France)' },
-      { label: 'Gammes', value: 'HOMEA, ARMONIA, EXTANXIA' },
+      { label: 'Gamme', value: 'EXTANXIA (Concept Alu)' },
       { label: 'Conception', value: 'Plans 3D et visite technique' },
       { label: 'Démarches', value: 'Déclaration préalable ou permis' },
     ],
@@ -230,10 +230,7 @@ export const prestations: Prestation[] = [
       },
     ],
     gammes: [
-      { title: 'HOMEA', marque: 'Concept Alu', text: 'Véranda moderne à toit plat, polyvalente et sophistiquée. Toiture pensée pour le confort : régulateur de lumière, volets télécommandés, isolation renforcée.' },
-      { title: 'ARMONIA', marque: 'Concept Alu', text: 'Tradition et élégance : toiture isolante, lignes épurées, larges surfaces vitrées. S’intègre en harmonie avec les demeures de caractère.' },
-      { title: 'EXTANXIA Still', marque: 'Concept Alu', text: 'Extension à toit plat inspirée de la finition acier : style atelier, industriel, très graphique.' },
-      { title: 'EXTANXIA Deko', marque: 'Concept Alu', text: 'Extension à toiture plate isolante haute performance (membrane EPDM), finitions bois ou alu, brise-soleil intégrables.' },
+      { title: 'EXTANXIA', marque: 'Concept Alu', text: 'Véranda et extension à toit plat : toiture isolante haute performance, grandes surfaces vitrées, finitions bois ou aluminium, brise-soleil et volets roulants intégrables. Une seule gamme, déclinée à votre maison.' },
     ],
     marques: ['concept-alu'],
     arguments: [
@@ -245,7 +242,7 @@ export const prestations: Prestation[] = [
     faq: [
       { q: 'Quel est le prix d’une véranda ?', a: 'Une véranda aluminium Concept Alu de 15 à 20 m² se situe généralement entre 25 000 et 45 000 € posée, hors dalle et électricité, selon la toiture (vitrée, mixte ou isolée), les ouvrants et les options de confort. Une extension à toit plat isolée est un peu plus onéreuse au mètre carré. Nous chiffrons précisément après visite.' },
       { q: 'Faut-il un permis de construire ?', a: 'Jusqu’à 20 m² de surface créée (40 m² dans certaines zones urbaines couvertes par un PLU), une déclaration préalable suffit ; au-delà, un permis de construire est nécessaire. Nous préparons les pièces graphiques du dossier.' },
-      { q: 'Une véranda est-elle habitable en hiver et en été ?', a: 'Oui, avec une toiture isolée ou mixte, des vitrages à contrôle solaire, des protections solaires et un chauffage adapté. Nos gammes HOMEA et EXTANXIA sont conçues pour un usage toute l’année.' },
+      { q: 'Une véranda est-elle habitable en hiver et en été ?', a: 'Oui, avec une toiture isolée ou mixte, des vitrages à contrôle solaire, des protections solaires et un chauffage adapté. La gamme EXTANXIA est conçue pour un usage toute l’année.' },
       { q: 'Quel délai pour une véranda ?', a: 'Comptez 2 à 3 mois pour l’instruction du dossier d’urbanisme, 8 à 12 semaines de fabrication, puis 1 à 2 semaines de pose selon la taille du projet.' },
     ],
     croisee: 'veranda-royan',

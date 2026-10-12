@@ -12,7 +12,7 @@ export type Agence = {
   openingHoursSpecification: { days: string[]; opens: string; closes: string }[];
   mapsQuery: string;
   showroom?: string;
-  responsable?: { name: string; role: string; bio: string };
+  responsable?: { name: string; role: string; bio: string; photo?: string }; // photo : clé dans src/assets/photos/equipe/
   zoneLabel: string;
   intro: string;
   description: string[];
@@ -95,16 +95,17 @@ export const agences: Record<'jonzac' | 'royan', Agence> = {
     mapsQuery: 'Fenêtres et Vérandas LUZ, 54C route du Magarin, 17920 Breuillet',
     showroom: 'Showroom & bureau',
     responsable: {
-      name: 'Olivier Michaud',
-      role: 'Commercial, agence de Royan',
-      bio: 'Plus de trente ans de menuiserie en pays royannais. Olivier vous reçoit à Breuillet, se déplace chez vous pour le métré et suit votre chantier jusqu’à la réception.',
+      name: 'Élodie', // nom de famille à confirmer avec Benoît avant affichage
+      role: 'Responsable de l’agence de Royan',
+      bio: 'Élodie vous reçoit à Breuillet, étudie votre projet avec vous et suit votre chantier jusqu’à la réception. Avec Olivier, commercial de l’agence, elle se déplace chez vous pour le métré.',
+      photo: 'elodie',
     },
     zoneLabel: 'Pays royannais, presqu’île d’Arvert, Marennes-Oléron',
     intro:
       'Notre agence du pays royannais, à Breuillet, à dix minutes de Royan. Menuiseries alu pour le bord de mer, vérandas, pergolas, portails et stores : un interlocuteur local qui connaît les contraintes du littoral.',
     description: [
       'Ouverte pour être au plus près de nos clients du littoral, l’agence de Breuillet couvre Royan et toute la Côte de Beauté, la presqu’île d’Arvert, le bassin de Marennes et l’île d’Oléron.',
-      'Le climat marin impose des choix précis : aluminium laqué avec label Qualimarine, quincaillerie inox, vitrages à contrôle solaire, stores résistants au vent. Olivier Michaud, votre commercial à Breuillet, vous conseille sur ces points dès la première visite.',
+      'Le climat marin impose des choix précis : aluminium laqué avec label Qualimarine, quincaillerie inox, vitrages à contrôle solaire, stores résistants au vent. Élodie, responsable de l’agence, et Olivier Michaud, commercial, vous conseillent sur ces points dès la première visite.',
       'Nos équipes de pose sont les mêmes qu’à Jonzac : des salariés LUZ, pas de sous-traitance. Le service après-vente et le dépannage sont assurés depuis Breuillet pour tout le secteur.',
     ],
     communes: [

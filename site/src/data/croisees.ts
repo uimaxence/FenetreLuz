@@ -35,13 +35,13 @@ export const croisees: Croisee[] = [
         title: 'Une véranda pensée pour le climat royannais',
         text: [
           'Exposition sud-ouest, vent dominant, embruns : nous choisissons des profils aluminium laqués Qualimarine, des vitrages à contrôle solaire et des toitures isolées ou mixtes pour un confort réel en plein été. Stores de toiture, brise-soleil orientables et ventilation complètent l’ensemble.',
-          'Sur les villas des années 50 de Royan comme sur les maisons de Saint-Georges-de-Didonne ou Vaux-sur-Mer, la gamme HOMEA à toit plat ou l’extension EXTANXIA s’intègrent avec sobriété. Nous préparons les documents pour la déclaration préalable ou le permis, y compris dans les secteurs soumis à l’avis de l’Architecte des Bâtiments de France.',
+          'Sur les villas des années 50 de Royan comme sur les maisons de Saint-Georges-de-Didonne ou Vaux-sur-Mer, la véranda ou l’extension EXTANXIA à toit plat s’intègre avec sobriété. Nous préparons les documents pour la déclaration préalable ou le permis, y compris dans les secteurs soumis à l’avis de l’Architecte des Bâtiments de France.',
         ],
       },
       {
         title: 'Un interlocuteur local',
         text: [
-          'Olivier Michaud, commercial de l’agence de Royan, vient chez vous pour l’étude, vous présente le projet en 3D et suit la pose réalisée par nos propres équipes. Le service après-vente est assuré depuis Breuillet.',
+          'Élodie, responsable de l’agence de Royan, et Olivier Michaud, commercial, viennent chez vous pour l’étude, vous présentent le projet en 3D et suivent la pose réalisée par nos propres équipes. Le service après-vente est assuré depuis Breuillet.',
         ],
       },
     ],
@@ -83,7 +83,7 @@ export const croisees: Croisee[] = [
       { title: 'Tenue au vent', text: 'Structures dimensionnées pour le littoral, anémomètre de sécurité.' },
       { title: 'Évolutive', text: 'Coulissants, stores, LED, chauffage ajoutables après coup.' },
       { title: 'Pergola exposée', text: 'À tester dans notre showroom de Jonzac.' },
-      { title: 'Agence à Breuillet', text: 'Étude et suivi par Olivier Michaud.' },
+      { title: 'Agence à Breuillet', text: 'Étude et suivi par Élodie et Olivier.' },
     ],
     realisations: ['pergola-coulissants-verre-store-zip-pays-royannais', 'double-pergola-bioclimatique-pays-royannais', 'pergola-blanche-sur-mesure-pays-royannais', 'pergola-semussac', 'pergola-bioclimatique-ile-oleron'],
     faq: [

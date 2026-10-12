@@ -1,6 +1,6 @@
 {
   "_doc": "Fichier GÉNÉRÉ par `npm run avis` (scripts/fetch-avis.mjs) : ne pas éditer à la main. Regénéré avant chaque build si GOOGLE_PLACES_API_KEY est définie.",
-  "fetchedAt": "2026-10-09T13:44:31.676Z",
+  "fetchedAt": "2026-10-12T07:21:29.996Z",
   "fiches": {
     "jonzac": {
       "placeId": "ChIJOVK27AJQAEgRUyL_6Nvdprc",
@@ -65,8 +65,8 @@
     "royan": {
       "placeId": "ChIJScwnEDRxAUgRWKg9bzBRsOE",
       "nom": "Fenêtres & Vérandas LUZ",
-      "note": 4.9,
-      "nombre": 60,
+      "note": 4.8,
+      "nombre": 61,
       "url": "https://maps.google.com/?cid=16262587522901452888&g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
       "writeAReviewUrl": "https://www.google.com/maps/place//data=!4m3!3m2!1s0x480171341027cc49:0xe1b051306f3da858!12e1?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAIYBCAA",
       "avis": [
