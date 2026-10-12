@@ -16,6 +16,7 @@ export type Realisation = {
   photos: number;
   featured?: boolean;
   lowRes?: boolean; // photos de faible définition : à ne pas utiliser en grand format
+  listeSeulement?: boolean; // visible uniquement dans la liste /realisations/ et sur sa page : jamais en vedette, ni sur les pages prestations, agences ou villes
 };
 
 export const realisations: Realisation[] = [
@@ -736,6 +737,22 @@ export const realisations: Realisation[] = [
     photos: 2,
   },
   {
+    slug: 'store-banne-hermes-royan',
+    title: 'Store banne coffre au bord de la piscine',
+    ville: 'Royan',
+    zone: 'royan',
+    prestation: 'stores',
+    prestationLabel: 'Store banne',
+    marque: 'Soliso',
+    description: 'Store banne à coffre Soliso, toile blanche, motorisé, en couverture de la terrasse d’une maison rose du pays royannais, face à la piscine.',
+    details: [
+      { label: 'Produit', value: 'Store banne coffre' },
+      { label: 'Motorisation', value: 'Somfy' },
+    ],
+    photos: 1,
+    listeSeulement: true, // demande de Benoît (12 oct. 2026) : gardé dans la liste, plus utilisé en référence
+  },
+  {
     slug: 'volets-battants-alu-persiennes-saint-georges-de-didonne',
     title: 'Volets battants aluminium persiennés',
     ville: 'Saint-Georges-de-Didonne',
@@ -935,10 +952,12 @@ export const realisations: Realisation[] = [
 ];
 
 export const realisationBySlug = (slug: string) => realisations.find((r) => r.slug === slug);
-export const realisationsFeatured = realisations.filter((r) => r.featured);
+/** Chantiers utilisables en référence (vedette, pages prestations / agences) : exclut ceux limités à la liste. */
+const enReference = realisations.filter((r) => !r.listeSeulement);
+export const realisationsFeatured = enReference.filter((r) => r.featured);
 export const realisationsByPrestation = (slug: string) =>
-  realisations.filter((r) => r.prestation === slug || (slug === 'volets' && r.prestationLabel === 'Fenêtres & volets'));
-export const realisationsByZone = (zone: Realisation['zone']) => realisations.filter((r) => r.zone === zone);
+  enReference.filter((r) => r.prestation === slug || (slug === 'volets' && r.prestationLabel === 'Fenêtres & volets'));
+export const realisationsByZone = (zone: Realisation['zone']) => enReference.filter((r) => r.zone === zone);
 
 export const zoneLabels: Record<Realisation['zone'], string> = {
   jonzac: 'Jonzac, Haute-Saintonge & Charente',
