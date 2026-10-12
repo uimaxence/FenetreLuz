@@ -736,22 +736,6 @@ export const realisations: Realisation[] = [
     photos: 2,
   },
   {
-    slug: 'store-banne-hermes-royan',
-    title: 'Store banne coffre au bord de la piscine',
-    ville: 'Royan',
-    zone: 'royan',
-    prestation: 'stores',
-    prestationLabel: 'Store banne',
-    marque: 'Soliso',
-    description: 'Store banne à coffre Soliso, toile blanche, motorisé, en couverture de la terrasse d’une maison rose du pays royannais, face à la piscine.',
-    details: [
-      { label: 'Produit', value: 'Store banne coffre' },
-      { label: 'Motorisation', value: 'Somfy' },
-    ],
-    photos: 1,
-    featured: true,
-  },
-  {
     slug: 'volets-battants-alu-persiennes-saint-georges-de-didonne',
     title: 'Volets battants aluminium persiennés',
     ville: 'Saint-Georges-de-Didonne',
