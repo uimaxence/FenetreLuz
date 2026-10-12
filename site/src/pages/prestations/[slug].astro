@@ -101,6 +101,7 @@ const jsonLd = [
                   {s.images.map((id) => (
                     <Placeholder id={id} label={s.title} ratio={s.images!.length > 1 ? '1 / 1' : '4 / 3'} class="txt-media__item" />
                   ))}
+                  {s.credit && <p class="txt-media__credit">{s.credit}</p>}
                 </div>
               )}
             </div>
@@ -380,6 +381,12 @@ const jsonLd = [
   .txt-media :global(.txt-media__item) {
     border-radius: var(--radius);
     overflow: hidden;
+  }
+  .txt-media__credit {
+    grid-column: 1 / -1;
+    margin: 0;
+    font-size: 0.78rem;
+    color: var(--ink-3);
   }
   @media (max-width: 800px) {
     .txt-grid {
