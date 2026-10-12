@@ -624,12 +624,14 @@ export const prestations: Prestation[] = [
     sections: [
       {
         title: 'Se réunir autour du feu',
+        images: ['brasero-feu'],
         text: [
           'Un foyer rond en acier épais, posé sur la terrasse ou dans le jardin : le brasero Vulcan chauffe, éclaire et rassemble. L’acier monte vite en température et la rouille de surface, voulue, protège le métal au fil des saisons.',
         ],
       },
       {
         title: 'Modèles et accessoires',
+        images: ['brasero-detail'],
         text: [
           'Plusieurs diamètres et hauteurs selon la taille de la terrasse, avec couvercles, grilles et housses de protection. Nous vous conseillons le modèle adapté à votre terrasse et à votre pergola.',
         ],
