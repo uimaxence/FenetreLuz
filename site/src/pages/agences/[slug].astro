@@ -1,5 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
+import { Picture, Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import PageHero from '../../components/PageHero.astro';
 import SectionHead from '../../components/SectionHead.astro';
@@ -22,6 +22,7 @@ export function getStaticPaths() {
 const { a } = Astro.props as { a: Agence };
 const hero = agencePhoto(a.photo);
 const showroom = a.slug === 'jonzac' ? equipePhoto('showroom-steve-elodie') : undefined;
+const portrait = a.responsable?.photo ? equipePhoto(a.responsable.photo) : undefined;
 const reals = realisationsByZone(a.slug).sort((x, y) => Number(!!y.featured) - Number(!!x.featured)).slice(0, 6);
 const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.mapsQuery)}`;
 const villesProches = villes.filter((v) => v.agence === a.slug);
@@ -102,9 +103,13 @@ const jsonLd = [
         {
           a.responsable && (
             <div class="resp">
-              <span class="resp__ic">
-                <Icon id="team" />
-              </span>
+              {portrait ? (
+                <Image src={portrait} alt={`${a.responsable.name}, ${a.responsable.role.toLowerCase()}`} width={192} height={192} fit="cover" position="top" format="webp" loading="lazy" decoding="async" class="resp__photo" />
+              ) : (
+                <span class="resp__ic">
+                  <Icon id="team" />
+                </span>
+              )}
               <div>
                 <strong>{a.responsable.name}</strong>
                 <span>{a.responsable.role}</span>
@@ -293,12 +298,22 @@ const jsonLd = [
   }
   .resp {
     display: flex;
-    gap: 1rem;
+    align-items: center;
+    gap: 1.25rem;
     padding: 1.25rem;
     margin-top: 1.5rem;
     border-radius: var(--radius);
     background: var(--stone-50);
     border: 1px solid var(--stone-200);
+  }
+  .resp :global(.resp__photo) {
+    flex: none;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--lime);
+    background: var(--stone-100);
   }
   .resp__ic {
     flex: none;
