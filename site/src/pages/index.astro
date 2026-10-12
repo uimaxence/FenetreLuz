@@ -37,7 +37,7 @@ const poseTall = equipePhoto('pose-securite-1');
 const showroom = equipePhoto('showroom-steve-elodie');
 const commerciaux = equipePhoto('equipe-commerciale');
 const pose = equipePhoto('pose-securite-2');
-const benoit = equipePhoto('benoit');
+const respJonzac = agences.jonzac.responsable?.photo ? equipePhoto(agences.jonzac.responsable.photo) : undefined;
 const respRoyan = agences.royan.responsable?.photo ? equipePhoto(agences.royan.responsable.photo) : undefined;
 
 // Mur de chantiers : 1 grande tuile + 8 tuiles (prestations variées, photos nettes, secteur Jonzac et Royan)
@@ -226,11 +226,11 @@ const description =
 
       <div class="contacts">
         <div class="contact reveal">
-          {benoit && <Image src={benoit} alt="" width={128} height={128} fit="cover" position="top" format="webp" loading="lazy" decoding="async" class="contact__img" />}
+          {respJonzac && <Image src={respJonzac} alt="" width={128} height={128} fit="cover" position="top" format="webp" loading="lazy" decoding="async" class="contact__img" />}
           <div>
             <p class="tag">Agence de Jonzac</p>
-            <strong>{site.founder}</strong>
-            <span>Gérant, fondateur. Il suit personnellement les projets de la Haute-Saintonge.</span>
+            <strong>{agences.jonzac.responsable?.name}</strong>
+            <span>{agences.jonzac.responsable?.role}. {agences.jonzac.responsable?.bio}</span>
             <a href={`tel:${agences.jonzac.tel}`}><Icon id="phone" /> {agences.jonzac.phone}</a>
           </div>
         </div>

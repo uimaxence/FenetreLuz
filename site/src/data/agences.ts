@@ -43,6 +43,12 @@ export const agences: Record<'jonzac' | 'royan', Agence> = {
     ],
     mapsQuery: 'Fenêtres et Vérandas LUZ, 14 Bis route de Saint-Genis, 17500 Saint-Germain-de-Lusignan',
     showroom: 'Showroom de 200 m²',
+    responsable: {
+      name: 'Benoît Clarysse',
+      role: 'Gérant, fondateur',
+      bio: 'Benoît vous reçoit dans le showroom de Saint-Germain-de-Lusignan et suit personnellement les projets de la Haute-Saintonge et de l’ouest de la Charente, du premier rendez-vous à la réception du chantier.',
+      photo: 'benoit',
+    },
     zoneLabel: 'Haute-Saintonge, Sud Charente-Maritime',
     intro:
       'Notre agence historique et son showroom de 200 m², aux portes de Jonzac. Fenêtres, portes, vérandas, portails, volets et stores : venez voir, toucher et comparer avant de choisir.',
