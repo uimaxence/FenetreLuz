@@ -41,7 +41,7 @@ export const croisees: Croisee[] = [
       {
         title: 'Un interlocuteur local',
         text: [
-          'Élodie, responsable de l’agence de Royan, et Olivier Michaud, commercial, viennent chez vous pour l’étude, vous présentent le projet en 3D et suivent la pose réalisée par nos propres équipes. Le service après-vente est assuré depuis Breuillet.',
+          'Élodie, responsable de l’agence de Royan, et Steve, commercial, viennent chez vous pour l’étude, vous présentent le projet en 3D et suivent la pose réalisée par nos propres équipes. Le service après-vente est assuré depuis Breuillet.',
         ],
       },
     ],
@@ -83,7 +83,7 @@ export const croisees: Croisee[] = [
       { title: 'Tenue au vent', text: 'Structures dimensionnées pour le littoral, anémomètre de sécurité.' },
       { title: 'Évolutive', text: 'Coulissants, stores, LED, chauffage ajoutables après coup.' },
       { title: 'Pergola exposée', text: 'À tester dans notre showroom de Jonzac.' },
-      { title: 'Agence à Breuillet', text: 'Étude et suivi par Élodie et Olivier.' },
+      { title: 'Agence à Breuillet', text: 'Étude et suivi par Élodie et Steve.' },
     ],
     realisations: ['pergola-coulissants-verre-store-zip-pays-royannais', 'double-pergola-bioclimatique-pays-royannais', 'pergola-blanche-sur-mesure-pays-royannais', 'pergola-semussac', 'pergola-bioclimatique-ile-oleron'],
     faq: [

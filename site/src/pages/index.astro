@@ -900,6 +900,10 @@ const description =
       grid-template-rows: none;
       height: auto;
     }
+    /* Règle générique d'abord : même spécificité que les variantes, qui doivent passer après. */
+    .team__cell {
+      aspect-ratio: 3 / 4;
+    }
     .team__cell--big {
       grid-column: 1 / -1;
       grid-row: auto;
@@ -910,8 +914,10 @@ const description =
       grid-row: auto;
       aspect-ratio: 3 / 4;
     }
-    .team__cell {
-      aspect-ratio: 3 / 4;
+    /* 4 cellules sur 2 colonnes : la dernière prend toute la largeur pour ne pas laisser de trou. */
+    .team__cell:last-child {
+      grid-column: 1 / -1;
+      aspect-ratio: 4 / 3;
     }
     .people {
       grid-template-columns: repeat(4, 1fr);

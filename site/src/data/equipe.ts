@@ -10,8 +10,8 @@ export type Membre = {
 export const equipe: Membre[] = [
   { prenom: 'Benoît', role: 'Gérant, fondateur', photo: 'benoit', pole: 'direction', agence: 'jonzac' },
   { prenom: 'Élodie', role: 'Responsable de l’agence de Royan', photo: 'elodie', pole: 'direction', agence: 'royan' },
-  { prenom: 'Olivier', role: 'Commercial', photo: 'olivier', pole: 'commercial', agence: 'royan' },
-  { prenom: 'Steve', role: 'Commercial', photo: 'steve', pole: 'commercial' },
+  { prenom: 'Olivier', role: 'Commercial', photo: 'olivier', pole: 'commercial' },
+  { prenom: 'Steve', role: 'Commercial', photo: 'steve', pole: 'commercial', agence: 'royan' },
   { prenom: 'Laura', role: 'Assistante commerciale', photo: 'laura', pole: 'bureau' },
   { prenom: 'Lydia', role: 'Assistante commerciale', photo: 'lydia', pole: 'bureau' },
   { prenom: 'Mickaël', role: 'Métreur', photo: 'mickael', pole: 'bureau' },

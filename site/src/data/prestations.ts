@@ -232,7 +232,7 @@ export const prestations: Prestation[] = [
       },
     ],
     gammes: [
-      { title: 'EXTANXIA', marque: 'Concept Alu', text: 'Véranda et extension à toit plat : toiture isolante haute performance, grandes surfaces vitrées, finitions bois ou aluminium, brise-soleil et volets roulants intégrables. Une seule gamme, déclinée à votre maison.' },
+      { title: 'EXTANXIA', marque: 'Concept Alu', text: 'Véranda et extension à toit plat : toiture isolante haute performance, grandes surfaces vitrées, finition intérieure en placo, brise-soleil et volets roulants intégrables. Une seule gamme, déclinée à votre maison.' },
     ],
     marques: ['concept-alu'],
     arguments: [
