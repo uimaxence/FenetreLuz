@@ -138,6 +138,10 @@ const img = realPhoto(slug, i);
     }
   }
   @media (max-width: 700px) {
+    /* Seule sur ses deux lignes de grille, la grande tuile n'a pas de hauteur propre : on lui en donne une. */
+    .tile--big {
+      aspect-ratio: 4 / 3;
+    }
     .tile__body {
       padding: 0.75rem 0.8rem;
     }

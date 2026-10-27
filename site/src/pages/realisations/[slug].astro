@@ -183,9 +183,12 @@ const jsonLd = [
   }
   .rgrid {
     display: grid;
-    grid-template-columns: 1.6fr 1fr;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
     gap: clamp(1.5rem, 4vw, 3rem);
     align-items: start;
+  }
+  .gallery {
+    min-width: 0; /* la bande de vignettes (120 px chacune) ne doit pas élargir la colonne */
   }
   .gallery__main {
     border-radius: var(--radius-l);
@@ -326,7 +329,7 @@ const jsonLd = [
   }
   @media (max-width: 900px) {
     .rgrid {
-      grid-template-columns: 1fr;
+      grid-template-columns: minmax(0, 1fr);
     }
     .rinfo {
       position: static;
