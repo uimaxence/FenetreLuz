@@ -41,7 +41,7 @@ export const croisees: Croisee[] = [
       {
         title: 'Un interlocuteur local',
         text: [
-          'Élodie, responsable de l’agence de Royan, et Steve, commercial, viennent chez vous pour l’étude, vous présentent le projet en 3D et suivent la pose réalisée par nos propres équipes. Le service après-vente est assuré depuis Breuillet.',
+          'Élodie, responsable de l’agence de Royan, et Steve Peponnet, commercial, viennent chez vous pour l’étude, vous présentent le projet en 3D et suivent la pose réalisée par nos propres équipes. Le service après-vente est assuré depuis Breuillet.',
         ],
       },
     ],
