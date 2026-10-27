@@ -15,7 +15,7 @@ type Commune = { n: string; d: string; p: number };
 type City = { id: string; label: string; kind: 'agence' | 'ville' | 'town'; href: string | null; x: number; y: number; zone: string | null; dep: string };
 
 const zones = map.zones as Record<ZoneId, { d: string; count: number; communes: Commune[] }>;
-const deps = map.deps as Record<'17' | '16', { nom: string; d: string; communes: number; covered: number }>;
+const deps = map.deps as Record<'17' | '16' | '33', { nom: string; d: string; communes: number; covered: number }>;
 const cities = map.cities as City[];
 
 /** Pages existantes pour certaines communes (lien sur la puce). */
@@ -34,9 +34,9 @@ const principales = (list: Commune[], n = 12) => [...list].sort((a, b) => b.p - 
 
 const zoneMeta: Record<ZoneId, { kicker: string; title: string; text: string; agence: Agence[]; extra?: { label: string; href: string }[] }> = {
   jonzac: {
-    kicker: 'Agence de Jonzac · Haute-Saintonge & Charente',
-    title: 'Jonzac, la Haute-Saintonge et le pays de Cognac',
-    text: `Notre agence historique et son showroom de 200 m² à Saint-Germain-de-Lusignan suivent ${zones.jonzac.count} communes : toute la Haute-Saintonge, de Pons à Montguyon et de Mirambeau à Archiac, et l’ouest de la Charente jusqu’à Cognac, Jarnac, Châteauneuf, Barbezieux et Rouillac.`,
+    kicker: 'Agence de Jonzac · Haute-Saintonge, Charente & Nord Gironde',
+    title: 'Jonzac, la Haute-Saintonge, le pays de Cognac et le Nord Gironde',
+    text: `Notre agence historique et son showroom de 200 m² à Saint-Germain-de-Lusignan suivent ${zones.jonzac.count} communes : toute la Haute-Saintonge, de Pons à Montguyon et de Mirambeau à Archiac, l’ouest de la Charente jusqu’à Cognac, Jarnac, Châteauneuf, Barbezieux et Rouillac, et le nord de la Gironde jusqu’à Blaye, Berson et Saint-Savin.`,
     agence: [agences.jonzac],
     extra: [{ label: 'Menuiserie à Cognac', href: '/menuiserie-cognac/' }],
   },
@@ -72,21 +72,29 @@ const depMeta = {
     agence: [agences.jonzac],
     communes: zones.jonzac.communes.filter((c) => c.d === '16'),
   },
+  '33': {
+    kicker: 'Département',
+    title: 'Nord Gironde',
+    text: `${deps['33'].covered} communes du nord de la Gironde, depuis l’agence de Jonzac : l’Estuaire, le Blayais jusqu’à Blaye et Berson, et le secteur de Saint-Savin. Mêmes équipes, mêmes fabricants, mêmes aides à la rénovation.`,
+    agence: [agences.jonzac],
+    communes: zones.jonzac.communes.filter((c) => c.d === '33'),
+  },
 };
 
 const totalCommunes = zoneIds.reduce((n, z) => n + zones[z].count, 0);
 
 /** Position des libellés (décalage en unités du viewBox) pour éviter les chevauchements. */
 const labelPos: Record<string, { dx: number; dy: number; anchor?: 'start' | 'middle' | 'end' }> = {
-  'agence-jonzac': { dx: 0, dy: -14, anchor: 'middle' },
-  'agence-royan': { dx: 0, dy: -14, anchor: 'middle' },
-  'la-tremblade': { dx: -9, dy: 4, anchor: 'end' },
-  gemozac: { dx: -8, dy: 4, anchor: 'end' },
-  jonzac: { dx: 9, dy: 13 },
-  royan: { dx: 9, dy: 12 },
+  'agence-jonzac': { dx: -13, dy: -9, anchor: 'end' }, // à gauche : Archiac est juste au nord-est
+  'agence-royan': { dx: 13, dy: -11 }, // à droite : La Tremblade est juste à l'ouest
+  'la-tremblade': { dx: -12, dy: 6, anchor: 'end' },
+  gemozac: { dx: -11, dy: 6, anchor: 'end' },
+  cognac: { dx: -13, dy: 6, anchor: 'end' }, // Jarnac est juste à l'est
+  jonzac: { dx: 12, dy: 19 },
+  royan: { dx: 12, dy: 18 },
 };
-const pos = (c: City) => labelPos[c.id] ?? { dx: 9, dy: 4 };
-const radius = { agence: 7.5, ville: 5.5, town: 3.5 } as const;
+const pos = (c: City) => labelPos[c.id] ?? { dx: 12, dy: 6 };
+const radius = { agence: 9, ville: 7, town: 4.5 } as const;
 
 const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompare(b.n, 'fr'));
 ---
@@ -96,7 +104,7 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
     <svg class="zmap__svg" viewBox={map.viewBox} role="group" aria-label="Carte des zones d’intervention de Fenêtres & Vérandas LUZ en Charente-Maritime et Charente">
       <g class="zmap__deps">
         {
-          (['17', '16'] as const).map((d) => (
+          (['17', '16', '33'] as const).map((d) => (
             <path class="dep" d={deps[d].d} data-dep={d} role="button" tabindex="0" aria-label={`${deps[d].nom} : ${deps[d].covered} communes couvertes`}>
               <title>{deps[d].nom}</title>
             </path>
@@ -148,7 +156,7 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
       }
       <li class="zmap__legend-sep" aria-hidden="true"></li>
       {
-        (['17', '16'] as const).map((d) => (
+        (['17', '16', '33'] as const).map((d) => (
           <li>
             <button type="button" class="zmap__key zmap__key--dep" data-select={d} aria-pressed="false">
               <i /> {deps[d].nom} <small>{d}</small>
@@ -164,7 +172,7 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
     <!-- Vue d'ensemble -->
     <div class="zpanel" data-panel="all">
       <p class="zpanel__kicker"><Icon id="map" /> Deux agences, deux secteurs</p>
-      <h3 class="zpanel__title">{totalCommunes} communes desservies en Charente-Maritime et Charente</h3>
+      <h3 class="zpanel__title">{totalCommunes} communes desservies en Charente-Maritime, Charente et Nord Gironde</h3>
       <p class="zpanel__text">
         Sélectionnez votre secteur sur la carte : vous verrez l’agence qui vous suit, les communes desservies et nos pages locales.
       </p>
@@ -275,7 +283,7 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
 
     <!-- Panneaux départements -->
     {
-      (['17', '16'] as const).map((d) => {
+      (['17', '16', '33'] as const).map((d) => {
         const m = depMeta[d];
         return (
           <div class="zpanel" data-panel={d} hidden>
@@ -459,18 +467,18 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
   .city text {
     font-family: var(--font-ui);
     font-weight: 500;
-    font-size: 12px;
+    font-size: 17px; /* viewBox de 1000 unités affiché ~600 px : ≈ 10 px à l'écran */
     fill: var(--ink-2);
     paint-order: stroke;
     stroke: rgba(255, 255, 255, 0.9);
-    stroke-width: 3px;
+    stroke-width: 4px;
     stroke-linejoin: round;
     pointer-events: none; /* les libellés des simples repères laissent passer le clic vers la zone */
   }
   .city--ville text,
   .city--agence text {
     font-weight: 600;
-    font-size: 13.5px;
+    font-size: 19px;
     fill: var(--green-950);
   }
   .city--agence circle {
@@ -481,7 +489,7 @@ const panelList = (list: Commune[]) => [...list].sort((a, b) => a.n.localeCompar
     fill: var(--orange-600);
     text-transform: uppercase;
     letter-spacing: 0.04em;
-    font-size: 12.5px;
+    font-size: 17.5px;
   }
   a.city {
     cursor: pointer;

@@ -6,8 +6,9 @@ import Icon from './Icon.astro';
 import { agencesList } from '../data/agences';
 interface Props {
   produit?: string; // ex. "véranda"
+  contact?: string; // phrase remplaçant la présentation du responsable d'agence (ex. Steve pour Concept Alu)
 }
-const { produit = 'projet' } = Astro.props;
+const { produit = 'projet', contact } = Astro.props;
 ---
 
 <div class="lcta grid grid--2">
@@ -17,7 +18,7 @@ const { produit = 'projet' } = Astro.props;
         <span class="tag">{a.zoneLabel}</span>
         <h3>Votre {produit} à {a.city}</h3>
         <p>
-          Étude, métré et pose depuis notre agence de {a.address.city}. {a.responsable ? `${a.responsable.name} vous reçoit ${a.showroom?.includes('m²') ? `dans notre ${a.showroom.toLowerCase()}` : 'sur rendez-vous'}.` : `${a.showroom} pour comparer les gammes.`}
+          Étude, métré et pose depuis notre agence de {a.address.city}. {contact ?? (a.responsable ? `${a.responsable.name} vous reçoit ${a.showroom?.includes('m²') ? `dans notre ${a.showroom.toLowerCase()}` : 'sur rendez-vous'}.` : `${a.showroom} pour comparer les gammes.`)}
         </p>
         <div class="lcta__actions">
           <a class="link-arrow" href={`/agences/${a.slug}/`}>Agence de {a.city} <Icon id="arrow" /></a>

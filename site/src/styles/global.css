@@ -750,3 +750,45 @@ html.js .rays-anim path:nth-child(5) {
 .mt-3 {
   margin-top: 3rem;
 }
+
+/* Bouton « retour en haut » (affiché par main.ts après un écran et demi de défilement) */
+.totop {
+  position: fixed;
+  right: calc(var(--gutter) * 0.75);
+  bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  width: 46px;
+  height: 46px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: var(--green-900);
+  color: var(--lime);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition:
+    opacity 240ms ease,
+    transform 240ms var(--ease-out),
+    background 160ms ease;
+}
+.totop.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.totop svg {
+  width: 20px;
+  height: 20px;
+  transform: rotate(-90deg);
+}
+.totop:hover,
+.totop:focus-visible {
+  background: var(--green-500);
+  color: var(--white);
+}

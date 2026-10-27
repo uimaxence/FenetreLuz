@@ -85,7 +85,7 @@ export const prestations: Prestation[] = [
         title: 'Rénovation ou dépose totale ?',
         text: [
           'En pose rénovation, la nouvelle fenêtre est fixée sur le dormant existant, sain et bien ancré : intervention rapide, sans dégât sur les tableaux et les finitions intérieures. C’est la solution idéale quand l’ancien bâti est en bon état.',
-          'En dépose totale, nous retirons l’ancien dormant jusqu’à la maçonnerie, puis nous posons la fenêtre neuve directement dans le tableau. On récupère du clair de vitrage, on traite les ponts thermiques et on repart sur une base saine. Notre métreur vous indique la meilleure option lors de la visite technique, sans surcoût de diagnostic.',
+          'En dépose totale, nous retirons l’ancien dormant jusqu’à la maçonnerie, puis nous posons la fenêtre neuve directement dans le tableau. On récupère du clair de vitrage, on traite les ponts thermiques et on repart sur une base saine. Notre technico-commercial vous indique la meilleure option dès la première visite, sans surcoût de diagnostic.',
         ],
       },
       {
@@ -105,7 +105,7 @@ export const prestations: Prestation[] = [
     ],
     marques: ['meo', 'janneau'],
     arguments: [
-      { title: 'Métré précis, pose par nos salariés', text: 'Un métreur LUZ prend les cotes, nos poseurs installent. Pas de sous-traitance, un seul interlocuteur du devis à la réception.' },
+      { title: 'Métré précis, pose par nos salariés', text: 'Votre technico-commercial prend les premières cotes, notre métreur les vérifie avant la commande, nos poseurs installent. Pas de sous-traitance.' },
       { title: 'Certifiés RGE : vos aides sécurisées', text: 'Notre certification RGE conditionne MaPrimeRénov’, les primes CEE et l’éco-PTZ. Nous montons le dossier avec vous.' },
       { title: 'Deux showrooms pour comparer', text: 'À Jonzac et à Breuillet, manipulez les ouvrants MéO et Janneau, comparez les coloris et les vitrages avant de décider.' },
       { title: 'Garanties fabricant + décennale', text: 'Menuiseries garanties par MéO et Janneau, pose couverte par notre assurance décennale Generali.' },
@@ -199,14 +199,14 @@ export const prestations: Prestation[] = [
     h1: 'Vérandas et extensions aluminium en Charente-Maritime',
     metaTitle: 'Véranda & extension en Charente-Maritime (17) — Concept Alu, pose & devis | LUZ',
     metaDescription:
-      'Véranda ou extension aluminium sur mesure à Jonzac, Royan, Saintes et en Charente-Maritime. Partenaire Concept Alu (gamme EXTANXIA), conception 3D, pose par nos équipes. Devis gratuit.',
+      'Véranda ou extension aluminium sur mesure à Jonzac, Royan, Saintes et en Charente-Maritime. Partenaire Concept Alu (HOMEA, ARMONIA, EXTANXIA), conception 3D, pose par nos équipes. Devis gratuit.',
     icon: 'veranda',
     card: 'Une pièce en plus, baignée de lumière : vérandas et extensions Concept Alu conçues en 3D et posées par LUZ.',
     lead: 'Gagner une pièce à vivre, ouvrir la maison sur le jardin, valoriser votre bien : la véranda ou l’extension aluminium Concept Alu s’adapte à votre maison, qu’elle soit charentaise en pierre ou contemporaine.',
     hero: { real: 'veranda-concept-alu-les-mathes', pos: '62% 50%' },
     facts: [
       { label: 'Fabricant', value: 'Concept Alu (France)' },
-      { label: 'Gamme', value: 'EXTANXIA (Concept Alu)' },
+      { label: 'Gammes', value: 'HOMEA, ARMONIA, EXTANXIA' },
       { label: 'Conception', value: 'Plans 3D et visite technique' },
       { label: 'Démarches', value: 'Déclaration préalable ou permis' },
     ],
@@ -232,19 +232,21 @@ export const prestations: Prestation[] = [
       },
     ],
     gammes: [
-      { title: 'EXTANXIA', marque: 'Concept Alu', text: 'Véranda et extension à toit plat : toiture isolante haute performance, grandes surfaces vitrées, finition intérieure en placo, brise-soleil et volets roulants intégrables. Une seule gamme, déclinée à votre maison.' },
+      { title: 'HOMEA', marque: 'Concept Alu', text: 'Véranda moderne à toit plat, polyvalente et sophistiquée. Toiture pensée pour le confort : régulateur de lumière, volets télécommandés, isolation renforcée.' },
+      { title: 'ARMONIA', marque: 'Concept Alu', text: 'Tradition et élégance : toiture isolante, lignes épurées, larges surfaces vitrées. S’intègre en harmonie avec les demeures de caractère.' },
+      { title: 'EXTANXIA', marque: 'Concept Alu', text: 'Extension à toit plat : toiture isolante haute performance, grandes surfaces vitrées, finition intérieure en placo, brise-soleil et volets roulants intégrables. Déclinaisons Still (esprit atelier) et Deko.' },
     ],
     marques: ['concept-alu'],
     arguments: [
       { title: 'Partenaire Concept Alu', text: 'Fabricant français avec son propre bureau d’études. Nous concevons votre projet avec leurs outils 3D et le faisons fabriquer sur mesure.' },
-      { title: 'Un seul interlocuteur', text: 'Étude, dossier d’urbanisme, fabrication, pose, électricité et finitions : LUZ coordonne l’ensemble.' },
-      { title: 'Véranda et pergola exposées', text: 'Venez voir une véranda et une pergola Concept Alu grandeur nature dans notre showroom de Jonzac.' },
+      { title: 'Un responsable Concept Alu', text: 'Steve Peponnet, responsable de l’activité Concept Alu chez LUZ, suit votre projet de l’étude au dossier d’urbanisme, de la fabrication à la pose, à Jonzac comme à Royan.' },
+      { title: 'Véranda et pergola exposées', text: 'Venez voir une véranda et une pergola Concept Alu grandeur nature dans nos showrooms de Jonzac et de Breuillet.' },
       { title: 'Financement possible', text: 'Solutions de financement avec notre partenaire ARKEA pour lisser l’investissement (sous réserve d’acceptation).' },
     ],
     faq: [
       { q: 'Quel est le prix d’une véranda ?', a: 'Une véranda aluminium Concept Alu de 15 à 20 m² se situe généralement entre 25 000 et 45 000 € posée, hors dalle et électricité, selon la toiture (vitrée, mixte ou isolée), les ouvrants et les options de confort. Une extension à toit plat isolée est un peu plus onéreuse au mètre carré. Nous chiffrons précisément après visite.' },
       { q: 'Faut-il un permis de construire ?', a: 'Jusqu’à 20 m² de surface créée (40 m² dans certaines zones urbaines couvertes par un PLU), une déclaration préalable suffit ; au-delà, un permis de construire est nécessaire. Nous préparons les pièces graphiques du dossier.' },
-      { q: 'Une véranda est-elle habitable en hiver et en été ?', a: 'Oui, avec une toiture isolée ou mixte, des vitrages à contrôle solaire, des protections solaires et un chauffage adapté. La gamme EXTANXIA est conçue pour un usage toute l’année.' },
+      { q: 'Une véranda est-elle habitable en hiver et en été ?', a: 'Oui, avec une toiture isolée ou mixte, des vitrages à contrôle solaire, des protections solaires et un chauffage adapté. Les gammes HOMEA et EXTANXIA sont conçues pour un usage toute l’année.' },
       { q: 'Quel délai pour une véranda ?', a: 'Comptez 2 à 3 mois pour l’instruction du dossier d’urbanisme, 8 à 12 semaines de fabrication, puis 1 à 2 semaines de pose selon la taille du projet.' },
     ],
     croisee: 'veranda-royan',
@@ -294,8 +296,8 @@ export const prestations: Prestation[] = [
     ],
     marques: ['concept-alu', 'soliso'],
     arguments: [
-      { title: 'Étude sur mesure', text: 'Orientation, vent dominant, fixation sur la façade ou dalle : notre métreur adapte la structure à votre terrasse.' },
-      { title: 'Pergola exposée en showroom', text: 'Testez l’orientation des lames et les stores zip sur la pergola de notre agence de Jonzac.' },
+      { title: 'Étude sur mesure', text: 'Orientation, vent dominant, fixation sur la façade ou dalle : Steve Peponnet, responsable de l’activité Concept Alu, adapte la structure à votre terrasse.' },
+      { title: 'Pergola exposée en showroom', text: 'Testez l’orientation des lames et les stores zip sur les pergolas exposées dans nos showrooms de Jonzac et de Breuillet.' },
       { title: 'Pose et raccordement électrique', text: 'Nos équipes posent la pergola et raccordent moteurs, LED et capteurs.' },
       { title: 'Évolutive', text: 'Commencez par la structure, ajoutez coulissants, stores ou chauffage plus tard : tout est prévu dès le départ.' },
     ],
@@ -357,7 +359,7 @@ export const prestations: Prestation[] = [
       { title: 'Sans entretien', text: 'Aluminium thermolaqué : ni peinture, ni traitement, résistant aux embruns.' },
       { title: 'Cohérence esthétique', text: 'Mêmes coloris et profils que vos fenêtres, portail et pergola pour une façade harmonieuse.' },
       { title: 'Pose rapide', text: 'Structure préfabriquée, montage en 1 à 2 jours sur plots ou dalle existante.' },
-      { title: 'Déclaration préalable', text: 'Nous fournissons les plans nécessaires à votre déclaration de travaux.' },
+      { title: 'Un responsable Concept Alu', text: 'Steve Peponnet, responsable de l’activité Concept Alu chez LUZ, étudie votre carport ou pool house et fournit les plans de votre déclaration de travaux.' },
     ],
     faq: [
       { q: 'Quel est le prix d’un carport aluminium ?', a: 'Entre 5 000 et 12 000 € posé pour un carport une à deux voitures selon les dimensions, la toiture et les options (bardage, rangement, LED).' },
@@ -619,7 +621,7 @@ export const prestations: Prestation[] = [
     lead: 'Après la pergola et la terrasse, il manquait le feu. Les braseros Vulcan réunissent famille et amis autour du feu, du printemps aux soirées d’hiver. Venez les voir en démonstration dans notre showroom.',
     hero: { gen: 'brasero-terrasse' },
     facts: [
-      { label: 'Marque', value: 'Vulcan' },
+      { label: 'Marque', value: 'Vulcan Brasero' },
       { label: 'Matériau', value: 'Acier épais' },
       { label: 'Usage', value: 'Feu de bois, chauffage extérieur' },
       { label: 'Où', value: 'Showroom de Jonzac' },
@@ -629,7 +631,7 @@ export const prestations: Prestation[] = [
         title: 'Se réunir autour du feu',
         images: ['brasero-feu'],
         text: [
-          'Un foyer rond en acier épais, posé sur la terrasse ou dans le jardin : le brasero Vulcan chauffe, éclaire et rassemble. L’acier monte vite en température et la rouille de surface, voulue, protège le métal au fil des saisons.',
+          'Un foyer en acier épais, rond ou carré, posé sur la terrasse ou dans le jardin : le brasero Vulcan chauffe, éclaire et rassemble. La cuve en acier Corten se patine et se protège au fil des saisons ; la plaque de cuisson en acier permet de cuisiner autour du feu.',
         ],
       },
       {
@@ -640,7 +642,7 @@ export const prestations: Prestation[] = [
         ],
       },
     ],
-    gammes: [{ title: 'Braseros', marque: 'Vulcan', text: 'Foyer rond en acier épais, plusieurs diamètres et hauteurs, couvercles, grilles et housses en accessoires.' }],
+    gammes: [{ title: 'Braseros', marque: 'Vulcan Brasero', text: 'Foyers ronds ou carrés en acier Corten, modèles traversants, traditionnels, sur trépied ou à poser, pieds réglables en hauteur ; couvercles, grilles et housses en accessoires.' }],
     marques: ['vulcan'],
     arguments: [
       { title: 'À voir en showroom', text: 'Les braseros Vulcan sont exposés dans notre showroom de Jonzac.' },

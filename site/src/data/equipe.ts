@@ -6,12 +6,12 @@ export type Membre = {
   pole: 'direction' | 'commercial' | 'bureau' | 'pose';
 };
 
-/** Prénoms et rôles issus des fichiers photos fournis (noms de famille non communiqués). */
+/** Rôles précisés par Benoît (retour du 27 octobre 2026) ; prénoms seuls, sauf Benoît Clarysse et Steve Peponnet. */
 export const equipe: Membre[] = [
-  { prenom: 'Benoît', role: 'Gérant, fondateur', photo: 'benoit', pole: 'direction', agence: 'jonzac' },
-  { prenom: 'Élodie', role: 'Responsable de l’agence de Royan', photo: 'elodie', pole: 'direction', agence: 'royan' },
-  { prenom: 'Olivier', role: 'Commercial', photo: 'olivier', pole: 'commercial' },
-  { prenom: 'Steve', role: 'Commercial', photo: 'steve', pole: 'commercial', agence: 'royan' },
+  { prenom: 'Benoît', role: 'Gérant, secteur de Jonzac', photo: 'benoit', pole: 'direction', agence: 'jonzac' },
+  { prenom: 'Élodie', role: 'Responsable de l’agence de Royan, technico-commerciale', photo: 'elodie', pole: 'direction', agence: 'royan' },
+  { prenom: 'Olivier', role: 'Fondateur de l’agence de Royan, consultant commercial', photo: 'olivier', pole: 'commercial' },
+  { prenom: 'Steve', role: 'Responsable de l’activité Concept Alu, Jonzac et Royan', photo: 'steve', pole: 'commercial', agence: 'royan' },
   { prenom: 'Laura', role: 'Assistante commerciale', photo: 'laura', pole: 'bureau' },
   { prenom: 'Lydia', role: 'Assistante commerciale', photo: 'lydia', pole: 'bureau' },
   { prenom: 'Mickaël', role: 'Métreur', photo: 'mickael', pole: 'bureau' },
