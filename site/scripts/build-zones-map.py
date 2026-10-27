@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
 Génère src/data/zones-map.json : la carte vectorielle des zones d'intervention LUZ
-(Charente-Maritime + Charente) affichée par le composant ZonesMap.astro.
+(Charente-Maritime + Charente + Nord Gironde) affichée par le composant ZonesMap.astro.
 
 Sources (téléchargées à l'exécution, mises en cache dans le dossier temporaire) :
 - contours communaux + intercommunalité de rattachement : https://geo.api.gouv.fr
-- contours départementaux : https://france-geojson.gregoiredavid.fr
+- contours départementaux : union des contours communaux ci-dessus
 
 Les 2 zones (agence de Jonzac / agence de Royan) suivent la carte cantonale fournie par Benoît
 (roadmap-luz.md §2), approchées par intercommunalité (EPCI) ; l'ancienne zone « en développement »
@@ -19,7 +19,7 @@ import json, math, sys, tempfile, urllib.request
 from pathlib import Path
 
 try:
-    from shapely.geometry import shape, mapping
+    from shapely.geometry import shape, mapping, box
     from shapely.ops import unary_union
 except ImportError:
     sys.exit("shapely manquant : pip install shapely")
@@ -37,6 +37,10 @@ ZONES = {
         "200070514",  # CA Grand Cognac (Cognac, Jarnac, Châteauneuf, Segonzac)
         "200029734",  # CC des 4B Sud Charente (Barbezieux, Baignes)
         "241600303",  # CC du Rouillacais
+        # Nord Gironde (retour de Benoît du 27 octobre 2026 : « jusqu'à Blaye, Berson, Saint-Savin… ») — à valider commune par commune
+        "243300811",  # CC de l'Estuaire (Saint-Ciers-sur-Gironde)
+        "200023794",  # CC de Blaye (Blaye, Berson)
+        "243301181",  # CC Latitude Nord Gironde (Saint-Savin)
     ],
     "royan": [
         "241700640",  # CA Royan Atlantique
@@ -72,6 +76,8 @@ CITIES = [
     ("Jarnac", "jarnac", "Jarnac", "town", None),
     ("Châteauneuf-sur-Charente", "chateauneuf", "Châteauneuf", "town", None),
     ("Rouillac", "rouillac", "Rouillac", "town", None),
+    ("Blaye", "blaye", "Blaye", "town", None),
+    ("Saint-Savin", "saint-savin", "Saint-Savin", "town", None),
 ]
 
 WIDTH = 1000  # largeur du viewBox ; la hauteur découle des proportions
@@ -91,23 +97,39 @@ def fetch(url: str, name: str) -> dict | list:
 
 def main():
     communes = []
-    for dep in ("17", "16"):
+    for dep in ("17", "16", "33"):
         data = fetch(f"https://geo.api.gouv.fr/departements/{dep}/communes?fields=nom,code,codeEpci,population,centre,contour&format=json", f"communes{dep}.json")
         for c in data:
             c["dep"] = dep
         communes += data
-    deps = {
-        "17": fetch("https://france-geojson.gregoiredavid.fr/repo/departements/17-charente-maritime/departement-17-charente-maritime.geojson", "dep17.geojson"),
-        "16": fetch("https://france-geojson.gregoiredavid.fr/repo/departements/16-charente/departement-16-charente.geojson", "dep16.geojson"),
-    }
+    # Contours départementaux reconstitués par union des communes (même source que les secteurs ; le dépôt
+    # france-geojson présente un certificat invalide). Seule la partie nord de la Gironde sera visible après cadrage.
+    noms = {"17": "Charente-Maritime", "16": "Charente", "33": "Gironde"}
+    deps = {}
+    for dep, nom in noms.items():
+        geom = unary_union([shape(c["contour"]).buffer(0) for c in communes if c["dep"] == dep]).buffer(0.0008).buffer(-0.0008)
+        deps[dep] = {"properties": {"nom": nom}, "geometry": mapping(geom)}
+
+    # Secteurs (union des communes par EPCI), calculés avant la projection pour fixer le cadrage
+    zone_geoms, zone_members = {}, {}
+    for zone in ZONES:
+        members = [c for c in communes if EPCI_TO_ZONE.get(c.get("codeEpci")) == zone]
+        union = unary_union([shape(c["contour"]).buffer(0) for c in members])
+        # léger tampon aller-retour pour souder les micro-fentes entre communes, puis simplification
+        zone_geoms[zone] = union.buffer(0.0008).buffer(-0.0008).simplify(TOL_ZONE, preserve_topology=True)
+        zone_members[zone] = members
 
     # Projection : équirectangulaire corrigée à la latitude moyenne, puis mise à l'échelle du viewBox
     k = math.cos(math.radians(45.7))
     dep_geoms = {d: shape(g["geometry"]) for d, g in deps.items()}
-    minx = min(g.bounds[0] for g in dep_geoms.values()) * k
-    maxx = max(g.bounds[2] for g in dep_geoms.values()) * k
-    miny = min(g.bounds[1] for g in dep_geoms.values())
-    maxy = max(g.bounds[3] for g in dep_geoms.values())
+    # Cadrage : Charente-Maritime, Charente et les secteurs ; la Gironde n'apparaît que pour sa partie nord (découpée)
+    framed = [dep_geoms["17"], dep_geoms["16"], *zone_geoms.values()]
+    minx = min(g.bounds[0] for g in framed) * k
+    maxx = max(g.bounds[2] for g in framed) * k
+    miny = min(g.bounds[1] for g in framed)
+    maxy = max(g.bounds[3] for g in framed)
+    frame = box(minx / k - 0.08, miny - 0.08, maxx / k + 0.08, maxy + 0.08)
+    dep_geoms = {d: (g if d in ("17", "16") else g.intersection(frame)) for d, g in dep_geoms.items()}
     scale = (WIDTH - 2 * PAD) / (maxx - minx)
     height = round((maxy - miny) * scale + 2 * PAD)
 
@@ -134,11 +156,8 @@ def main():
         return "".join(parts)
 
     zones_out = {}
-    for zone, _ in ZONES.items():
-        members = [c for c in communes if EPCI_TO_ZONE.get(c.get("codeEpci")) == zone]
-        union = unary_union([shape(c["contour"]).buffer(0) for c in members])
-        # léger tampon aller-retour pour souder les micro-fentes entre communes, puis simplification
-        union = union.buffer(0.0008).buffer(-0.0008).simplify(TOL_ZONE, preserve_topology=True)
+    for zone in ZONES:
+        members, union = zone_members[zone], zone_geoms[zone]
         zones_out[zone] = {
             "d": geom_to_d(union),
             "count": len(members),

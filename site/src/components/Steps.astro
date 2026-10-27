@@ -1,23 +1,24 @@
 ---
 /**
- * Méthode LUZ en 4 étapes (séquence réelle : l'ordre porte du sens).
+ * Méthode LUZ en 4 étapes (parcours réel précisé par Benoît le 27 octobre 2026 : technico-commercial à domicile,
+ * devis au showroom, métreur après signature, pose).
  */
 import Icon from './Icon.astro';
 const steps = [
   {
     icon: 'home',
-    title: 'Rendez-vous chez vous ou en showroom',
-    text: 'Un conseiller LUZ écoute votre projet, regarde l’existant et vous oriente vers les bons matériaux et les bonnes gammes. Comparez les produits en showroom à Jonzac ou Breuillet.',
+    title: 'Premier rendez-vous chez vous',
+    text: 'Un technico-commercial LUZ vient chez vous, écoute votre projet, regarde l’existant et prend une première série de cotes.',
+  },
+  {
+    icon: 'file',
+    title: 'Devis et choix en showroom',
+    text: 'Second rendez-vous dans notre showroom de Jonzac ou de Breuillet : votre technico-commercial vous présente les produits et vous remet un devis clair, poste par poste, avec les aides mobilisables et, si besoin, une simulation de financement.',
   },
   {
     icon: 'ruler',
-    title: 'Métré et devis détaillé',
-    text: 'Notre métreur relève les cotes exactes. Vous recevez un devis clair, poste par poste, avec les aides mobilisables et, si besoin, une simulation de financement.',
-  },
-  {
-    icon: 'hammer',
-    title: 'Fabrication française sur mesure',
-    text: 'Vos menuiseries sont fabriquées en France par MéO, Janneau, Concept Alu, HORIZAL ou Soliso aux cotes relevées. Nous planifions la pose avec vous dès la commande.',
+    title: 'Métré définitif et fabrication',
+    text: 'Devis signé, notre métreur relève les cotes définitives, puis vos menuiseries sont fabriquées en France par MéO, Janneau, Concept Alu, HORIZAL ou Soliso. Nous planifions la pose avec vous dès la commande.',
   },
   {
     icon: 'check',

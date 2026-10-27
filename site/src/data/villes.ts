@@ -40,7 +40,7 @@ export const villes: Ville[] = [
     faq: [
       { q: 'Avez-vous une agence à Saintes ?', a: 'Pas encore : nos agences sont à Jonzac (Saint-Germain-de-Lusignan) et à Royan (Breuillet). Nous intervenons à Saintes comme sur le reste de la Saintonge, avec déplacement gratuit pour le devis.' },
       { q: 'Posez-vous des fenêtres en secteur sauvegardé à Saintes ?', a: 'Oui. Nous proposons des gammes bois ou aluminium à l’aspect traditionnel et préparons les pièces de la déclaration préalable soumise à l’ABF.' },
-      { q: 'Quel délai pour un devis à Saintes ?', a: 'Un rendez-vous chez vous sous une semaine en général, puis le devis sous quelques jours après le métré.' },
+      { q: 'Quel délai pour un devis à Saintes ?', a: 'Un rendez-vous chez vous sous une semaine en général, puis le devis, présenté en showroom, quelques jours après la visite.' },
     ],
     hero: { real: 'porte-entree-meo-manoir-saintes' },
   },

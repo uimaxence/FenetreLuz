@@ -45,17 +45,18 @@ export const agences: Record<'jonzac' | 'royan', Agence> = {
     showroom: 'Showroom de 200 m²',
     responsable: {
       name: 'Benoît Clarysse',
-      role: 'Gérant, fondateur',
+      role: 'Gérant, secteur de Jonzac',
       bio: 'Benoît vous reçoit dans le showroom de Saint-Germain-de-Lusignan et suit personnellement les projets de la Haute-Saintonge et de l’ouest de la Charente, du premier rendez-vous à la réception du chantier.',
       photo: 'benoit',
     },
-    zoneLabel: 'Haute-Saintonge, Sud Charente-Maritime',
+    zoneLabel: 'Haute-Saintonge, Sud Charente-Maritime, Nord Gironde',
     intro:
       'Notre agence historique et son showroom de 200 m², aux portes de Jonzac. Fenêtres, portes, vérandas, portails, volets et stores : venez voir, toucher et comparer avant de choisir.',
     description: [
       'Installée depuis plus de vingt ans à Saint-Germain-de-Lusignan, à deux minutes du centre de Jonzac, l’agence LUZ est le siège de l’entreprise. C’est ici que travaillent le bureau d’études, les assistantes commerciales et nos équipes de pose.',
-      'Le showroom de 200 m² présente en situation réelle les menuiseries MéO et Janneau, une véranda et une pergola Concept Alu, des portails HORIZAL, des stores Soliso et des volets EHRET. Vous pouvez manipuler les ouvrants, comparer les matériaux et les finitions, et repartir avec un chiffrage clair.',
-      'Nous intervenons dans toute la Haute-Saintonge : Jonzac bien sûr, mais aussi Archiac, Montendre, Montguyon, Mirambeau, Saint-Genis-de-Saintonge, Pons ou Gémozac, ainsi que le sud de la Charente jusqu’à Barbezieux.',
+      'Le showroom de 200 m² présente en situation réelle les menuiseries MéO et Janneau, une véranda, une extension et une pergola Concept Alu, des portails HORIZAL, des stores Soliso et des volets EHRET. Vous pouvez manipuler les ouvrants, comparer les matériaux et les finitions, et repartir avec un chiffrage clair.',
+      'Nous intervenons dans toute la Haute-Saintonge : Jonzac bien sûr, mais aussi Archiac, Montendre, Montguyon, Mirambeau, Saint-Genis-de-Saintonge, Pons ou Gémozac, ainsi que le sud de la Charente jusqu’à Barbezieux et le nord de la Gironde jusqu’à Blaye, Berson et Saint-Savin.',
+      'Pour les vérandas, extensions, pergolas et carports Concept Alu, votre interlocuteur est Steve Peponnet, responsable de l’activité Concept Alu chez LUZ : il vous reçoit à Jonzac comme à Breuillet et se déplace chez vous pour l’étude.',
     ],
     communes: [
       'Jonzac',
@@ -78,6 +79,10 @@ export const agences: Record<'jonzac' | 'royan', Agence> = {
       'Chevanceaux',
       'Baignes-Sainte-Radegonde',
       'Barbezieux-Saint-Hilaire',
+      'Saint-Ciers-sur-Gironde',
+      'Blaye',
+      'Berson',
+      'Saint-Savin',
     ],
     photo: 'jonzac',
   },
@@ -102,8 +107,8 @@ export const agences: Record<'jonzac' | 'royan', Agence> = {
     showroom: 'Showroom & bureau',
     responsable: {
       name: 'Élodie', // nom de famille à confirmer avec Benoît avant affichage
-      role: 'Responsable de l’agence de Royan',
-      bio: 'Élodie vous reçoit à Breuillet, étudie votre projet avec vous et suit votre chantier jusqu’à la réception. Avec Steve, commercial de l’agence, elle se déplace chez vous pour le métré.',
+      role: 'Responsable de l’agence de Royan, technico-commerciale',
+      bio: 'Élodie vient chez vous pour la première prise de cotes, vous présente le devis et les produits au showroom de Breuillet, puis suit votre chantier jusqu’à la réception.',
       photo: 'elodie',
     },
     zoneLabel: 'Pays royannais, presqu’île d’Arvert, Marennes-Oléron',
@@ -111,7 +116,8 @@ export const agences: Record<'jonzac' | 'royan', Agence> = {
       'Notre agence du pays royannais, à Breuillet, à dix minutes de Royan. Menuiseries alu pour le bord de mer, vérandas, pergolas, portails et stores : un interlocuteur local qui connaît les contraintes du littoral.',
     description: [
       'Ouverte pour être au plus près de nos clients du littoral, l’agence de Breuillet couvre Royan et toute la Côte de Beauté, la presqu’île d’Arvert, le bassin de Marennes et l’île d’Oléron.',
-      'Le climat marin impose des choix précis : aluminium laqué avec label Qualimarine, quincaillerie inox, vitrages à contrôle solaire, stores résistants au vent. Élodie, responsable de l’agence, et Steve Peponnet, commercial, vous conseillent sur ces points dès la première visite.',
+      'Le climat marin impose des choix précis : aluminium laqué avec label Qualimarine, quincaillerie inox, vitrages à contrôle solaire, stores résistants au vent. Élodie, responsable de l’agence et technico-commerciale, vous conseille sur ces points dès la première visite, avec Olivier, fondateur de l’agence et consultant commercial.',
+      'Le showroom de Breuillet présente des menuiseries Janneau et MéO ainsi qu’une pergola et une véranda Concept Alu. Pour les vérandas, extensions et pergolas, Steve Peponnet, responsable de l’activité Concept Alu, vous y reçoit et suit votre projet.',
       'Nos équipes de pose sont les mêmes qu’à Jonzac : des salariés LUZ, pas de sous-traitance. Le service après-vente et le dépannage sont assurés depuis Breuillet pour tout le secteur.',
     ],
     communes: [

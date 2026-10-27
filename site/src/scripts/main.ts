@@ -1,6 +1,6 @@
 /**
  * Interactions du site (léger, sans dépendance) :
- * - révélation au scroll, compteurs, header compact, méga-menus, menu mobile,
+ * - révélation au scroll, compteurs, header compact, méga-menus, menu mobile, retour en haut,
  * - filtres réalisations, formulaire de devis, barre de progression de lecture.
  * Ré-initialisé à chaque navigation (ClientRouter → astro:page-load).
  */
@@ -145,6 +145,23 @@ function initHeader() {
     burger.setAttribute('aria-label', openNow ? 'Fermer le menu' : 'Ouvrir le menu');
   });
   header.querySelectorAll<HTMLAnchorElement>('.nav a').forEach((a) => a.addEventListener('click', closeMobile));
+}
+
+/* ---------- Retour en haut ---------- */
+let toTopBound = false;
+function initToTop() {
+  const btn = document.querySelector<HTMLButtonElement>('[data-totop]');
+  if (!btn) return;
+  const update = () => {
+    const b = document.querySelector<HTMLElement>('[data-totop]');
+    if (b) b.classList.toggle('is-visible', window.scrollY > window.innerHeight * 1.5);
+  };
+  update();
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: reduceMotion() ? 'auto' : 'smooth' }));
+  if (!toTopBound) {
+    window.addEventListener('scroll', update, { passive: true });
+    toTopBound = true;
+  }
 }
 
 /* ---------- Filtres réalisations ---------- */
@@ -341,6 +358,7 @@ function init() {
   initReveal();
   initCounters();
   initHeader();
+  initToTop();
   initFilters();
   initForms();
   initReadingBar();

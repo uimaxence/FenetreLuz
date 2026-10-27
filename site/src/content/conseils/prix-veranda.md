@@ -43,7 +43,7 @@ Volets roulants intégrés, stores de toiture, brise-soleil orientables, éclair
 
 ### 5. Le contexte du chantier
 
-Accès difficile, dépose d’une ancienne véranda, reprise de maçonnerie ou de terrasse, raccordement sur une maison en pierre irrégulière : le métreur les intègre au devis après visite.
+Accès difficile, dépose d’une ancienne véranda, reprise de maçonnerie ou de terrasse, raccordement sur une maison en pierre irrégulière : votre technico-commercial les intègre au devis après la visite.
 
 ## Véranda ou extension ?
 

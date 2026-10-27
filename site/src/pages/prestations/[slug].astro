@@ -12,6 +12,7 @@ import Placeholder from '../../components/Placeholder.astro';
 import LocalCta from '../../components/LocalCta.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import MeoBlock from '../../components/MeoBlock.astro';
+import JanneauBlock from '../../components/JanneauBlock.astro';
 import { prestationsPubliees, type Prestation } from '../../data/prestations';
 import { realisationsByPrestation } from '../../data/realisations';
 import { marqueBySlug } from '../../data/marques';
@@ -161,6 +162,7 @@ const jsonLd = [
   }
 
   {p.marques.includes('meo') && <MeoBlock accent={p.slug === 'portes-entree' ? 'configurateur' : 'gamme'} />}
+  {p.marques.includes('janneau') && <JanneauBlock accent={p.slug === 'portes-entree' ? 'simulateur' : 'gamme'} />}
 
   {
     p.arguments.length > 0 && (
@@ -239,7 +241,10 @@ const jsonLd = [
   <section class="section">
     <div class="container">
       <SectionHead eyebrow="Près de chez vous" title={`Votre projet ${p.nav.toLowerCase()} à Jonzac ou à Royan`} />
-      <LocalCta produit={p.nav.toLowerCase()} />
+      <LocalCta
+        produit={p.nav.toLowerCase()}
+        contact={p.marques.includes('concept-alu') ? 'Steve Peponnet, responsable de l’activité Concept Alu, vous reçoit dans nos deux showrooms et se déplace chez vous pour l’étude.' : undefined}
+      />
       {
         (croisee || p.aides) && (
           <div class="grid grid--2 mt-2">

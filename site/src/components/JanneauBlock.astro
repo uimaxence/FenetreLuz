@@ -1,0 +1,208 @@
+---
+/**
+ * Bloc « Menuisier Créateur Janneau » (pendant du bloc MéO, demandé par Benoît le 27 octobre 2026) :
+ * le réseau, la gamme PVC / alu / bois, le simulateur de porte d'entrée et les garanties fabricant.
+ * - accent="simulateur" (portes d'entrée) : le simulateur en premier ;
+ * - accent="gamme" (fenêtres, volets, page marques) : la gamme en premier.
+ */
+import type { ImageMetadata } from 'astro';
+import Icon from './Icon.astro';
+import Rays from './Rays.astro';
+import { janneau } from '../data/janneau';
+import { prestationBySlug } from '../data/prestations';
+
+interface Props {
+  accent?: 'simulateur' | 'gamme';
+  /** Lien vers la fiche Janneau de la page marques (masqué sur cette page). */
+  lienMarques?: boolean;
+  id?: string;
+}
+const { accent = 'gamme', lienMarques = true, id } = Astro.props;
+
+const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/certifications/*.{svg,png}', { eager: true });
+const logo = Object.entries(logos).find(([p]) => /\/janneau\.(svg|png)$/i.test(p))?.[1].default;
+---
+
+<section class="section jan" id={id}>
+  <div class="container">
+    <div class="jan__grid">
+      <div class="jan__intro reveal">
+        <p class="eyebrow"><Rays /> Menuisier Créateur Janneau</p>
+        <h2>{accent === 'simulateur' ? 'Composez votre porte d’entrée Janneau en ligne' : 'Nos menuiseries Janneau : PVC, aluminium et bois'}</h2>
+        <p class="jan__text">{janneau.presentation}</p>
+        <p class="jan__text">
+          LUZ est membre du réseau Janneau Menuisier Créateur pour ses deux agences : des installateurs sélectionnés par le fabricant pour la qualité de leur
+          conseil, de leurs relevés de cotes et de leur pose.
+        </p>
+        <ul class="list-rays jan__engagements">
+          {janneau.engagements.map((e) => <li>{e}</li>)}
+        </ul>
+        {lienMarques && (
+          <a class="link-arrow" href="/marques-partenaires/#janneau">
+            Janneau dans nos marques partenaires <Icon id="arrow" />
+          </a>
+        )}
+      </div>
+
+      <div class="jan__side">
+        <div class:list={['jan__card', 'jan__card--config', 'reveal', { 'jan__card--first': accent === 'simulateur' }]}>
+          {logo && <img class="jan__logo" src={logo.src} width={logo.width} height={logo.height} alt="Janneau" loading="lazy" decoding="async" />}
+          <span class="badge badge--lime">Simulateur de porte d’entrée</span>
+          <h3>Choisissez votre porte, voyez-la en vrai</h3>
+          <p>
+            Modèle, couleurs, vitrage et accessoires : composez votre porte d’entrée Janneau dans le simulateur du fabricant et obtenez un rendu réaliste.
+            Nous la chiffrons ensuite avec la pose.
+          </p>
+          <div class="jan__actions">
+            <a class="btn btn--primary" href={janneau.simulateur} target="_blank" rel="noopener">Ouvrir le simulateur <Icon id="arrow-up-right" /></a>
+            <a class="btn btn--outline" href="/devis/">Chiffrer ma porte</a>
+          </div>
+        </div>
+
+        <div class:list={['jan__card', 'reveal', { 'jan__card--first': accent === 'gamme' }]} style="--d:80ms">
+          <span class="badge">La gamme</span>
+          <ul class="jan__gamme">
+            {janneau.gamme.map((g) => {
+              const p = g.prestation ? prestationBySlug(g.prestation) : undefined;
+              return (
+                <li>
+                  <strong>{g.nom}</strong>
+                  <span>{g.texte}</span>
+                  {p && !p.draft && (
+                    <a class="link-arrow" href={`/prestations/${p.slug}/`}>
+                      {p.nav} <Icon id="arrow" />
+                    </a>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        <div class="jan__card jan__card--garantie reveal" style="--d:160ms">
+          <span class="badge badge--lime"><Icon id="check" /> Garanties fabricant {janneau.garantie.duree}</span>
+          <p>{janneau.garantie.texte}</p>
+          <p class="jan__small">{janneau.garantie.vitrage}</p>
+          <p class="jan__links">
+            <a class="link-arrow" href={janneau.site} target="_blank" rel="noopener">Le site de Janneau <Icon id="arrow-up-right" /></a>
+            <a class="link-arrow" href={janneau.reseau} target="_blank" rel="noopener">Le réseau Menuisier Créateur <Icon id="arrow-up-right" /></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .jan {
+    background: var(--stone-50);
+    border-top: 1px solid var(--stone-200);
+    border-bottom: 1px solid var(--stone-200);
+  }
+  .jan__grid {
+    display: grid;
+    grid-template-columns: 1fr 1.25fr;
+    gap: 2.5rem 4rem;
+    align-items: start;
+  }
+  .jan__intro h2 {
+    margin-bottom: 1rem;
+  }
+  .jan__text {
+    color: var(--ink-2);
+    line-height: 1.6;
+  }
+  .jan__engagements {
+    margin: 1.25rem 0 1.5rem;
+  }
+  .jan__side {
+    display: grid;
+    gap: 1rem;
+  }
+  .jan__card {
+    display: grid;
+    gap: 0.75rem;
+    padding: 1.6rem;
+    border-radius: var(--radius);
+    background: var(--white);
+    border: 1px solid var(--stone-200);
+  }
+  .jan__card--first {
+    order: -1;
+  }
+  .jan__card .badge {
+    justify-self: start;
+  }
+  .jan__card h3 {
+    font-size: 1.35rem;
+    margin: 0;
+  }
+  .jan__card p {
+    margin: 0;
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+  .jan__logo {
+    width: 110px;
+    height: auto;
+    justify-self: start;
+  }
+  .jan__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.25rem;
+  }
+  .jan__gamme {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .jan__gamme li {
+    display: grid;
+    gap: 0.15rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--stone-200);
+  }
+  .jan__gamme li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .jan__gamme strong {
+    font-family: var(--font-ui);
+    color: var(--green-900);
+  }
+  .jan__gamme span {
+    color: var(--ink-2);
+    font-size: 0.95rem;
+  }
+  .jan__gamme .link-arrow {
+    font-size: 0.85rem;
+    margin-top: 0.15rem;
+  }
+  .jan__card--garantie {
+    background: var(--green-900);
+    border-color: var(--green-900);
+  }
+  .jan__card--garantie p {
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .jan__small {
+    font-size: 0.9rem;
+  }
+  .jan__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+  }
+  .jan__card--garantie .link-arrow {
+    color: var(--lime);
+  }
+  @media (max-width: 900px) {
+    .jan__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

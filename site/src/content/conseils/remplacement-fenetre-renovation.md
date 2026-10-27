@@ -49,7 +49,7 @@ L’ancien dormant est **retiré jusqu’à la maçonnerie**. La fenêtre neuve 
 
 ## Comment nous décidons
 
-Lors de la visite, notre métreur :
+Lors de la première visite, notre technico-commercial :
 
 1. sonde les dormants existants (bois pourri, fixations, équerrage) ;
 2. mesure les tableaux et vérifie l’aplomb des murs ;

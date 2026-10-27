@@ -178,7 +178,7 @@ const description =
       <SectionHead
         eyebrow="Qui sommes-nous"
         title="Une équipe à taille humaine, à votre écoute"
-        lead="Douze personnes, toutes salariées LUZ : conseillers, métreur, assistantes et poseurs. Celui qui vous conseille, celui qui mesure et ceux qui posent travaillent dans le même bâtiment, à deux minutes de Jonzac."
+        lead="Douze personnes, toutes salariées LUZ : conseillers, métreur, assistantes et poseurs. Celui qui vous conseille, celui qui mesure et ceux qui posent travaillent ensemble, à Jonzac comme à Breuillet."
         row
       >
         <a class="link-arrow" href="/a-propos/">Notre histoire <Icon id="arrow" /></a>
@@ -186,8 +186,8 @@ const description =
 
       <div class="team__mosaic">
         <figure class="team__cell team__cell--big reveal reveal--scale">
-          {groupe && <Picture src={groupe} alt="L’équipe du bureau et du showroom de Fenêtres & Vérandas LUZ à Jonzac" widths={[700, 1000, 1400]} sizes="(max-width: 900px) 100vw, 46vw" formats={['webp']} loading="lazy" decoding="async" class="team__img" pictureAttributes={{ class: 'team__pic' }} />}
-          <figcaption>Le bureau et le showroom de Jonzac</figcaption>
+          {groupe && <Picture src={groupe} alt="L’équipe du bureau et des showrooms de Fenêtres & Vérandas LUZ, à Jonzac et à Breuillet" widths={[700, 1000, 1400]} sizes="(max-width: 900px) 100vw, 46vw" formats={['webp']} loading="lazy" decoding="async" class="team__img" pictureAttributes={{ class: 'team__pic' }} />}
+          <figcaption>L’équipe du bureau et des showrooms</figcaption>
         </figure>
         <figure class="team__cell team__cell--tall reveal reveal--scale" style="--d:80ms">
           {poseTall && <Picture src={poseTall} alt="Poseur LUZ sur échelle, ligne de vie et harnais, pendant le remplacement d’une fenêtre" widths={[500, 800]} sizes="(max-width: 900px) 50vw, 24vw" formats={['webp']} loading="lazy" decoding="async" class="team__img" pictureAttributes={{ class: 'team__pic' }} />}
@@ -280,7 +280,7 @@ const description =
         <ul class="why__list">
           <li class="reveal" style="--d:0ms">
             <span class="why__ic"><Icon id="ruler" /></span>
-            <div><strong>Métré par un professionnel</strong><p>Notre métreur relève chaque ouverture ; le devis est établi sur des cotes réelles, sans surprise.</p></div>
+            <div><strong>Un devis sur des cotes réelles</strong><p>Votre technico-commercial prend les premières cotes chez vous ; une fois le devis signé, notre métreur relève les cotes définitives avant la commande. Pas de surprise à la pose.</p></div>
           </li>
           <li class="reveal" style="--d:70ms">
             <span class="why__ic"><Icon id="hammer" /></span>
@@ -331,7 +331,7 @@ const description =
       <SectionHead
         eyebrow="Agences & zone d’intervention"
         title="Nous intervenons près de chez vous"
-        lead="Deux agences à Jonzac et à Royan, des équipes de pose qui couvrent la Charente-Maritime et l’ouest de la Charente. Sélectionnez votre secteur pour connaître l’agence qui vous suit et les communes desservies. Le déplacement pour le métré et le devis est gratuit."
+        lead="Deux agences à Jonzac et à Royan, des équipes de pose qui couvrent la Charente-Maritime, l’ouest de la Charente et le nord de la Gironde. Sélectionnez votre secteur pour connaître l’agence qui vous suit et les communes desservies. Le déplacement pour le métré et le devis est gratuit."
       />
       <ZonesMap />
       <div class="grid grid--2 zones__agences">
@@ -602,11 +602,11 @@ const description =
     }
     .hero2__shade {
       background:
-        linear-gradient(to bottom, rgba(11, 46, 16, 0.18) 0%, rgba(11, 46, 16, 0.55) 30%, rgba(11, 46, 16, 0.9) 48%, rgba(11, 46, 16, 0.96) 100%);
+        linear-gradient(to bottom, rgba(11, 46, 16, 0.22) 0%, rgba(11, 46, 16, 0.6) 20%, rgba(11, 46, 16, 0.9) 36%, rgba(11, 46, 16, 0.96) 100%);
     }
     .hero2__in {
       grid-template-columns: 1fr;
-      padding-block: clamp(13rem, 52vw, 19rem) 3.5rem;
+      padding-block: clamp(6.5rem, 28vw, 10rem) 3.5rem;
       gap: 1.5rem;
     }
     .hero2__team {

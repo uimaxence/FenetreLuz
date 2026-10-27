@@ -9,6 +9,7 @@ export type Marque = {
   prestations: string[]; // slugs des pages prestations liées
   principale?: boolean; // affichée dans les bandeaux de confiance
   aVenir?: boolean;
+  site?: string; // site officiel du fabricant (affiché sur la page marques)
 };
 
 export const marques: Marque[] = [
@@ -120,10 +121,11 @@ export const marques: Marque[] = [
   },
   {
     slug: 'vulcan',
-    name: 'Vulcan',
+    name: 'Vulcan Brasero',
+    site: 'https://www.vulcanbrasero.com/',
     categorie: 'Braseros',
     produits: ['Braseros en acier', 'Accessoires'],
-    description: 'Braseros à bois pour se réunir dehors toute l’année autour du feu. À découvrir dans notre showroom de Jonzac.',
+    description: 'Fabricant artisanal charentais de braseros en acier Corten : modèles ronds ou carrés, traversants, traditionnels, sur trépied ou à poser, et leurs accessoires. À découvrir dans notre showroom de Jonzac.',
     prestations: ['braseros'],
   },
   {

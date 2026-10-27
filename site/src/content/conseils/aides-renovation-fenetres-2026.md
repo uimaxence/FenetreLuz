@@ -51,7 +51,7 @@ Oui. MaPrimeRénov’ + prime CEE + TVA 5,5 % + éco-PTZ sont cumulables, dans l
 
 ## Dans quel ordre faire les démarches ?
 
-1. **Visite et devis** : notre métreur relève les cotes ; le devis mentionne les performances des fenêtres et notre numéro RGE.
+1. **Visite et devis** : notre technico-commercial vient chez vous et établit le devis ; il mentionne les performances des fenêtres et notre numéro RGE.
 2. **Demande MaPrimeRénov’** en ligne, puis **demande de prime CEE** auprès de l’organisme choisi, **avant de signer**.
 3. **Signature du devis** une fois l’accord de principe reçu ; nous lançons la fabrication (6 à 10 semaines).
 4. **Pose**, puis envoi de la facture et de l’attestation ; les aides sont versées sur votre compte.
