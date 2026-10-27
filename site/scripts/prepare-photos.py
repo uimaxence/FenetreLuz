@@ -18,6 +18,7 @@ SRC = SITE.parent / "assets" / "PHOTOS SITE LUZ"
 OUT = SITE / "src" / "assets" / "photos"
 R = "REALISATIONS "
 P2 = "PHOTOS SITE 2/"  # deuxième envoi de photos (octobre 2026), même dossier source
+P3 = "Photo site/"  # troisième envoi (WeTransfer de Benoît, 27 octobre 2026) : vérandas et extensions Concept Alu
 
 # slug -> liste de photos sources (la première = photo principale)
 REALISATIONS = {
@@ -160,7 +161,8 @@ REALISATIONS = {
         R + "/VOLETS BATTANTS /Volets Battants Alu Ehret ISOLATION SUR MESURE PAYS JONZACAIS(1).jpg",
         R + "/VOLETS BATTANTS /Volets Battants Alu Ehret ISOLATION SUR MESURE PAYS JONZACAIS(2).jpg"],
     # --- « PHOTOS SITE 2 » (deuxième envoi, 9 octobre 2026) ---
-    "veranda-concept-alu-les-mathes": [P2 + "véranda concept alu Les Mathes 1.jpg", P2 + "véranda concept alu Les Mathes 2.jpg"],
+    "veranda-concept-alu-les-mathes": [P2 + "véranda concept alu Les Mathes 1.jpg", P2 + "véranda concept alu Les Mathes 2.jpg",
+        P3 + "20230329_140511.jpg", P3 + "20230329_140539.jpg"],  # 20230329_140618 et _140454 du 3e envoi = doublons des deux premières
     "baie-vitree-alu-janneau-jonzac": [P2 + "Baie vitrée Janneau Jonzac 1.jpg", P2 + "Baie vitrée Janneau Jonzac 2.jpg"],
     "porte-entree-meo-royan": [P2 + "Porte d'entrée MéO Royan.jpg"],
     "pergola-bioclimatique-saujon": [P2 + "pergola concept alu Saujon.jpg"],
@@ -171,6 +173,35 @@ REALISATIONS = {
     "portail-noir-horizal-pays-royannais": [P2 + "portail noir Horizal pays royannais.jpg"],  # « portail noir Horizal.jpg » est un doublon
     "garde-corps-horizal-saint-palais-sur-mer": [P2 + "Garde-corps Horizal Saint-Palais.jpeg"],
     "garde-corps-horizal-arvert": [P2 + "Garde-corps Horizal Arvert.jpg"],
+    # --- « Photo site » (troisième envoi, 27 octobre 2026) : uniquement des vérandas / extensions Concept Alu.
+    # Communes retrouvées par le GPS des photos quand il existait ; sinon ville « Charente-Maritime » (à préciser par Benoît).
+    "extension-toit-plat-puits-de-lumiere": [P3 + "07492632db2f426bfd3d21b8c9d67259.jpeg", P3 + "020d7e1b3fabc6991b7be1968ab30fa4.jpeg", P3 + "0705730712db4116b381e649ca6ac829.jpeg"],
+    "extension-toit-plat-interieur-avant-finitions": [P3 + "7950658ba547480574316b59a063005a.jpeg"],
+    "veranda-toit-plat-anthracite-terrasse-carrelee": [P3 + "received_1541636329955009.jpeg"],
+    "extension-toit-plat-fin-de-chantier": [P3 + "1770234862777-20260202_175316.jpg"],
+    "veranda-blanche-toit-plat": [P3 + "1773253626672-IMG_1516.jpg"],
+    "extension-toit-plat-terrasse-pierre": [P3 + "1792069642402-IMG_2878.jpg"],
+    "veranda-toit-plat-facade-arriere": [P3 + "20220913_183637 - Copie.jpg"],
+    "extension-bardage-aluminium-chantier": [P3 + "481758121_1154408732984146_7003855513500661346_n.jpg"],
+    "extension-noire-volets-roulants-integres": [P3 + "received_974616640376428.jpeg", P3 + "received_686229433023520.jpeg"],  # 482462851_…_n.jpg = même chantier en 480 px
+    "extension-vitree-maison-en-pierre": [P3 + "483156597_2089464941525162_4523439805523037966_n.jpg"],
+    "veranda-toit-plat-soubassement-pierre": [P3 + "550181848_1352996692853547_713619525706574925_n.jpg"],
+    "veranda-grise-toit-plat-pavillon": [P3 + "550459443_1316117726766344_5718129827023614683_n.jpg", P3 + "550856396_1729890057716795_2383764182008527775_n.jpg", P3 + "551315263_2473637446354124_1192137725797606193_n.jpg"],
+    "veranda-anthracite-fin-de-chantier": [P3 + "588219353_1651137659186969_192240215381690117_n.jpg"],
+    "extension-extanxia-beige-toiture-gravillonnee": [P3 + "EXTANXIA 1015 1.jpg", P3 + "EXTANXIA 1015 3.jpg"],
+    "veranda-homea-piscine-gimeux": [P3 + "HOMEA GIMEUX (2).jpg"],
+    "veranda-armonia-blanche-maison-de-maitre": [P3 + "VERANDA ARMONIA CONCEPT ALU.jpg"],
+    "veranda-armonia-sable-cognac": [P3 + "VERANDA CONCEPT ALU ARMONIA (10).jpg", P3 + "VERANDA CONCEPT ALU ARMONIA (11).jpg"],
+    "veranda-armonia-stores-interieurs": [P3 + "VERANDA CONCEPT ALU ARMONIA (15).jpg"],
+    "veranda-armonia-blanche-saint-georges-antignac": [P3 + "VERANDA CONCEPT ALU ARMONIA (9).JPG"],
+    "veranda-homea-piscine-couverte": [P3 + "VERANDA HOMEA CONCEPT ALU.jpg"],
+    "veranda-armonia-anthracite-nercillac": [P3 + "Véranda Armonia 7016 CONCEPT ALU (1).jpg", P3 + "Véranda Armonia 7016 CONCEPT ALU (5).jpg"],
+    "veranda-armonia-terrasse-surelevee": [P3 + "Véranda Armonia Concept Alu (10).jpg", P3 + "Véranda Armonia Concept Alu (11).jpg"],
+    "veranda-armonia-sable-maison-de-caractere": [P3 + "Véranda Armonia Concept Alu (7).jpg", P3 + "Véranda Armonia Concept Alu (8).jpg"],
+    "veranda-armonia-sable-store-zip": [P3 + "Véranda Armonia CONCEPT ALU.jpeg"],
+    "veranda-extanxia-anthracite-terrasse": [P3 + "Véranda Extanxia Concept Alu (11).jpg"],
+    "extension-extanxia-noire-volet-roulant": [P3 + "Véranda Extanxia Concept Alu Noir 2100(1).jpg"],
+    "sas-entree-homea-nieul-le-virouil": [P3 + "Véranda Homéa Concept Alu (7).jpg", P3 + "Véranda Homéa Concept Alu (5).jpg"],
 }
 
 EQUIPE = {
