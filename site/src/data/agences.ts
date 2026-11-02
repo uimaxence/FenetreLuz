@@ -97,11 +97,13 @@ export const agences: Record<'jonzac' | 'royan', Agence> = {
     tel: '+33546213721',
     email: 'contact@fenetresluz.com',
     hours: [
-      { days: 'Lundi – Vendredi', time: '9h00 – 12h30' },
-      { days: 'Après-midi', time: 'Sur rendez-vous' },
+      { days: 'Lundi', time: '14h00 – 18h00' },
+      { days: 'Mardi – Vendredi', time: '9h00 – 12h00' },
+      { days: 'Samedi', time: 'Sur rendez-vous' },
     ],
     openingHoursSpecification: [
-      { days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '12:30' },
+      { days: ['Monday'], opens: '14:00', closes: '18:00' },
+      { days: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '09:00', closes: '12:00' },
     ],
     mapsQuery: 'Fenêtres et Vérandas LUZ, 54C route du Magarin, 17920 Breuillet',
     showroom: 'Showroom & bureau',
