@@ -128,15 +128,6 @@ export const marques: Marque[] = [
     description: 'Fabricant artisanal charentais de braseros en acier Corten : modèles ronds ou carrés, traversants, traditionnels, sur trépied ou à poser, et leurs accessoires. À découvrir dans notre showroom de Jonzac.',
     prestations: ['braseros'],
   },
-  {
-    slug: 'twic',
-    name: 'TWIC',
-    categorie: 'Terrasses bois',
-    produits: ['Terrasses bois et composite'],
-    description: 'Gamme de terrasses bois et composite TWIC (« gentlemen poseurs ») en cours d’intégration à notre offre : nous vous tiendrons informés de sa disponibilité.',
-    prestations: ['terrasses-bois'],
-    aVenir: true,
-  },
 ];
 
 export const marquesPrincipales = marques.filter((m) => m.principale);

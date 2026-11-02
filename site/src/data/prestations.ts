@@ -654,26 +654,6 @@ export const prestations: Prestation[] = [
     ],
     keywords: ['brasero', 'brasero vulcan'],
   },
-  {
-    slug: 'terrasses-bois',
-    nav: 'Terrasses bois',
-    title: 'Terrasses bois',
-    h1: 'Terrasses bois et composite',
-    metaTitle: 'Terrasse bois en Charente-Maritime (17) — Pose & devis | Fenêtres & Vérandas LUZ',
-    metaDescription: 'Terrasses en bois et composite TWIC posées à Jonzac, Royan et en Charente-Maritime, en accompagnement de votre pergola ou véranda.',
-    icon: 'terrasse',
-    card: 'Le prolongement naturel de la pergola : terrasses bois et composite TWIC (gamme à venir).',
-    lead: 'Pour compléter une pergola, une véranda ou un pool house, nous intégrons prochainement à notre offre les terrasses bois et composite TWIC.',
-    hero: { gen: 'terrasse-bois' },
-    facts: [{ label: 'Marque', value: 'TWIC' }],
-    sections: [],
-    gammes: [],
-    marques: ['twic'],
-    arguments: [],
-    faq: [],
-    keywords: ['terrasse bois'],
-    draft: true,
-  },
 ];
 
 export const prestationsPubliees = prestations.filter((p) => !p.draft);
