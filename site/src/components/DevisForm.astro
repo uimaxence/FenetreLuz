@@ -1,10 +1,11 @@
 ---
 /**
  * Formulaire de demande de devis / contact.
- * - Sans JS : POST classique vers /api/devis/ puis redirection /devis/merci/.
+ * - Sans JS : POST classique vers /api/devis/ puis redirection /devis/merci/ (ou /devis/#erreur-envoi en cas d'échec).
  * - Avec JS : envoi fetch + message inline (voir scripts/main.ts).
  */
 import Icon from './Icon.astro';
+import { agences } from '../data/agences';
 interface Props {
   defaultProjet?: string;
   defaultSecteur?: 'jonzac' | 'royan' | 'autre';
@@ -104,6 +105,10 @@ const secteurs = [
     </div>
   </div>
   <p class="dform__status" data-status hidden role="status" aria-live="polite"></p>
+  <p class="dform__status dform__status--cible" id="erreur-envoi" data-state="error">
+    L’envoi n’a pas abouti. Vérifiez les champs obligatoires puis réessayez, ou appelez-nous directement :
+    <a href={`tel:${agences.jonzac.tel}`}>{agences.jonzac.phone}</a> (Jonzac) · <a href={`tel:${agences.royan.tel}`}>{agences.royan.phone}</a> (Royan).
+  </p>
 </form>
 
 <style>
@@ -268,6 +273,12 @@ const secteurs = [
   .dform__status[data-state='error'] {
     background: #fdece7;
     border-color: var(--orange);
+  }
+  .dform__status--cible {
+    margin-top: 1rem;
+  }
+  .dform__status--cible:not(:target) {
+    display: none;
   }
   @media (max-width: 640px) {
     .dform__grid {

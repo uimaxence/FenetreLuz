@@ -1382,6 +1382,15 @@ export const realisationsByPrestation = (slug: string) =>
   enReference.filter((r) => r.prestation === slug || (slug === 'volets' && r.prestationLabel === 'Fenêtres & volets'));
 export const realisationsByZone = (zone: Realisation['zone']) => enReference.filter((r) => r.zone === zone);
 
+/** Lieu d'un chantier précédé de la bonne préposition : « à Jonzac », « en Charente-Maritime », « dans le Pays royannais ». */
+export const lieuChantier = (ville: string) => {
+  if (ville === 'Charente-Maritime') return `en ${ville}`;
+  if (ville.startsWith('Pays ')) return `dans le ${ville}`;
+  if (ville.startsWith('Île ')) return `sur l’î${ville.slice(1)}`;
+  if (ville.startsWith('Les ')) return `aux ${ville.slice(4)}`;
+  return `à ${ville}`;
+};
+
 export const zoneLabels: Record<Realisation['zone'], string> = {
   jonzac: 'Jonzac, Haute-Saintonge & Charente',
   royan: 'Royan, littoral & Saintes',

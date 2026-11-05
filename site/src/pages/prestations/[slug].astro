@@ -73,7 +73,7 @@ const jsonLd = [
   >
     <div class="phero-ctas">
       <a class="btn btn--primary btn--lg" href="/devis/">Demander un devis <Icon id="arrow" /></a>
-      <a class="btn btn--ghost" href="#realisations">Voir des réalisations</a>
+      {reals.length > 0 && <a class="btn btn--ghost" href="#realisations">Voir des réalisations</a>}
     </div>
   </PageHero>
 

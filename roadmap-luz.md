@@ -87,6 +87,7 @@ Tâches :
 - [ ] Setup technique (stack, hébergement, nom de domaine — fenetresluz.com existant à vérifier/migrer)
   > Décision : le domaine fenetresluz.com est conservé (ancienneté + backlinks). Vérifier l'accès au registrar/DNS avec Benoît.
   > Stack livrée : Astro 7 (pages 100 % pré-rendues en HTML, adaptateur Vercel pour l'API du formulaire uniquement), projet dans `site/` (voir `site/README.md`). Hébergement : Vercel (dépôt GitHub `uimaxence/FenetreLuz`, Root Directory `site`). Reste : accès DNS et variables SMTP sur Vercel.
+  > 5 novembre 2026 : site en ligne sur www.fenetresluz.com (DNS OVH → Vercel, MX OVH inchangés). Identifiants SMTP reçus (OVH `ssl0.ovh.net:465`, compte `fenetres-luz2@mcneill.fr`, connexion testée) ; variables `SMTP_*`, `DEVIS_FROM`, `DEVIS_TO` à saisir sur Vercel puis redéployer. Destinataire des demandes (`DEVIS_TO`) à confirmer avec Benoît.
 - [ ] Intégration du design validé
   > v1 intégrée (92 pages générées), en attente de validation DA par Benoît/Élodie (section 4). Captures et corrections faites sur desktop 1440 px et mobile 390 px.
   > Premier retour de Benoît (25 septembre 2026) : base validée ; demandes = logo officiel repris tel quel, plus d'humain (photos d'équipe), zone d'intervention sous forme de carte cliquable (comme Fenêtres sur Loire), plus de photos de chantiers. Réponse : page `/v2/` (non indexée, hors sitemap) = proposition de nouvel accueil avec hero photo statique, carte « équipe » dans le hero, section équipe (mosaïque + 12 portraits + interlocuteurs), mur de 9 chantiers, carte interactive des zones. À présenter en visio ; si validée, remplacer `index.astro` et supprimer `/v2/`.
@@ -110,6 +111,7 @@ Tâches :
   > Agences (`/agences/[slug]/`, LocalBusiness), villes (`/menuiserie-[ville]/`) et pages croisées (`/[produit]-royan/`).
 - [x] Formulaire de contact + demande de devis
   > Formulaire unique (projet + secteur + coordonnées, RGPD, anti-robot) sur /devis/, /contact/, /depannage/ et pages agences. Endpoint `/api/devis/` : envoi SMTP dès que `.env` est renseigné (sinon journalisation).
+  > 5 novembre 2026 : en production, sans SMTP, l'endpoint renvoie désormais une erreur (message « appelez-nous ») au lieu de confirmer une demande que personne ne reçoit.
 - [x] Intégration des avis Google (2 fiches)
   > En prod le 22 sept. 2026 : `site/scripts/fetch-avis.mjs` interroge l'API Places (New) (clé `GOOGLE_PLACES_API_KEY`, projet Cloud de Benoît) et écrit `src/data/avis-google.json` (note, nombre, 5 avis max par fiche) ; lancé par `npm run avis` et avant chaque build. Place ID des deux fiches dans `src/data/google-fiches.json` (Jonzac 4,8/153 avis, Royan 4,9/60 au 22 sept.). Reste : liens courts « laisser un avis » (§8) à coller dans `google-fiches.json`, verbatims supplémentaires dans `avisManuels` (`avis.ts`).
   > Bloc et page /avis/ prêts, aucun avis inventé : renseigner `site/src/data/avis.ts` (liens des fiches, note, verbatims réels) une fois l'accès aux fiches confirmé.
@@ -138,6 +140,7 @@ Tâches :
   > `sitemap-index.xml` et `robots.txt` générés ; soumission Search Console après mise en ligne.
 - [x] Plan de redirections 301 depuis les anciennes URLs (ne pas perdre le SEO existant)
   > 7 redirections dans `site/astro.config.mjs` (menuiserie-alu-bois-pvc-royan → /agences/royan/, fenetres-portes, portail-…, verandas-pergolas, fermetures-volets, alarmes-domotique, demande-de-devis). À compléter après crawl complet de l'ancien site.
+  > 5 novembre 2026, contrôle en ligne : les 7 redirections répondent en 301 direct (avec ou sans slash final). Inventaire des anciennes URL (Wayback Machine, index Google `site:`, backlinks) : 10 URL, toutes couvertes ; ajout de `/maintenance/` (encore indexée) et `/accueil-2/` → `/`. Les fichiers `/_astro/` étaient servis sans cache longue durée (règle de l'adaptateur placée après `handle: filesystem`) : corrigé dans `src/integrations/vercelRedirects.mjs`, à vérifier après déploiement (`cache-control: … immutable`).
 - [x] Corriger les points d'audit déjà identifiés (contenu obsolète, contenu dupliqué fournisseur, Schema manquant, NAP incohérent, éléments de contact cassés)
   > Plus aucune mention « Parthenay » hors page À propos (historique), promo MéO 2023 supprimée, textes réécrits (pas de copier-coller fournisseur), NAP unique dans `site/src/data/agences.ts` et réutilisé partout (header, footer, pages, Schema).
 
@@ -184,7 +187,8 @@ Tâches :
 - [ ] Validation finale par Benoît
 
 ## 13. Lancement
-- [ ] Mise en ligne — objectif avant le pic de recherche de septembre
+- [x] Mise en ligne — objectif avant le pic de recherche de septembre
+  > Site constaté en ligne le 5 novembre 2026. Crawl de contrôle : 143 pages, 2 182 ressources, aucun lien interne ni image en erreur.
 - [ ] Soumission sitemap sur Search Console
 - [ ] Annonce du lancement (réseaux sociaux, post GMB)
 
