@@ -2,7 +2,7 @@
 /**
  * Visuel « à générer » (voir IMAGES-A-GENERER.md à la racine du projet).
  * - Si un fichier src/assets/gen/{id}.{jpg,png,webp} existe, il est affiché (optimisé par astro:assets, recadré au ratio).
- * - Sinon : dégradé vert + rayons, avec l'identifiant affiché discrètement pour repérer le visuel à produire.
+ * - Sinon : dégradé vert + rayons ; l'identifiant du visuel à produire n'est affiché qu'en développement, jamais en ligne.
  */
 import { Picture } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
@@ -39,7 +39,7 @@ const found = Object.entries(gen).find(([path]) => path.split('/').pop()!.replac
   ) : (
     <div {...rest} class:list={['ph', cls]} style={`aspect-ratio:${ratio}`} role="img" aria-label={label ?? 'Visuel à venir'}>
       <Rays class="ph__rays" />
-      <span class="ph__id">Visuel à générer · {id}</span>
+      {import.meta.env.DEV && <span class="ph__id">Visuel à générer · {id}</span>}
     </div>
   )
 }

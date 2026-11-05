@@ -184,6 +184,7 @@ Tâches :
 - [ ] Tests des formulaires (devis, contact)
 - [ ] Tests mobile / responsive
 - [ ] Vérification légale (mentions, CGV, cookies, RGPD)
+  > 5 novembre 2026 : mentions de brouillon retirées des pages en ligne (crochets des mentions légales, de la politique de confidentialité et de la page partenariats). Hébergeur renseigné (Vercel Inc.). Restent à obtenir de Benoît : médiateur de la consommation (mention obligatoire), numéro de contrat et zone de couverture Generali, numéro et validité Qualibat ; à fournir par Maxence : crédit « Conception et réalisation ». Bandeau de consentement à prévoir avant tout outil de mesure (PostHog, Google Ads).
 - [ ] Validation finale par Benoît
 
 ## 13. Lancement

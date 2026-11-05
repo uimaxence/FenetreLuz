@@ -12,8 +12,6 @@ const L = site.legal;
   <PageHero title="Mentions légales" crumbs={[{ label: 'Mentions légales' }]} compact />
   <section class="section">
     <div class="container container--narrow prose">
-      <p class="note">Les éléments entre crochets restent à compléter (hébergeur, prestataire, numéros d'assurance et de qualification) avant la mise en ligne.</p>
-
       <h2>Éditeur du site</h2>
       <p>
         <strong>{site.legalName}</strong>, {L.forme} au capital de {L.capital}<br />
@@ -28,19 +26,19 @@ const L = site.legal;
       <p>Directeur de la publication : {L.gerant}, gérant.</p>
 
       <h2>Hébergement</h2>
-      <p>[Nom de l’hébergeur retenu — adresse — téléphone]</p>
+      <p>Vercel Inc., 440 N Barranca Avenue #4133, Covina, CA 91723, États-Unis — <a href="https://vercel.com" rel="noopener nofollow">vercel.com</a></p>
 
-      <h2>Conception et réalisation</h2>
-      <p>[Nom de l’agence / prestataire — site web]</p>
+      {/* À COMPLÉTER : section « Conception et réalisation » (nom du prestataire, site web). */}
 
       <h2>Assurances et qualifications</h2>
       <p>
-        Assurance responsabilité civile et décennale : Generali [numéro de contrat, zone de couverture géographique].<br />
-        Certification RGE (Reconnu Garant de l’Environnement) — Qualibat [numéro de qualification, validité].
+        Assurance responsabilité civile et décennale : Generali.<br />
+        Certification RGE (Reconnu Garant de l’Environnement) — Qualibat.
+        {/* À COMPLÉTER avec Benoît : numéro de contrat et zone de couverture Generali, numéro et validité de la qualification Qualibat. */}
       </p>
 
       <h2>Propriété intellectuelle</h2>
-      <p>L’ensemble des contenus de ce site (textes, photographies de chantiers, logo, motif graphique) est la propriété de {site.legalName} ou de ses partenaires et ne peut être reproduit sans autorisation écrite. Les marques MéO, Janneau, Concept Alu, HORIZAL, Soliso, EHRET, Soprofen, Gypass, Somfy, DEA, Vulcan et TWIC ainsi que les logos RGE, Qualibat et Generali sont la propriété de leurs titulaires respectifs et sont reproduits au titre des réseaux et certifications dont l’entreprise est membre.</p>
+      <p>L’ensemble des contenus de ce site (textes, photographies de chantiers, logo, motif graphique) est la propriété de {site.legalName} ou de ses partenaires et ne peut être reproduit sans autorisation écrite. Les marques MéO, Janneau, Concept Alu, HORIZAL, Soliso, EHRET, Soprofen, Gypass, Somfy, DEA et Vulcan ainsi que les logos RGE, Qualibat et Generali sont la propriété de leurs titulaires respectifs et sont reproduits au titre des réseaux et certifications dont l’entreprise est membre.</p>
 
       <h2>Données personnelles</h2>
       <p>Les informations recueillies via les formulaires sont destinées à {site.legalName} pour le traitement de votre demande. Consultez notre <a href="/politique-confidentialite/">politique de confidentialité</a> pour connaître vos droits.</p>
@@ -49,7 +47,8 @@ const L = site.legal;
       <p>Photographies de chantiers et d’équipe : {site.name}. Certains visuels d’illustration (articles, produits sans photo de chantier) sont générés ou issus de banques d’images ; ils n’illustrent pas des réalisations de l’entreprise.</p>
 
       <h2>Médiation de la consommation</h2>
-      <p>Conformément aux articles L.611-1 et suivants du Code de la consommation, en cas de litige non résolu, le client consommateur peut recourir gratuitement au médiateur de la consommation dont relève l’entreprise : [nom et coordonnées du médiateur — à renseigner].</p>
+      <p>Conformément aux articles L.611-1 et suivants du Code de la consommation, en cas de litige non résolu, le client consommateur peut recourir gratuitement à un médiateur de la consommation en vue de la résolution amiable du litige.</p>
+      {/* À COMPLÉTER avec Benoît : nom et coordonnées du médiateur dont relève l'entreprise (mention obligatoire, art. L.616-1 du Code de la consommation). */}
     </div>
   </section>
 </Base>
