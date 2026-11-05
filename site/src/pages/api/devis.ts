@@ -2,7 +2,8 @@
  * Réception des demandes de devis / contact / dépannage.
  * - JSON (fetch depuis le site) → réponse JSON.
  * - Formulaire classique (sans JS) → redirection vers /devis/merci/.
- * Envoi par e-mail via SMTP si configuré (voir .env.example), sinon journalisation serveur.
+ * Envoi par e-mail via SMTP si configuré (voir .env.example), sinon journalisation serveur ;
+ * en production, l'absence de configuration SMTP renvoie une erreur (jamais de fausse confirmation).
  */
 import type { APIRoute } from 'astro';
 import nodemailer from 'nodemailer';
@@ -37,7 +38,7 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
       ? await request.json()
       : Object.fromEntries((await request.formData()).entries());
   } catch {
-    return wantsJson ? json({ ok: false, error: 'Requête invalide' }, 400) : redirect('/devis/', 303);
+    return wantsJson ? json({ ok: false, error: 'Requête invalide' }, 400) : redirect('/devis/?erreur=1#erreur-envoi', 303);
   }
 
   // Piège à robots : champ caché rempli → on fait semblant d'accepter.
@@ -62,7 +63,7 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
   if (!data.ville) errors.push('ville');
   if (!data.consent) errors.push('consent');
   if (errors.length) {
-    return wantsJson ? json({ ok: false, error: `Champs invalides : ${errors.join(', ')}` }, 422) : redirect('/devis/?erreur=1', 303);
+    return wantsJson ? json({ ok: false, error: `Champs invalides : ${errors.join(', ')}` }, 422) : redirect('/devis/?erreur=1#erreur-envoi', 303);
   }
 
   const subject = `[fenetresluz.com] ${data.projet} — ${data.nom} (${data.secteur})`;
@@ -100,8 +101,12 @@ export const POST: APIRoute = async ({ request, redirect, clientAddress }) => {
       });
     } catch (err) {
       console.error('[devis] envoi SMTP impossible :', err);
-      return wantsJson ? json({ ok: false, error: 'Envoi impossible pour le moment' }, 500) : redirect('/devis/?erreur=1', 303);
+      return wantsJson ? json({ ok: false, error: 'Envoi impossible pour le moment' }, 500) : redirect('/devis/?erreur=1#erreur-envoi', 303);
     }
+  } else if (env('VERCEL_ENV') === 'production') {
+    // En ligne, ne jamais confirmer une demande que personne ne recevra.
+    console.error(`[devis] SMTP non configuré en production — demande non transmise :\n${text}`);
+    return wantsJson ? json({ ok: false, error: 'Envoi impossible pour le moment' }, 500) : redirect('/devis/?erreur=1#erreur-envoi', 303);
   } else {
     console.log(`[devis] SMTP non configuré — demande journalisée :\n${text}`);
   }

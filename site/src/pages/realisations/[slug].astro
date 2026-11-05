@@ -8,7 +8,7 @@ import Rays from '../../components/Rays.astro';
 import RealisationCard from '../../components/RealisationCard.astro';
 import LocalCta from '../../components/LocalCta.astro';
 import CtaBand from '../../components/CtaBand.astro';
-import { realisations, type Realisation } from '../../data/realisations';
+import { realisations, lieuChantier, type Realisation } from '../../data/realisations';
 import { prestationBySlug } from '../../data/prestations';
 import { agences } from '../../data/agences';
 import { villes } from '../../data/villes';
@@ -31,8 +31,14 @@ if (v) {
   localLabel = `Menuiserie à ${v.name}`;
 }
 const related = realisations.filter((x) => x.slug !== r.slug && x.prestation === r.prestation).slice(0, 3);
-const title = `${r.prestationLabel} à ${r.ville} — Réalisation LUZ`;
-const description = `${r.title} (${r.marque}) à ${r.ville}. ${r.description.slice(0, 150)}…`;
+// Titre propre à chaque chantier ; le lieu n'est ajouté que si l'intitulé ne le cite pas déjà.
+const lieu = r.title.toLowerCase().includes(r.ville.toLowerCase()) ? '' : ` ${lieuChantier(r.ville)}`;
+const title = `${r.title}${lieu} — Réalisation LUZ`;
+// Description : 160 caractères au plus, coupée sur un mot entier.
+const intro = `${r.title} (${r.marque})${lieu}.`;
+const place = 158 - intro.length;
+const suite = r.description.length <= place ? r.description : `${r.description.slice(0, place).replace(/[\s,;:(«–—-]+\S*$/, '')}…`;
+const description = place > 30 ? `${intro} ${suite}` : intro;
 const first = photos[0];
 
 const jsonLd = [

@@ -45,6 +45,8 @@ export default defineConfig({
     '/fermetures-volets/': { status: 301, destination: '/prestations/volets/' },
     '/alarmes-domotique/': { status: 301, destination: '/prestations/motorisation/' },
     '/demande-de-devis/': { status: 301, destination: '/devis/' },
+    '/accueil-2/': { status: 301, destination: '/' },
+    '/maintenance/': { status: 301, destination: '/' },
   },
   image: {
     // Formats modernes générés au build par sharp
