@@ -11,14 +11,14 @@ import type { ImageMetadata } from 'astro';
 const logos = import.meta.glob<{ default: ImageMetadata }>('../assets/logos/partenaires/*.{svg,png}', { eager: true });
 const logoFor = (id: string) => Object.entries(logos).find(([p]) => p.split('/').pop()!.replace(/\.(svg|png)$/i, '') === id)?.[1].default;
 
-/** Textes à compléter avec Benoît (roadmap §1 : nature exacte de chaque partenariat, logos, photos). */
+/** Textes à compléter avec Benoît (roadmap §1) : nature exacte et saison du partenariat UBJ, club Lions exact et actions soutenues, forme du soutien aux Eurochestries, logos, photos. */
 const partenaires = [
   {
     id: 'ubj-rugby',
     nom: 'UBJ Jonzac-Barbezieux Rugby',
     type: 'Sport',
     texte:
-      'Partenaire du club de rugby de Jonzac-Barbezieux : nous soutenons le club et ses équipes, des jeunes aux seniors, parce que l’esprit d’équipe et le travail bien fait sont aussi les nôtres. [À préciser avec le club : nature du partenariat, saison, visuels.]',
+      'Partenaire du club de rugby de Jonzac-Barbezieux : nous soutenons le club et ses équipes, des jeunes aux seniors, parce que l’esprit d’équipe et le travail bien fait sont aussi les nôtres.',
     visuel: 'partenariat-ubj-rugby',
   },
   {
@@ -26,7 +26,7 @@ const partenaires = [
     nom: 'Lions Club',
     type: 'Solidarité',
     texte:
-      'Membres et soutiens des actions solidaires du Lions Club sur le territoire jonzacais : collectes, événements caritatifs, aide aux personnes en difficulté. [À préciser : club exact, actions soutenues.]',
+      'Membres et soutiens des actions solidaires du Lions Club sur le territoire jonzacais : collectes, événements caritatifs, aide aux personnes en difficulté.',
     visuel: 'partenariat-lions-club',
   },
   {
@@ -34,7 +34,7 @@ const partenaires = [
     nom: 'Festival des Eurochestries',
     type: 'Culture',
     texte:
-      'Partenaire du festival international de musique classique qui réunit chaque été de jeunes orchestres du monde entier en Charente-Maritime. [À préciser : forme du soutien, édition.]',
+      'Partenaire du festival international de musique classique qui réunit chaque été de jeunes orchestres du monde entier en Charente-Maritime.',
     visuel: 'partenariat-eurochestries',
   },
 ];
