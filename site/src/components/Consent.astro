@@ -1,0 +1,98 @@
+---
+/**
+ * Bandeau de consentement à la mesure (Google Analytics + Google Ads).
+ * Masqué par défaut : scripts/mesure.ts l'affiche tant que le visiteur n'a pas choisi, et sur « Gérer les cookies » (pied de page).
+ * Les deux boutons ont le même poids visuel : refuser doit être aussi simple qu'accepter.
+ */
+import { mesure } from '../data/mesure';
+import { agences } from '../data/agences';
+
+const config = {
+  tag: mesure.googleTag,
+  devis: mesure.conversions.devis,
+  depannage: mesure.conversions.depannage,
+  tel: {
+    [agences.jonzac.tel]: mesure.conversions.telJonzac,
+    [agences.royan.tel]: mesure.conversions.telRoyan,
+  },
+  jours: mesure.dureeChoix,
+  cookie: mesure.dureeCookie,
+};
+---
+
+<section class="consent" data-consent hidden aria-labelledby="consent-title">
+  <p class="consent__title" id="consent-title">Acceptez-vous la mesure d’audience&nbsp;?</p>
+  <p class="consent__text">
+    Avec votre accord, nous utilisons Google Analytics et Google Ads pour compter les visites et savoir quelles annonces amènent des demandes. Sans accord, rien n’est transmis. Aucune publicité ciblée.
+    <a href="/politique-confidentialite/#cookies">En savoir plus</a>
+  </p>
+  <div class="consent__actions">
+    <button class="btn btn--dark btn--sm" type="button" data-consent-refuse>Refuser</button>
+    <button class="btn btn--dark btn--sm" type="button" data-consent-accept>Accepter</button>
+  </div>
+</section>
+<script is:inline type="application/json" id="mesure-config" set:html={JSON.stringify(config)} />
+
+<style>
+  .consent {
+    position: fixed;
+    left: var(--gutter);
+    bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+    z-index: 90;
+    width: min(26rem, calc(100vw - 2 * var(--gutter)));
+    padding: 1.25rem 1.35rem 1.35rem;
+    background: var(--white);
+    color: var(--ink);
+    border: 1px solid var(--stone-200);
+    border-radius: var(--radius-l);
+    box-shadow: var(--shadow);
+    animation: consent-in 320ms var(--ease-out) both;
+  }
+  .consent[hidden] {
+    display: none;
+  }
+  .consent__title {
+    margin: 0 0 0.4rem;
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: 1.02rem;
+    color: var(--green-900);
+  }
+  .consent__text {
+    margin: 0 0 1rem;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: var(--ink-2);
+  }
+  .consent__text a {
+    color: var(--green-700);
+    white-space: nowrap;
+  }
+  .consent__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  @keyframes consent-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+  }
+  @media (max-width: 640px) {
+    .consent {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: auto;
+      border-radius: var(--radius-l) var(--radius-l) 0 0;
+      border-width: 1px 0 0;
+      padding-bottom: calc(1.35rem + env(safe-area-inset-bottom, 0px));
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .consent {
+      animation: none;
+    }
+  }
+</style>

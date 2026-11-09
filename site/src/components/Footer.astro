@@ -89,6 +89,7 @@ const year = new Date().getFullYear();
       <p>© {year} {site.name} — Menuiserie à Jonzac & Royan, Charente-Maritime.</p>
       <ul class="footer__legal">
         {nav.footer.legal.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+        <li><button type="button" data-consent-open>Gérer les cookies</button></li>
       </ul>
     </div>
   </div>
@@ -256,17 +257,27 @@ const year = new Date().getFullYear();
   }
   .footer__legal {
     list-style: none;
-    padding: 0;
+    /* Dégage le bouton « retour en haut », fixé dans l'angle bas droit. */
+    padding: 0 3.5rem 0 0;
     margin: 0;
     display: flex;
     flex-wrap: wrap;
     gap: 1.25rem;
   }
-  .footer__legal a {
+  .footer__legal a,
+  .footer__legal button {
     color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
   }
-  .footer__legal a:hover {
+  .footer__legal button {
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    cursor: pointer;
+  }
+  .footer__legal a:hover,
+  .footer__legal button:hover {
     color: var(--lime);
   }
   @media (max-width: 1100px) {

@@ -1,9 +1,12 @@
 /**
  * Interactions du site (léger, sans dépendance) :
  * - révélation au scroll, compteurs, header compact, méga-menus, menu mobile, retour en haut,
- * - filtres réalisations, formulaire de devis, barre de progression de lecture.
+ * - filtres réalisations, formulaire de devis, barre de progression de lecture,
+ * - bandeau de consentement et mesure (scripts/mesure.ts).
  * Ré-initialisé à chaque navigation (ClientRouter → astro:page-load).
  */
+
+import { initMesure, suivreDemande } from './mesure';
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -245,6 +248,7 @@ function initForms() {
         });
         const json = await res.json().catch(() => ({}));
         if (!res.ok || !json.ok) throw new Error(json.error || 'Erreur serveur');
+        suivreDemande(data.projet === 'depannage' ? 'depannage' : 'devis');
         form.classList.add('is-sent');
         form.querySelector<HTMLElement>('[data-fields]')?.setAttribute('hidden', '');
         if (status) {
@@ -364,6 +368,7 @@ function init() {
   initReadingBar();
   initGallery();
   initSliders();
+  initMesure();
 }
 
 document.addEventListener('astro:page-load', init);
