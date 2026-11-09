@@ -13,5 +13,13 @@ dist/
 # Les versions normalisées sont dans site/src/assets/photos/ (voir site/scripts/prepare-photos.py).
 assets/PHOTOS SITE LUZ/
 
+# Exports Google Ads du client (dépenses, mots-clés, concurrents) : hors du dépôt public.
+site/src/SEO/
+
 # Extrait INPI (données personnelles des dirigeants)
 Export_Portail_Data_FENETRES_LUZ_Du_*.pdf
+
+# Documents de pilotage, notes internes et brouillons de mails : hors du dépôt public (conservés en local).
+# Les articles du site restent suivis : le build en a besoin.
+*.md
+!site/src/content/**/*.md
